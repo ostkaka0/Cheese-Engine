@@ -47,7 +47,7 @@ void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
 
 	for(short x = -2; x < 4; x++)
 	{
-		for(short y = -2; y < 3; y++)
+		for(short y = -2; y < 4; y++)
 		{
 			if(chunkX+x > 0 && chunkY+y > 0 && chunkX+x < sizeX && chunkY+y < sizeY)
 			{
