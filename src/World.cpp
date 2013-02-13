@@ -19,6 +19,17 @@ World::World(short unsigned sizeX, short unsigned sizeY)
 			chunkList[x][y] = new Chunk();
 		}
 	}
+
+	for(int xx = 0; xx < this->sizeX * 16; xx++)
+	{
+		this->setBlock(256 + xx * 16, 256, &(BlockSolid(2)));
+		this->setBlock(256 + xx * 16, 256 + sizeY * 16 * 16 - 16, &(BlockSolid(2)));
+	}
+	for(int yy = 0; yy < this->sizeY * 16; yy++)
+	{
+		this->setBlock(256, 256 + yy * 16, &(BlockSolid(2)));
+		this->setBlock( 256 + sizeX * 16 * 16 - 16, 256 + yy * 16, &(BlockSolid(2)));
+	}
 }
 
 World::~World(void)
@@ -28,17 +39,6 @@ World::~World(void)
 
 void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
 {
-	/*sf::Sprite *borderSprite(&(tc.getTextures("BlockSolid.png")[0]));
-
-	for(int bX = -1; bX < (sizeX * CHUNKWIDTH - 16) + 1; bX++)
-	{
-		for(int bY = -1; bY < (sizeY * CHUNKHEIGHT - 16) + 1; bY++)
-		{
-			borderSprite->SetPosition(bX * 16, bY * 16);
-			app.Draw(*borderSprite);
-		}
-	}*/
-
 	float playerX = player.getX();
 	float playerY = player.getY();
  
@@ -52,7 +52,6 @@ void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
 			if(chunkX+x > 0 && chunkY+y > 0 && chunkX+x < sizeX && chunkY+y < sizeY)
 			{
 				chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc);
-				//std::cout << chunkX + x << " " << chunkY + y << std::endl;
 			}
 		}
 	}
@@ -66,7 +65,7 @@ void World::setBlock(short x, short y, Block* block)
 	int blockY = (y/16) % 16;
 	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
 	{
-		std::cout << "xchunk: " << chunkX << " ychunk: " << chunkY << " xblock: " << blockX << " yblock: " << blockY << std::endl;
+		//std::cout << "xchunk: " << chunkX << " ychunk: " << chunkY << " xblock: " << blockX << " yblock: " << blockY << std::endl;
 		chunkList[chunkX][chunkY]->setBlock(blockX, blockY, *block);
 	}
 }
@@ -74,9 +73,16 @@ void World::setBlock(short x, short y, Block* block)
 
 Block* World::getBlock(short x, short y)
 {
-		int chunkX = (x/16)/16;
+	int chunkX = (x/16)/16;
 	int chunkY = (y/16)/16;
 	int blockX = (x/16) % 16;
 	int blockY = (y/16) % 16;
-	return(chunkList[chunkX][chunkY]->getBlock(blockX, blockY));
+	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
+	{
+		return(chunkList[chunkX][chunkY]->getBlock(blockX, blockY));
+	}
+	else
+	{
+		return(0);
+	}
 }
