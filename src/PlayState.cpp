@@ -32,7 +32,7 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 
 	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		currentWorld->setBlock(player->getX() + app.GetInput().GetMouseX()-(8*16), player->getY() + app.GetInput().GetMouseY(), &(BlockSolid(4)));	
+		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), &(BlockSolid(4)));	
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
