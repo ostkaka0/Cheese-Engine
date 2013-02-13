@@ -25,6 +25,6 @@ void Block::Draw(short posX, short posY, short chunkPosX, short chunkPosY, sf::R
 {
 	sf::Sprite *tempSprite = &(tc.getTextures(getTextureName())[getTextureId()]);
 	tempSprite->SetPosition((16*chunkPosX-16 + posX)*16, (16*chunkPosY-16  + posY)*16);
-		//tempSprite->SetBlendMode(sf::Blend::Add);
+	//tempSprite->SetBlendMode(sf::Blend::Add);
 	app.Draw(*tempSprite);
 }

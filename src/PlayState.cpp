@@ -36,7 +36,7 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
-		currentWorld->setBlock(player->getX() + app.GetInput().GetMouseX()-(8*16), player->getY() + app.GetInput().GetMouseY(), &(BlockSolid(0)));	
+		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), 0);	
 	}
 	//std::cout << "Chunk x: " << (int)((player->getX()/16)/16) << " y: " << (int)((player->getY()/16)/16) << std::endl;
 	camera->Update(app);

@@ -2,15 +2,16 @@
 #define CHUNKWIDTH 16
 #define CHUNKHEIGHT 16
 #include "Block.h"
-#include "Player.h"
 #include "BlockSolid.h"
+#include "BlockAir.h"
+#include "Player.h"
 #include "TextureContainer.h"
 #include <SFML/Graphics.hpp>
 
 class Chunk
 {
 private:
-    Block* blockList[CHUNKWIDTH][CHUNKHEIGHT];
+	Block* blockList[CHUNKWIDTH][CHUNKHEIGHT];
 public:
 	Chunk();
 	~Chunk(void);

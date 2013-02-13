@@ -20,3 +20,8 @@ short int BlockSolid::getId()
 {
 	return 1;
 }
+
+bool BlockSolid::isSeeThrough()
+{
+	return(false);
+}

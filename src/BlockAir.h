@@ -1,14 +1,12 @@
 #pragma once
 #include "Block.h"
 
-class BlockSolid : public Block
+class BlockAir: public Block
 {
 public:
-	BlockSolid(short int);
-	//~Block(void);
+	BlockAir();
 	virtual	short int getId();
 	virtual char getTextureId();
 	virtual std::string getTextureName();
-	virtual bool isSeeThrough();
 };
 
