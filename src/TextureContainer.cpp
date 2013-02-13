@@ -5,7 +5,7 @@
 
 TextureContainer::TextureContainer(void)
 {
-	AddSpriteSheet("BlockSolid.png", 16, 16);
+	AddSpriteSheet("BS.png", 16, 16);
 	AddSpriteSheet("graywizard.png", 16, 26);
 }
 
@@ -50,7 +50,7 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 		}
 	}
 	//textureList[textureType]->push_back(sprite);
-	textureList.insert(std::pair<std::string, sf::Sprite*>(fileName, sprite));
+	textureList.emplace(fileName, sprite);
 	std::cout << "Added texturesheet " << fileName << std::endl;
 	return success;
 }
