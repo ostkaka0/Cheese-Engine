@@ -93,6 +93,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BlockGravity.cpp">
+      <Filter>Source Files\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuItem.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGravity.h">
+      <Filter>Header Files\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,20 +4,6 @@
 #include "Camera.h"
 #include <SFML/Graphics.hpp>
 
-/*class Player : public Creature
-{
-private:
-    std::string name;
-    bool leftIsDown = false;
-    bool downIsDown = false;
-    bool rightIsDown = false;
-    bool upIsDown = false;
-    public:
-
-    virtual void Update(sf::RenderWindow &App);
-    virtual void Draw(sf::RenderWindow &App);
-};*/
-
 Player::Player(float X, float Y, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) : Creature(X, Y, 4096,0.875, spriteName, spriteIndex, IsClientControlling)
 {
     name = Name;
@@ -82,7 +68,7 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up)
 
 std::string Player::getTextureName()
 {
-	return "blocksolid.png";
+	return "graywizard.png";
 }
 
 char Player::getTextureId()

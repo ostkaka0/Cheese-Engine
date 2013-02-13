@@ -3,6 +3,7 @@
 #define CHUNKHEIGHT 16
 #include "Block.h"
 #include "BlockSolid.h"
+#include "BlockGravity.h"
 #include "Player.h"
 #include "TextureContainer.h"
 #include <SFML/Graphics.hpp>

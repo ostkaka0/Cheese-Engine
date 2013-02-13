@@ -5,7 +5,10 @@
 
 TextureContainer::TextureContainer(void)
 {
-	AddSpriteSheet("blocksolid.png", 16, 16);
+	AddSpriteSheet("BlockBackground.png", 16, 16);
+	AddSpriteSheet("BlockSolid.png", 16, 16);
+	AddSpriteSheet("BlockGravity.png", 16, 16);
+
 	AddSpriteSheet("graywizard.png", 16, 26);
 }
 
@@ -14,18 +17,6 @@ TextureContainer::~TextureContainer(void)
 {
 
 }
-
-
-/*bool TextureContainer::AddTexture(std::string fileName, int textureType)
-{
-	sf::Image *image = new sf::Image();
-	bool success = image->LoadFromFile(fileName);
-	image->SetSmooth(false);
-	sf::Sprite *sprite = new sf::Sprite();
-	sprite[0].SetImage(*image); 
-	blockTextureList.
-	return success;
-}*/
 
 bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int spriteHeight)
 {

@@ -24,6 +24,7 @@ public:
 	void Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player);
 	void setBlock(short x, short y, Block* block);
 	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
+	void DrawBorder(int blockId);
 	Block* getBlock(short x, short y);
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
 };
