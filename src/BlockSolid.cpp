@@ -8,7 +8,7 @@ BlockSolid::BlockSolid(short int texture)
 
 std::string BlockSolid::getTextureName()
 {
-	return "BS.png";
+	return "blocksolid.png";
 }
 
 char BlockSolid::getTextureId()
