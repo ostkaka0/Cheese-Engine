@@ -7,7 +7,7 @@ using namespace sf;
 
 int main()
 {
-    sf::RenderWindow app(sf::VideoMode(768, 512), "SFML window");
+    sf::RenderWindow app(sf::VideoMode(768, 512), "Cheese Multiplayer - Alpha");
 
 	GameState *gameState = new PlayState(&app);
 

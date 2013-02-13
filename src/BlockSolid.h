@@ -9,5 +9,6 @@ public:
 	virtual	short int getId();
 	virtual char getTextureId();
 	virtual std::string getTextureName();
+	virtual bool isSeeThrough();
 };
 

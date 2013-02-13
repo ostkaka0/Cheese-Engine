@@ -13,6 +13,7 @@ public:
     virtual	short int getId()=0;
 	virtual char getTextureId()=0;
 	virtual std::string getTextureName()=0;
+	virtual bool isSeeThrough()=0;
 	//virtual char getSubTextureId() = 0;
 	void setMetadata(unsigned char);
 	void Draw(short posX, short posY, short chunkPosX, short chunkPosY, sf::RenderWindow &app, TextureContainer &tc);
