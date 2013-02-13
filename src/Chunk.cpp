@@ -31,7 +31,7 @@ void Chunk::Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer
 		{
 			if(blockList[x][y] == NULL || blockList[x][y]->isSeeThrough())
 			{
-				sf::Sprite *tempSprite = &(tc.getTextures("BlockSolid.png")[1]);
+				sf::Sprite *tempSprite = &(tc.getTextures("BlockBackground.png")[0]);
 				tempSprite->SetPosition((16*xPos-16 + x)*16, (16*yPos-16  + y)*16);
 				app.Draw(*tempSprite);
 			}

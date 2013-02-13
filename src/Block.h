@@ -7,7 +7,6 @@ class Block
 {
 public:
 	Block(void);
-	~Block(void);
 	unsigned char metadata;
 	unsigned char getMetadata();
     virtual	short int getId()=0;
