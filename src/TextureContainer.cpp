@@ -6,6 +6,8 @@
 TextureContainer::TextureContainer(void)
 {
 	AddSpriteSheet("BlockSolid.png", 16, 16);
+	AddSpriteSheet("BlockGravity.png", 16, 16);
+
 	AddSpriteSheet("graywizard.png", 16, 26);
 }
 
@@ -43,14 +45,13 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 		for (int y = 0; y+1 <= height; y ++)
 		{
 			tempImage = new sf::Image(spriteWidth, spriteHeight);
-			//tempImage->Copy(image, 0, 0, sf::IntRect(x*spriteWidth, y*spriteHeight, (x + 1)*spriteWidth, (y + 1)*spriteHeight), true);
 			tempImage->Copy(image, 0, 0, sf::IntRect(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight), false);
 			tempImage->SetSmooth(false);
 			sprite[x+y*width].SetImage(*tempImage);
 		}
 	}
 	//textureList[textureType]->push_back(sprite);
-	textureList.insert(std::pair<std::string, sf::Sprite*>(fileName, sprite));
+	textureList.emplace(std::pair<std::string, sf::Sprite*>(fileName, sprite));
 	std::cout << "Added texturesheet " << fileName << std::endl;
 	return success;
 }

@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include <typeinfo>
 
 Chunk::Chunk()
 { 
@@ -46,11 +47,17 @@ void Chunk::setBlock(unsigned short x, unsigned short y, Block &block)
 {
 	if(&block != NULL)
 	{
-		blockList[x][y] = new BlockSolid(0);
-		*blockList[x][y] = block;
+		if (blockList[x][y] != NULL)
+		{
+			delete blockList[x][y];
+		}
+		blockList[x][y] = &block;
 	}
 	else
+	{
+		delete blockList[x][y];
 		blockList[x][y] = 0;
+	}
 }	
 
 Block* Chunk::getBlock(unsigned short x, unsigned short y){return blockList[x][y];}

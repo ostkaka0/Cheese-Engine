@@ -13,7 +13,7 @@ std::string BlockSolid::getTextureName()
 
 char BlockSolid::getTextureId()
 {
-	return(getMetadata()); //Metadata säger vilken 16x16 sprite/16x16 textur blocket får
+	return(getMetadata());
 }
 
 short int BlockSolid::getId()

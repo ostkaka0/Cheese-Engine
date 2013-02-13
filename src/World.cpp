@@ -22,13 +22,13 @@ World::World(short unsigned sizeX, short unsigned sizeY)
 
 	for(int xx = 0; xx < this->sizeX * 16; xx++)
 	{
-		this->setBlock(256 + xx * 16, 256, &(BlockSolid(2)));
-		this->setBlock(256 + xx * 16, 256 + sizeY * 16 * 16 - 16, &(BlockSolid(2)));
+		this->setBlock(256 + xx * 16, 256, new BlockSolid(2));
+		this->setBlock(256 + xx * 16, 256 + sizeY * 16 * 16 - 16, new BlockSolid(2));
 	}
 	for(int yy = 0; yy < this->sizeY * 16; yy++)
 	{
-		this->setBlock(256, 256 + yy * 16, &(BlockSolid(2)));
-		this->setBlock( 256 + sizeX * 16 * 16 - 16, 256 + yy * 16, &(BlockSolid(2)));
+		this->setBlock(256, 256 + yy * 16, new BlockSolid(2));
+		this->setBlock( 256 + sizeX * 16 * 16 - 16, 256 + yy * 16, new BlockSolid(2));
 	}
 }
 

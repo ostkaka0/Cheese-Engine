@@ -8,7 +8,7 @@ using namespace sf;
 PlayState::PlayState(sf::RenderWindow *window)
 {
 	camera = new Camera(10);
-	currentWorld = new World(8, 8);
+	currentWorld = new World(64, 64);
 
 	window->SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
@@ -32,7 +32,7 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 
 	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), &(BlockSolid(4)));	
+		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(1));	
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
