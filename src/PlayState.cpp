@@ -8,12 +8,15 @@ using namespace sf;
 PlayState::PlayState(sf::RenderWindow *window)
 {
 	camera = new Camera(10);
-	currentWorld = new World(64, 64);
+	currentWorld = new World(8, 8);
 
 	window->SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
 
 	player = new Player(0, 0, true, "graywizard.png", 0, "Karl-Bertil");
+
+	BlockSolid blockSolid(0); 
+	currentWorld->AddBlockType(blockSolid.getId(),[](unsigned short metadata) { return new BlockSolid(metadata); });
 }
 
 PlayState::~PlayState()
@@ -32,11 +35,11 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 
 	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(2));	
+		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(15));	
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
-		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), 0);	
+		currentWorld->setBlock(camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), NULL);	
 	}
 	//std::cout << "Chunk x: " << (int)((player->getX()/16)/16) << " y: " << (int)((player->getY()/16)/16) << std::endl;
 	camera->Update(app);

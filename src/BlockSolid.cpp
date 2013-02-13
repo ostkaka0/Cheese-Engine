@@ -8,12 +8,12 @@ BlockSolid::BlockSolid(short int texture)
 
 std::string BlockSolid::getTextureName()
 {
-	return "BlockSolid.png";
+	return "blocksolid.png";
 }
 
 char BlockSolid::getTextureId()
 {
-	return(getMetadata());
+	return(getMetadata()); //Metadata säger vilken 16x16 sprite/16x16 textur blocket får
 }
 
 short int BlockSolid::getId()

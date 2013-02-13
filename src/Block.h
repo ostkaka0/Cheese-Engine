@@ -7,9 +7,10 @@ class Block
 {
 public:
 	Block(void);
+	~Block(void);
 	unsigned char metadata;
 	unsigned char getMetadata();
-    virtual	short int getId()=0;
+    virtual short int getId()=0;
 	virtual char getTextureId()=0;
 	virtual std::string getTextureName()=0;
 	virtual bool isSeeThrough()=0;
