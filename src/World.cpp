@@ -107,5 +107,5 @@ std::function<Block*(unsigned short)>* World::getBlockType(unsigned short id)
 
 /*std::map<unsigned short, std::function<Block*>>* World::getBlockTypeMap()
 {
-	return &blockTypeMap;
+	return *blockmap;
 }*/

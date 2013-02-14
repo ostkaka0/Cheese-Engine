@@ -1,7 +1,7 @@
 #include "BlockSolid.h"
 
 
-BlockSolid::BlockSolid(short int texture)
+BlockSolid::BlockSolid(unsigned short texture)
 {
 	this->setMetadata(texture);
 }
@@ -11,12 +11,12 @@ std::string BlockSolid::getTextureName()
 	return "BlockSolid.png";
 }
 
-char BlockSolid::getTextureId()
+unsigned char BlockSolid::getTextureId()
 {
 	return(getMetadata());
 }
 
-short int BlockSolid::getId()
+unsigned short BlockSolid::getId()
 {
 	return 1;
 }
@@ -24,4 +24,9 @@ short int BlockSolid::getId()
 bool BlockSolid::isSeeThrough()
 {
 	return(false);
+}
+
+unsigned char BlockSolid::getLayer()
+{
+	return 2;
 }
