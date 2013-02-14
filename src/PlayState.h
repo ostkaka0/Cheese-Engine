@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "TextureContainer.h"
 #include "Camera.h"
+#include "InGameUI.h"
 
 class PlayState : public GameState
 {
@@ -26,5 +27,6 @@ public:
 	std::vector<Player*> playerList;
 	TextureContainer tc;
 	Camera *camera;
+	InGameUI *blockMenu;
 };
 

@@ -99,6 +99,9 @@
     <ClCompile Include="BlockBackground.cpp">
       <Filter>Source Files\Block</Filter>
     </ClCompile>
+    <ClCompile Include="InGameUI.cpp">
+      <Filter>Source Files\MenuItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuItem.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="BlockBackground.h">
       <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameUI.h">
+      <Filter>Header Files\MenuItem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

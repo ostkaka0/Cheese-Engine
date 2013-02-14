@@ -7,6 +7,7 @@ using namespace sf;
 
 PlayState::PlayState(sf::RenderWindow *window)
 {
+	blockMenu = new InGameUI(tc);
 	camera = new Camera(10);
 	currentWorld = new World(8, 8);
 
@@ -15,8 +16,10 @@ PlayState::PlayState(sf::RenderWindow *window)
 
 	player = new Player(0, 0, true, "graywizard.png", 0, "Karl-Bertil");
 
-	BlockSolid blockSolid(0); 
+	BlockSolid blockSolid(0);
+	BlockBackground blockBackground(0);
 	currentWorld->AddBlockType(blockSolid.getId(),[](unsigned short metadata) { return new BlockSolid(metadata); });
+	currentWorld->AddBlockType(blockBackground.getId(),[](unsigned short metadata) { return new BlockBackground(metadata); });
 }
 
 PlayState::~PlayState()
@@ -43,6 +46,7 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 	}
 	//std::cout << "Chunk x: " << (int)((player->getX()/16)/16) << " y: " << (int)((player->getY()/16)/16) << std::endl;
 	camera->Update(app);
+	blockMenu->Update(app, tc, *camera, *currentWorld);
 	return this;
 }
 
@@ -50,6 +54,7 @@ void PlayState::Draw(sf::RenderWindow &app)
 {
 	currentWorld->Draw(app, tc, *player);
 	player->Draw(app, tc);
+	blockMenu->Draw(app, tc, *camera, *currentWorld);
 	//std::cout << "FPS: " << (1/app.GetFrameTime()) << std::endl;
 }
 

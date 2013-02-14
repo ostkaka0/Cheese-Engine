@@ -27,18 +27,19 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 	int width = image.GetWidth()/spriteWidth;
 	int height = image.GetHeight()/spriteHeight;
 
-	sf::Sprite *sprite = new sf::Sprite[width*height];
+	sf::Sprite *sprite = new sf::Sprite[width*height*height];
 	sf::Image *tempImage;
 
-	for (int x = 0; x+1 <= width; x++)
+	for (int y = 0; y < width; y++)
 	{
-		for (int y = 0; y+1 <= height; y++)
+		for (int x = 0; x < height; x++)
 		{
 			tempImage = new sf::Image(spriteWidth, spriteHeight);
 			//tempImage->Copy(image, 0, 0, sf::IntRect(x*spriteWidth, y*spriteHeight, (x + 1)*spriteWidth, (y + 1)*spriteHeight), true);
-			tempImage->Copy(image, 0, 0, sf::IntRect(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight), false);
+			tempImage->Copy(image, 0, 0, sf::IntRect(x * spriteWidth, y * spriteHeight, (x + 1) * spriteWidth, (y + 1) * spriteHeight), false);
 			tempImage->SetSmooth(false);
-			sprite[x+y*width].SetImage(*tempImage);
+			sprite[x + (y*width)].SetImage(*tempImage);
+			//std::cout << "added " << fileName << " at " << (x + (y*width)) << std::endl;
 		}
 	}
 	//textureList[textureType]->push_back(sprite);
