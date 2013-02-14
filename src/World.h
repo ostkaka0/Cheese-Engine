@@ -27,5 +27,6 @@ public:
 	void DrawBorder(int blockId);
 	Block* getBlock(unsigned char layer, short x, short y);
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
+	std::map<unsigned short, std::function<Block*(unsigned short)>>* getBlockTypeMap();
 };
 

@@ -3,14 +3,15 @@
 #include "TextureContainer.h"
 #include "Camera.h"
 #include "World.h"
+#include "Block.h"
 
 class InGameUI
 {
 public:
-	InGameUI(TextureContainer &tc);
+	InGameUI(TextureContainer &tc, World &world);
 	~InGameUI(void);
 	void Update(sf::RenderWindow &app, TextureContainer &tc, Camera &camera, World &world);
 	void Draw(sf::RenderWindow &app, TextureContainer &tc, Camera &camera, World &world);
-	std::map<sf::Sprite*, sf::Vector2f> InGameUIItemList;
+	std::map<Block*, sf::Vector2f> InGameUIItemList;
 };
 

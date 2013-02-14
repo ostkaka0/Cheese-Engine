@@ -7,9 +7,9 @@ using namespace sf;
 
 PlayState::PlayState(sf::RenderWindow *window)
 {
-	blockMenu = new InGameUI(tc);
 	camera = new Camera(10);
 	currentWorld = new World(8, 8);
+	blockMenu = new InGameUI(tc, *currentWorld);
 
 	window->SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
@@ -18,8 +18,9 @@ PlayState::PlayState(sf::RenderWindow *window)
 
 	BlockSolid blockSolid(0);
 	BlockBackground blockBackground(0);
+
 	currentWorld->AddBlockType(blockSolid.getId(),[](unsigned short metadata) { return new BlockSolid(metadata); });
-	currentWorld->AddBlockType(blockBackground.getId(),[](unsigned short metadata) { return new BlockBackground(metadata); });
+	//currentWorld->AddBlockType(blockBackground.getId(),[](unsigned short metadata) { return new BlockBackground(metadata); });
 }
 
 PlayState::~PlayState()
