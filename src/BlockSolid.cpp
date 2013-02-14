@@ -26,6 +26,11 @@ bool BlockSolid::isSeeThrough()
 	return(false);
 }
 
+bool BlockSolid::isSolid()
+{
+	return(true);
+}
+
 unsigned char BlockSolid::getLayer()
 {
 	return 2;

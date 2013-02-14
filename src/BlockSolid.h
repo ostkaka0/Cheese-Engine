@@ -10,5 +10,6 @@ public:
 	virtual unsigned char getLayer();
 	virtual std::string getTextureName();
 	virtual bool isSeeThrough();
+	virtual bool isSolid();
 };
 
