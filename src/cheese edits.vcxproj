@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BlockBackground.cpp" />
     <ClCompile Include="BlockGravity.cpp" />
     <ClCompile Include="BlockSolid.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
+    <ClInclude Include="BlockBackground.h" />
     <ClInclude Include="BlockGravity.h" />
     <ClInclude Include="BlockSolid.h" />
     <ClInclude Include="Camera.h" />
