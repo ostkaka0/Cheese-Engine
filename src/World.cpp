@@ -34,13 +34,13 @@ void World::DrawBorder(int blockId)
 {
 	for(int xx = 0; xx < this->sizeX * 16; xx++)
 	{
-		this->setBlock(256 + xx * 16, 256, new BlockSolid(blockId));
-		this->setBlock(256 + xx * 16, sizeY * 16 * 16 - 16, new BlockSolid(blockId));
+		this->setBlock(2, 256 + xx * 16, 256, new BlockSolid(blockId));
+		this->setBlock(2, 256 + xx * 16, sizeY * 16 * 16 - 16, new BlockSolid(blockId));
 	}
 	for(int yy = 0; yy < this->sizeY * 16; yy++)
 	{
-		this->setBlock(256, 256 + yy * 16, new BlockSolid(blockId));
-		this->setBlock(sizeX * 16 * 16 - 16, 256 + yy * 16, new BlockSolid(blockId));
+		this->setBlock(2, 256, 256 + yy * 16, new BlockSolid(blockId));
+		this->setBlock(2, sizeX * 16 * 16 - 16, 256 + yy * 16, new BlockSolid(blockId));
 	}
 }
 
@@ -64,7 +64,7 @@ void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
 	}
 }
 
-void World::setBlock(short x, short y, Block* block)
+void World::setBlock(unsigned char layer, short x, short y, Block* block)
 {
 	int chunkX = (x/16)/16;
 	int chunkY = (y/16)/16;
@@ -73,12 +73,12 @@ void World::setBlock(short x, short y, Block* block)
 	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
 	{
 		//std::cout << "xchunk: " << chunkX << " ychunk: " << chunkY << " xblock: " << blockX << " yblock: " << blockY << std::endl;
-		chunkList[chunkX][chunkY]->setBlock(blockX, blockY, *block);
+		chunkList[chunkX][chunkY]->setBlock(layer, blockX, blockY, *block);
 	}
 }
 
 
-Block* World::getBlock(short x, short y)
+Block* World::getBlock(unsigned char layer, short x, short y)
 {
 	int chunkX = (x/16)/16;
 	int chunkY = (y/16)/16;
@@ -86,7 +86,7 @@ Block* World::getBlock(short x, short y)
 	int blockY = (y/16) % 16;
 	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
 	{
-		return(chunkList[chunkX][chunkY]->getBlock(blockX, blockY));
+		return(chunkList[chunkX][chunkY]->getBlock(layer, blockX, blockY));
 	}
 	else
 	{

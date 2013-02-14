@@ -11,13 +11,17 @@
 class Chunk
 {
 private:
-	Block* blockList[CHUNKWIDTH][CHUNKHEIGHT];
+	Block* blockList[CHUNKWIDTH][CHUNKHEIGHT][6];
+	bool drawBackground;
+	sf::Sprite *backgroundSprite;
+	bool isAnySolid(Block* blocks[6]);
+	bool isAnySeeThrough(Block* blocks[6]);
 public:
 	Chunk();
 	~Chunk(void);
-	Block* getBlock(unsigned short, unsigned short);
-	void setBlock(unsigned short, unsigned short, Block&);
-	unsigned short getBlockId(unsigned short x, unsigned short y);
+	Block* getBlock(unsigned char layer, unsigned short, unsigned short);
+	void setBlock(unsigned char layer, unsigned short, unsigned short, Block&);
+	unsigned short getBlockId(unsigned char layer, unsigned short x, unsigned short y);
 	void Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer &tc);
 };
 
