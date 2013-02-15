@@ -20,12 +20,12 @@ PlayState::PlayState(sf::RenderWindow *window)
 	BlockBackground blockBackground(0);
 
 	currentWorld->AddBlockType(blockSolid.getId(),[](unsigned short metadata) { return new BlockSolid(metadata); });
-	//currentWorld->AddBlockType(blockBackground.getId(),[](unsigned short metadata) { return new BlockBackground(metadata); });
+	currentWorld->AddBlockType(blockBackground.getId(),[](unsigned short metadata) { return new BlockBackground(metadata); });
 }
 
 PlayState::~PlayState()
 {
-	
+
 }
 
 void PlayState::EventUpdate(sf::Event &event)
@@ -39,7 +39,13 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 
 	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		currentWorld->setBlock(2, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(15));
+		if(app.GetInput().GetMouseY() < 512 - 24)
+		{
+			if(blockMenu->selectedBlockSolid != -1)
+				currentWorld->setBlock(2, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(blockMenu->selectedBlockSolid));
+			else if(blockMenu->selectedBackground != -1)
+				currentWorld->setBlock(0, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockBackground(blockMenu->selectedBackground));
+		}
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
