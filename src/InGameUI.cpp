@@ -40,6 +40,20 @@ void InGameUI::Update(sf::RenderWindow &app, TextureContainer &tc, Camera &camer
 			}
 		}
 	}
+	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
+	{
+		if(app.GetInput().GetMouseY() < 512 - 24)
+		{
+			if(selectedBlockSolid != -1)
+				world.setBlock(2,(short)( camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), new BlockSolid(selectedBlockSolid));
+			else if(selectedBackground != -1)
+				world.setBlock(0, (short)(camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), new BlockBackground(selectedBackground));
+		}
+	}
+	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
+	{
+		world.setBlock(2, (short)(camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), NULL);	
+	}
 }
 
 void InGameUI::Draw(sf::RenderWindow &app, TextureContainer &tc, Camera &camera, World &world)

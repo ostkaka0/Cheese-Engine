@@ -6,7 +6,7 @@
 class Monster : public Creature
 {
 public:
-	Monster(float X, float Y, float speed, float friction, std::string spriteName, int spriteIndex, bool IsClientControlling);
+	Monster(float X, float Y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool IsClientControlling);
     ~Monster(void);
 	virtual void Update(sf::RenderWindow &App);
 };

@@ -7,6 +7,7 @@
 #include "TextureContainer.h"
 #include "Camera.h"
 #include "InGameUI.h"
+#include "Projectile.h"
 
 class PlayState : public GameState
 {
@@ -16,15 +17,10 @@ public:
     virtual void EventUpdate(sf::Event &event);
     virtual GameState *Update(sf::RenderWindow &app);
     virtual void Draw(sf::RenderWindow &app);
-	void AddCreature(Creature*);
-	void AddPlayer(Player*);
 	World* currentWorld;
-	Player* player;
 	sf::Image playerImage;
 	sf::Sprite* playerSprite;
 	sf::Sprite *spriteList;
-	std::vector<Creature*> creatureList;
-	std::vector<Player*> playerList;
 	TextureContainer tc;
 	Camera *camera;
 	InGameUI *blockMenu;

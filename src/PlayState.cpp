@@ -1,6 +1,8 @@
 #include <string>
 #include "GameState.h"
 #include "PlayState.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 using namespace sf;
 
 
@@ -14,7 +16,9 @@ PlayState::PlayState(sf::RenderWindow *window)
 	window->SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
 
-	player = new Player(0, 0, true, "graywizard.png", 0, "Karl-Bertil");
+	Player* player = new Player(0, 0, 32, 32, true, "graywizard.png", 0, "Karl-Bertil");
+	currentWorld->AddPlayer(player);
+	camera->setCameraAt(*player);
 
 	BlockSolid blockSolid(0);
 	BlockBackground blockBackground(0);
@@ -35,23 +39,7 @@ void PlayState::EventUpdate(sf::Event &event)
 
 GameState *PlayState::Update(sf::RenderWindow &app)
 {
-	player->Update(app, *camera);
-
-	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
-	{
-		if(app.GetInput().GetMouseY() < 512 - 24)
-		{
-			if(blockMenu->selectedBlockSolid != -1)
-				currentWorld->setBlock(2, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockSolid(blockMenu->selectedBlockSolid));
-			else if(blockMenu->selectedBackground != -1)
-				currentWorld->setBlock(0, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), new BlockBackground(blockMenu->selectedBackground));
-		}
-	}
-	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
-	{
-		currentWorld->setBlock(2, camera->GetCenter().x + app.GetInput().GetMouseX()-(8*16), camera->GetCenter().y + app.GetInput().GetMouseY(), NULL);	
-	}
-	//std::cout << "Chunk x: " << (int)((player->getX()/16)/16) << " y: " << (int)((player->getY()/16)/16) << std::endl;
+	currentWorld->Update(app, *camera);
 	camera->Update(app);
 	blockMenu->Update(app, tc, *camera, *currentWorld);
 	return this;
@@ -59,18 +47,7 @@ GameState *PlayState::Update(sf::RenderWindow &app)
 
 void PlayState::Draw(sf::RenderWindow &app)
 {
-	currentWorld->Draw(app, tc, *player);
-	player->Draw(app, tc);
+	currentWorld->Draw(app, tc, *camera);
 	blockMenu->Draw(app, tc, *camera, *currentWorld);
 	//std::cout << "FPS: " << (1/app.GetFrameTime()) << std::endl;
-}
-
-void PlayState::AddCreature(Creature* creature)
-{
-	creatureList.push_back(creature);
-}
-
-void PlayState::AddPlayer(Player* player)
-{
-	playerList.push_back(player);
 }

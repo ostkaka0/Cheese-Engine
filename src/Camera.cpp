@@ -32,3 +32,11 @@ void Camera::setSpeed(double speed)
 {
 	this->speed = speed;
 }
+
+sf::Vector2f Camera::getCreaturePosition()
+{
+	if(currentCreature != NULL)
+		return(currentCreature->getPosition());
+	else
+		return(sf::Vector2f(0, 0));
+}

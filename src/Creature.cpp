@@ -6,7 +6,7 @@
 
 #define PI 3.14159265358979323846264338
 
-Creature::Creature(float x, float y, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
+Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
     {
         this->x = x;
         this->y = y;
@@ -14,8 +14,10 @@ Creature::Creature(float x, float y, float speed, float friction, std::string sp
         this->friction = friction;
         this->isClientControlling = isClientControlling;
 
-        xSpeed = 0;
-        ySpeed = 0;
+        speedX = 0;
+        speedY = 0;
+		this->sizeX = sizeX;
+		this->sizeY = sizeY;
         horizontal = 0;
         vertical = 0;
         angle = 0;
@@ -25,13 +27,13 @@ Creature::Creature(float x, float y, float speed, float friction, std::string sp
 
 void Creature::Update(sf::RenderWindow &app, sf::View &camera)
 {
-    xSpeed += horizontal * app.GetFrameTime();
-    ySpeed += vertical * app.GetFrameTime();
+    speedX += horizontal * app.GetFrameTime();
+    speedY += vertical * app.GetFrameTime();
 
-    xSpeed *= 1 - tan(friction*PI/2) * app.GetFrameTime();
-    ySpeed *= 1 - tan(friction*PI/2) * app.GetFrameTime();
+    speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
+    speedY *= 1 - tan(friction*PI/2) * app.GetFrameTime();
 
-    move(xSpeed * app.GetFrameTime(), ySpeed * app.GetFrameTime());
+    move(speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
 }
 
 void Creature::Draw(sf::RenderWindow &app, TextureContainer &tc)
@@ -54,12 +56,20 @@ void Creature::move(float X, float Y)
     x += X;
     y += Y;
 }
+
 void Creature::setPosition(float X, float Y)
 {
     x = X;
     y = Y;
 }
+
+sf::Vector2f Creature::getPosition()
+{
+	return(sf::Vector2f(x, y));
+}
+
 void Creature::setX(float X) { x = X; }
 void Creature::setY(float Y) { y = Y; }
 float Creature::getX() { return x; }
 float Creature::getY() { return y; }
+sf::Vector2f Creature::getSize() { return sf::Vector2f(sizeX, sizeY); }

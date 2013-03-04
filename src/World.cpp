@@ -44,13 +44,25 @@ void World::DrawBorder(int blockId)
 	}
 }
 
-void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
+void World::Update(sf::RenderWindow& app, Camera &camera)
 {
-	float playerX = player.getX();
-	float playerY = player.getY();
- 
-	int chunkX = (playerX/16)/16;
-	int chunkY = (playerY/16)/16;
+	for (std::vector<Projectile*>::size_type i = 0; i < projectileList.size(); i++)
+	{
+		projectileList[i]->Update(app, camera);
+	}
+	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
+	{
+		playerList[i]->Update(app, camera);
+	}
+}
+
+void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
+{
+	float playerX = camera.getCreaturePosition().x;
+	float playerY = camera.getCreaturePosition().y;
+
+	int chunkX = (int)((playerX/16)/16);
+	int chunkY = (int)((playerY/16)/16);
 
 	for(short x = -2; x < 4; x++)
 	{
@@ -62,6 +74,34 @@ void World::Draw(sf::RenderWindow &app, TextureContainer &tc, Player &player)
 			}
 		}
 	}
+
+	//Projectile start
+	/*if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
+	{
+		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getCreaturePosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getCreaturePosition().x+8)) * 180 / 3.1415;
+		if (angle < 0)
+			angle = angle + 360;
+		projectileList.push_back(new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+	}*/
+
+	for (std::vector<Projectile>::size_type i = 0; i < projectileList.size(); i++)
+	{
+		if(isVisible(app, camera, projectileList[i]->getPosition().x, projectileList[i]->getPosition().y, projectileList[i]->getSize().x, projectileList[i]->getSize().y))
+		{
+			projectileList[i]->Draw(app);
+		}
+	}
+	//Projectile end
+
+	//Player start
+	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
+	{
+		if(isVisible(app, camera, playerList[i]->getPosition().x, playerList[i]->getPosition().y, playerList[i]->getSize().x, playerList[i]->getSize().y))
+		{
+			playerList[i]->Draw(app, tc);
+		}
+	}
+	//Player end
 }
 
 void World::setBlock(unsigned char layer, short x, short y, Block* block)
@@ -90,7 +130,7 @@ Block* World::getBlock(unsigned char layer, short x, short y)
 	}
 	else
 	{
-		return(0);
+		return(NULL);
 	}
 }
 
@@ -108,4 +148,33 @@ std::function<Block*(unsigned short)>* World::getBlockType(unsigned short id)
 std::map<unsigned short, std::function<Block*(unsigned short)>>* World::getBlockTypeMap()
 {
 	return &blockTypeMap;
+}
+
+sf::Vector2i World::getSize(){return(sf::Vector2i(sizeX, sizeY));};
+
+bool World::isVisible(sf::RenderWindow& app, Camera& camera, float posX, float posY, float sizeX, float sizeY)
+{
+	if((posX + sizeX) >= (camera.GetCenter().x - camera.GetHalfSize().x))
+	{
+		if((posY + sizeY) >= (camera.GetCenter().y - camera.GetHalfSize().y))
+		{
+			if(posX <= (camera.GetCenter().x + camera.GetHalfSize().x) && posY <= (camera.GetCenter().y + camera.GetHalfSize().y))
+			{
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+	return false;
+}
+
+void World::AddCreature(Creature* creature)
+{
+	creatureList.push_back(creature);
+}
+
+void World::AddPlayer(Player* player)
+{
+	playerList.push_back(player);
 }

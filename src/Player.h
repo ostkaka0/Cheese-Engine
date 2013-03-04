@@ -1,9 +1,8 @@
-#ifndef PLAYER_H_INCLUDED
-#define PLAYER_H_INCLUDED
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Creature.h"
 #include "TextureContainer.h"
+#include "Camera.h"
 
 class Player : public Creature
 {
@@ -15,12 +14,10 @@ private:
 	float cameraDelay;
     std::string name;
 public:
-    Player(float X, float Y, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name);
-	virtual void Update(sf::RenderWindow &app, sf::View &camera);
+    Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name);
+	virtual void Update(sf::RenderWindow &app, Camera &camera);
     virtual void Draw(sf::RenderWindow &app, TextureContainer &tc);
     void KeyUpdate(bool Right, bool Down, bool Left, bool Up);
 	virtual std::string getTextureName();
 	virtual char getTextureId();
 };
-
-#endif

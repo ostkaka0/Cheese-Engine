@@ -1,10 +1,9 @@
 #include "player.h"
 #include <string>
 #include <list>
-#include "Camera.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player(float X, float Y, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) : Creature(X, Y, 4096,0.875, spriteName, spriteIndex, IsClientControlling)
+Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) : Creature(X, Y, sizeX, sizeY, 4096,0.875, spriteName, spriteIndex, IsClientControlling)
 {
     name = Name;
 	cameraDelay = 0;
@@ -14,7 +13,7 @@ Player::Player(float X, float Y, bool IsClientControlling, std::string spriteNam
     up = false;
 }
 
-void Player::Update(sf::RenderWindow &app, sf::View &camera)
+void Player::Update(sf::RenderWindow &app, Camera &camera)
 {
     if (isClientControlling)
     {
@@ -26,7 +25,7 @@ void Player::Update(sf::RenderWindow &app, sf::View &camera)
 
 		if (cameraDelay <= 0)
 		{
-			reinterpret_cast<Camera&>(camera).setCameraAt(*this);
+			camera.setCameraAt(*this);
 		}
 		else
 		{

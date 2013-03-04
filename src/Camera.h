@@ -13,5 +13,6 @@ public:
 	void Update(sf::RenderWindow &app);
 	void setCameraAt(Creature &creature);
 	void setSpeed(double speed);
+	sf::Vector2f getCreaturePosition();
 };
 

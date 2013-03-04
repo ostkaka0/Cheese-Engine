@@ -96,6 +96,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="TextureContainer.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -117,6 +118,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="TextureContainer.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
