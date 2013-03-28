@@ -5,7 +5,7 @@
 class Camera : public sf::View
 {
 private:
-	Creature *currentCreature;
+	Entity *currentEntity;
 	double speed;
 public:
 	Camera(double speed);
@@ -13,6 +13,6 @@ public:
 	void Update(sf::RenderWindow &app);
 	void setCameraAt(Creature &creature);
 	void setSpeed(double speed);
-	sf::Vector2f getCreaturePosition();
+	sf::Vector2f getEntityPosition();
 };
 

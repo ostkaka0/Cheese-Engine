@@ -3,7 +3,7 @@
 Camera::Camera(double speed)
 {
 	this->speed = speed;
-	currentCreature = NULL;
+	currentEntity = NULL;
 }
 
 
@@ -14,10 +14,10 @@ Camera::~Camera(void)
 
 void Camera::Update(sf::RenderWindow &app)
 {
-	if (currentCreature != NULL)
+	if (currentEntity != NULL)
 	{
-		float deltaX = currentCreature->getX()+8-GetCenter().x;
-		float deltaY = currentCreature->getY()+8-GetCenter().y;
+		float deltaX = currentEntity->getX()+8-GetCenter().x;
+		float deltaY = currentEntity->getY()+8-GetCenter().y;
 		float speedFactor = atan(app.GetFrameTime()*speed)*2/3.14159265358979323846264338327950288419;
 
 		SetCenter(GetCenter().x + deltaX*speedFactor, GetCenter().y + deltaY*speedFactor);
@@ -26,8 +26,8 @@ void Camera::Update(sf::RenderWindow &app)
 
 void Camera::setCameraAt(Creature &creature)
 {
-	if (currentCreature != &creature)
-		currentCreature = &creature;
+	if (currentEntity != &creature)
+		currentEntity = &creature;
 }
 
 void Camera::setSpeed(double speed)
@@ -35,10 +35,10 @@ void Camera::setSpeed(double speed)
 	this->speed = speed;
 }
 
-sf::Vector2f Camera::getCreaturePosition()
+sf::Vector2f Camera::getEntityPosition()
 {
-	if(currentCreature != NULL)
-		return(currentCreature->getPosition());
+	if(currentEntity != NULL)
+		return(currentEntity->getPosition());
 	else
 		return(sf::Vector2f(0, 0));
 }

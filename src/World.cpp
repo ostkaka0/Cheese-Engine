@@ -58,8 +58,8 @@ void World::Update(sf::RenderWindow& app, Camera &camera)
 
 void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 {
-	float playerX = camera.getCreaturePosition().x;
-	float playerY = camera.getCreaturePosition().y;
+	float playerX = camera.getEntityPosition().x;
+	float playerY = camera.getEntityPosition().y;
 
 	int chunkX = (int)((playerX/16)/16);
 	int chunkY = (int)((playerY/16)/16);
