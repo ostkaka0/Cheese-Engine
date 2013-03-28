@@ -4,7 +4,7 @@
 #define PI 3.14159265358979323846264338
 
 Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) 
-	: Entity(x,y,sizeX,sizeY,speed,friction,spriteName,spriteIndex,isClientControlling)
+	: Entity(x,y,sizeX,sizeY,0,speed,friction,spriteName,spriteIndex,isClientControlling)
 {
 	horizontal = 0;
     vertical = 0;

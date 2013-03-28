@@ -9,7 +9,7 @@
 
 #define PI 3.14159265358979323846264338
 
-Entity::Entity(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
+Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
 {
         this->x = x;
         this->y = y;
@@ -22,18 +22,18 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float speed, float fr
 		this->sizeX = sizeX;
 		this->sizeY = sizeY;
 
-        angle = 0;
+        this->angle = angle;
 		this->spriteName = spriteName;
 		this->spriteIndex = spriteIndex;
 }
 
 void Entity::Update(sf::RenderWindow &app, sf::View &camera)
 {
+    x += speedX * app.GetFrameTime();
+	y += speedY * app.GetFrameTime();
 
-    speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
+	speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
     speedY *= 1 - tan(friction*PI/2) * app.GetFrameTime();
-
-    setPosition(speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
 }
 
 void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)

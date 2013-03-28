@@ -4,8 +4,11 @@
 #include <math.h>
 
 
-Projectile::Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) : Entity(x,y,sizeX,sizeY,speed,friction,spriteName,spriteIndex,isClientControlling)
+Projectile::Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) : Entity(x,y,sizeX,sizeY,angle,speed,friction,spriteName,spriteIndex,isClientControlling)
 {
+	speedX = (float)cos(angle * M_PI/180) * speed;
+	speedY = (float)sin(angle * M_PI/180) * speed;
+
 }
 
 
@@ -15,17 +18,13 @@ Projectile::~Projectile(void)
 
 void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 { 
-	sf::Vector2f velocity;
-	velocity.x = (float)cos(getAngle() * M_PI/180) * speed;
-	velocity.y = -(float)sin(getAngle() * M_PI/180) * speed;
+	speedX = (float)cos(angle * M_PI/180) * speed;
+	speedY = (float)sin(angle * M_PI/180) * speed;
 
-	sf::Vector2f position = getPosition();
-	position.x += velocity.x * (app.GetFrameTime());
-	position.y += velocity.y * (app.GetFrameTime());
-
-	speedX = position.x;
-	speedY = position.y;
+	std::cout << "sdf";
 	Entity::Update(app,camera);
+
+	
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }
