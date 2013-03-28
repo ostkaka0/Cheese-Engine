@@ -1,14 +1,11 @@
 #include "Projectile.h"
+#include "Entity.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 
-Projectile::Projectile(sf::Vector2f position, float angle, float speed, sf::Sprite& sprite)
+Projectile::Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) : Entity(x,y,sizeX,sizeY,speed,friction,spriteName,spriteIndex,isClientControlling)
 {
-	this->sprite = new sf::Sprite(sprite);
-	this->setPosition(position);
-	this->setAngle(angle);
-	this->setSpeed(speed);
 }
 
 
@@ -18,7 +15,11 @@ Projectile::~Projectile(void)
 
 void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 { 
-	sf::Vector2f direction;
+	speedX = (float)cos(angle * M_PI/180)*speed;
+	speedY = (float)sin(angle * M_PI/180)*speed;
+	Entity::Update(app,camera);
+
+	/*sf::Vector2f direction;
 	direction.x = (float)cos(sprite->GetRotation() * M_PI/180);
 	direction.y = -(float)sin(sprite->GetRotation() * M_PI/180);
 
@@ -30,10 +31,10 @@ void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 	position.x += velocity.x * (app.GetFrameTime());
 	position.y += velocity.y * (app.GetFrameTime());
 
-	setPosition(position);
+	setPosition(position);*/
 }
 
-void Projectile::Draw(sf::RenderWindow& app)
+/*void Projectile::Draw(sf::RenderWindow& app)
 {
 	app.Draw(*sprite);
 }
@@ -75,3 +76,4 @@ float Projectile::getAngle() {return sprite->GetRotation();}
 sf::Vector2f Projectile::getPosition() {return sprite->GetPosition();}
 float Projectile::getSpeed() {return speed;}
 sf::Vector2f Projectile::getSize() {return sprite->GetSize();}
+*/

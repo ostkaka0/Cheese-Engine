@@ -88,7 +88,7 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 	{
 		if(isVisible(app, camera, projectileList[i]->getPosition().x, projectileList[i]->getPosition().y, projectileList[i]->getSize().x, projectileList[i]->getSize().y))
 		{
-			projectileList[i]->Draw(app);
+			projectileList[i]->Draw(app, tc);
 		}
 	}
 

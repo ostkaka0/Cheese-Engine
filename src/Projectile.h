@@ -2,13 +2,14 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include "Camera.h"
-class Projectile
+#include "Entity.h"
+class Projectile : public Entity
 {
 public:
-	Projectile(sf::Vector2f position, float angle, float speed, sf::Sprite& sprite);
+	Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	~Projectile(void);
 	virtual void Update(sf::RenderWindow& app, Camera& camera);
-	virtual void Draw(sf::RenderWindow& app);
+	/*virtual void Draw(sf::RenderWindow& app);
 	void Rotate(float degrees);
 	void setAngle(float angle);
 	float getAngle();
@@ -21,6 +22,6 @@ public:
 	void setTexture(sf::Sprite& sprite);
 	sf::Sprite* sprite;
 private:
-	float speed;
+	float speed;*/
 };
 
