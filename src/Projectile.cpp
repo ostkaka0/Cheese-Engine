@@ -18,7 +18,10 @@ void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 	speedX = (float)cos(angle * M_PI/180) * speed;
 	speedY = (float)sin(angle * M_PI/180) * speed;
 
+	std::cout << "sdf";
 	Entity::Update(app,camera);
+
+	
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }
