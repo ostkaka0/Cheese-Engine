@@ -59,21 +59,23 @@ Block* Chunk::getHighestBlock(unsigned char x, unsigned char y)
 	return(0);
 }
 
-void Chunk::Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer &tc)
+void Chunk::Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer &tc, Camera &camera)
 {
 	backgroundSprite = &(tc.getTextures("Block0.png")[0]);
 	for(short x = 0; x < CHUNKWIDTH; x++)
 	{
 		for(short y = 0; y < CHUNKHEIGHT; y++)
 		{
+			short xPosBlock = (16*xPos-16 + x)*16;
+			short yPosBlock = (16*yPos-16 + y)*16;
 			if(blockList[x][y][0] == NULL || isAnySeeThrough(blockList[x][y]))
 			{
-				backgroundSprite->SetPosition((16*xPos-16 + x)*16, (16*yPos-16  + y)*16);
+				backgroundSprite->SetPosition((16*xPos-16 + x)*16, (16*yPos-16 + y)*16);
 				app.Draw(*backgroundSprite);
 			}
 			for(int l = 5; l >= 0; l--)
 			{
-				if(blockList[x][y][l] != NULL)
+				if(blockList[x][y][l] != NULL && xPosBlock + 16 >= (camera.GetCenter().x - 381) && xPosBlock <= (camera.GetCenter().x + 381)&& yPosBlock + 16 >= (camera.GetCenter().y - 256) && yPosBlock <= (camera.GetCenter().y + 256))
 				{
 					blockList[x][y][l]->Draw(x, y, xPos, yPos, app, tc); 
 					if(!blockList[x][y][l]->isSeeThrough())

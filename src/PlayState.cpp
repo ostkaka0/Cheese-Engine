@@ -17,7 +17,7 @@ PlayState::PlayState(sf::RenderWindow *window)
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
 
 	Player* player = new Player(0, 0, 32, 32, true, "graywizard.png", 0, "Karl-Bertil");
-	currentWorld->AddPlayer(player);
+	currentWorld->AddPlayer(player, 0);
 	camera->setCameraAt(*player);
 
 	BlockSolid blockSolid(0);
@@ -49,5 +49,5 @@ void PlayState::Draw(sf::RenderWindow &app)
 {
 	currentWorld->Draw(app, tc, *camera);
 	blockMenu->Draw(app, tc, *camera, *currentWorld);
-	//std::cout << "FPS: " << (1/app.GetFrameTime()) << std::endl;
+	std::cout << "FPS: " << (1/app.GetFrameTime()) << std::endl;
 }

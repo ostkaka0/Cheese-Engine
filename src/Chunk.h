@@ -22,7 +22,7 @@ public:
 	Block* getBlock(unsigned char layer, unsigned short, unsigned short);
 	void setBlock(unsigned char layer, unsigned short, unsigned short, Block&);
 	unsigned short getBlockId(unsigned char layer, unsigned short x, unsigned short y);
-	void Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer &tc);
+	void Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer &tc, Camera &camera);
 	bool isAnySolid(Block* blocks[6]);
 	bool isAnySeeThrough(Block* blocks[6]);
 };

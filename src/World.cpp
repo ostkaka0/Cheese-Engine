@@ -70,7 +70,7 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 		{
 			if(chunkX+x > 0 && chunkY+y > 0 && chunkX+x < sizeX && chunkY+y < sizeY)
 			{
-				chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc);
+				chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc, camera);
 			}
 		}
 	}
@@ -174,7 +174,12 @@ void World::AddCreature(Creature* creature)
 	creatureList.push_back(creature);
 }
 
-void World::AddPlayer(Player* player)
+void World::AddPlayer(Player* player, short Id)
 {
-	playerList.push_back(player);
+	playerList.insert((playerList.begin() + Id), player);
+}
+
+void World::RemovePlayer(short Id)
+{
+	playerList.erase(playerList.begin() + Id);
 }

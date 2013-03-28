@@ -39,6 +39,7 @@ public:
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
 	std::map<unsigned short, std::function<Block*(unsigned short)>>* getBlockTypeMap();
 	void AddCreature(Creature*);
-	void AddPlayer(Player*);
+	void AddPlayer(Player*, short Id);
+	void RemovePlayer(short Id);
 };
 
