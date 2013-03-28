@@ -23,7 +23,8 @@ void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 	position.x += velocity.x * (app.GetFrameTime());
 	position.y += velocity.y * (app.GetFrameTime());
 
-	setPosition(position.x, position.y);
+	speedX = position.x;
+	speedY = position.y;
 	Entity::Update(app,camera);
 }
 

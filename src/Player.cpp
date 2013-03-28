@@ -3,7 +3,8 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 
-Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) : Creature(X, Y, sizeX, sizeY, 4096,0.875, spriteName, spriteIndex, IsClientControlling)
+Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
+	: Creature(X, Y, sizeX, sizeY, 4096,0.875, spriteName, spriteIndex, IsClientControlling)
 {
     name = Name;
 	cameraDelay = 0;

@@ -41,8 +41,8 @@ void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)
 	sf::Sprite *sprite = &(tc.getTextures(spriteName)[spriteIndex]);
 	if (sprite != NULL)
 	{
-		sprite->SetPosition(getPosition());
-		sprite->SetRotation(getAngle());
+	    sprite->SetPosition(sf::Vector2f(x, y));
+	    sprite->SetRotation(angle);
 		app.Draw(*sprite);
 	}
 	else
