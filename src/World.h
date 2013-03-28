@@ -21,8 +21,7 @@ private:
 	short int sizeY;
 	Chunk *chunkList[256][256];
 	std::map<unsigned short, std::function<Block*(unsigned short)>> blockTypeMap;
-	std::vector<Projectile*> projectileList;
-	std::vector<Creature*> creatureList;
+	std::vector<Entity*> entityList;
 	std::vector<Player*> playerList;
 
 public:

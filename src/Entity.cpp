@@ -33,7 +33,7 @@ void Entity::Update(sf::RenderWindow &app, sf::View &camera)
     speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
     speedY *= 1 - tan(friction*PI/2) * app.GetFrameTime();
 
-    move(speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
+    setPosition(speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
 }
 
 void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)
@@ -41,20 +41,14 @@ void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)
 	sf::Sprite *sprite = &(tc.getTextures(spriteName)[spriteIndex]);
 	if (sprite != NULL)
 	{
-		sprite->SetPosition(sf::Vector2f(x, y));
-		sprite->SetRotation(angle);
+		sprite->SetPosition(getPosition());
+		sprite->SetRotation(getAngle());
 		app.Draw(*sprite);
 	}
 	else
 	{
 		std::cout << "'" << getTextureName() << "' not found!" << std::endl;
 	}
-}
-
-void Entity::move(float X, float Y)
-{
-    x += X;
-    y += Y;
 }
 
 void Entity::setPosition(float X, float Y)
@@ -69,3 +63,5 @@ void Entity::setY(float Y) { y = Y; }
 float Entity::getX() { return x; }
 float Entity::getY() { return y; }
 sf::Vector2f Entity::getSize() { return sf::Vector2f(sizeX, sizeY); }
+void Entity::setAngle(float angle) {this->angle = angle; }
+float Entity::getAngle() { return angle;  }

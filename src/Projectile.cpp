@@ -15,23 +15,16 @@ Projectile::~Projectile(void)
 
 void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 { 
-	speedX = (float)cos(angle * M_PI/180)*speed;
-	speedY = (float)sin(angle * M_PI/180)*speed;
-	Entity::Update(app,camera);
-
-	/*sf::Vector2f direction;
-	direction.x = (float)cos(sprite->GetRotation() * M_PI/180);
-	direction.y = -(float)sin(sprite->GetRotation() * M_PI/180);
-
 	sf::Vector2f velocity;
-	velocity.x = direction.x * speed;
-	velocity.y = direction.y * speed;
+	velocity.x = (float)cos(getAngle() * M_PI/180) * speed;
+	velocity.y = -(float)sin(getAngle() * M_PI/180) * speed;
 
-	sf::Vector2f position = sprite->GetPosition();
+	sf::Vector2f position = getPosition();
 	position.x += velocity.x * (app.GetFrameTime());
 	position.y += velocity.y * (app.GetFrameTime());
 
-	setPosition(position);*/
+	setPosition(position.x, position.y);
+	Entity::Update(app,camera);
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }

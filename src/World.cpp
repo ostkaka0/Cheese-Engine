@@ -47,9 +47,9 @@ void World::DrawBorder(int blockId)
 
 void World::Update(sf::RenderWindow& app, Camera &camera)
 {
-	for (std::vector<Projectile*>::size_type i = 0; i < projectileList.size(); i++)
+	for (std::vector<Projectile*>::size_type i = 0; i < entityList.size(); i++)
 	{
-		projectileList[i]->Update(app, camera);
+		entityList[i]->Update(app, camera);
 	}
 	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
 	{
@@ -81,15 +81,17 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 	{
 		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
 		if (angle < 0)
-			angle = angle + 360;
-		projectileList.push_back(new Projectile(0, 0, 32, 32, 128, 0, "arrow.png", 0, false));//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+			angle += 360;
+		Projectile *projectile = new Projectile(0, 0, 32, 32, 128, 0, "arrow.png", 0, false);
+		projectile->setAngle(angle);
+		entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
 	}
 
-	for (std::vector<Projectile>::size_type i = 0; i < projectileList.size(); i++)
+	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)
 	{
-		if(isVisible(app, camera, projectileList[i]->getPosition().x, projectileList[i]->getPosition().y, projectileList[i]->getSize().x, projectileList[i]->getSize().y))
+		if(isVisible(app, camera, entityList[i]->getPosition().x, entityList[i]->getPosition().y, entityList[i]->getSize().x, entityList[i]->getSize().y))
 		{
-			projectileList[i]->Draw(app, tc);
+			entityList[i]->Draw(app, tc);
 		}
 	}
 
@@ -170,7 +172,7 @@ bool World::isVisible(sf::RenderWindow& app, Camera& camera, float posX, float p
 
 void World::AddCreature(Creature* creature)
 {
-	creatureList.push_back(creature);
+	entityList.push_back(creature);
 }
 
 void World::AddPlayer(Player* player, short Id)

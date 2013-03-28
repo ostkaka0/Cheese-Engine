@@ -24,7 +24,6 @@ public:
     virtual void Draw(sf::RenderWindow &app, TextureContainer &tc);
 	virtual std::string getTextureName()=0;
 	virtual char getTextureId()=0;
-    void move(float x, float y);
     void setPosition(float x, float y);
 	sf::Vector2f getPosition();
 	sf::Vector2f getSize();
@@ -32,5 +31,7 @@ public:
     void setY(float y);
     float getX();
     float getY();
+	float getAngle();
+	void setAngle(float angle);
 };
 
