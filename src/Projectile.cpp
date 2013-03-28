@@ -4,7 +4,7 @@
 #include <math.h>
 
 
-Projectile::Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) : Entity(x,y,sizeX,sizeY,speed,friction,spriteName,spriteIndex,isClientControlling)
+Projectile::Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) : Entity(x,y,sizeX,sizeY,angle,speed,friction,spriteName,spriteIndex,isClientControlling)
 {
 }
 

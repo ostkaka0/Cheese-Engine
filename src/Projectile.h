@@ -6,7 +6,7 @@
 class Projectile : public Entity
 {
 public:
-	Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
+	Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	~Projectile(void);
 	virtual void Update(sf::RenderWindow& app, Camera& camera);
 	std::string getTextureName();

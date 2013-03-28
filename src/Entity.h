@@ -19,7 +19,7 @@ protected:
 	std::string spriteName;
 	int spriteIndex;
 public:
-	Entity(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
+	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	virtual void Update(sf::RenderWindow &app, sf::View &camera);
     virtual void Draw(sf::RenderWindow &app, TextureContainer &tc);
 	virtual std::string getTextureName()=0;
