@@ -77,7 +77,7 @@ void Chunk::Draw(short xPos, short yPos, sf::RenderWindow &app, TextureContainer
 			{
 				if(blockList[x][y][l] != NULL && xPosBlock + 16 >= (camera.GetCenter().x - 381) && xPosBlock <= (camera.GetCenter().x + 381)&& yPosBlock + 16 >= (camera.GetCenter().y - 256) && yPosBlock <= (camera.GetCenter().y + 256))
 				{
-					blockList[x][y][l]->Draw(x, y, xPos, yPos, app, tc); 
+					blockList[x][y][l]->Draw(16*xPos-16 + x, 16*yPos-16 + y, app, tc); 
 					if(!blockList[x][y][l]->isSeeThrough())
 						break;
 				}

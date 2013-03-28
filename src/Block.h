@@ -19,6 +19,6 @@ public:
 	virtual bool isSeeThrough()=0;
 	virtual bool isSolid()=0;
 	//virtual char getSubTextureId() = 0;
-	void Draw(short posX, short posY, short chunkPosX, short chunkPosY, sf::RenderWindow &app, TextureContainer &tc);
+	void Draw(short posX, short posY, sf::RenderWindow &app, TextureContainer &tc);
 };
 

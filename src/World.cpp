@@ -91,7 +91,6 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 			projectileList[i]->Draw(app);
 		}
 	}
-	//Projectile end
 
 	//Player start
 	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
@@ -101,7 +100,6 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 			playerList[i]->Draw(app, tc);
 		}
 	}
-	//Player end
 }
 
 void World::setBlock(unsigned char layer, short x, short y, Block* block)
