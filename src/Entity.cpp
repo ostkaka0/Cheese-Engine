@@ -29,11 +29,11 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 
 void Entity::Update(sf::RenderWindow &app, sf::View &camera)
 {
+    x += speedX * app.GetFrameTime();
+	y += speedY * app.GetFrameTime();
 
-    speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
+	speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
     speedY *= 1 - tan(friction*PI/2) * app.GetFrameTime();
-
-    setPosition(x + speedX * app.GetFrameTime(), y + speedY * app.GetFrameTime());
 }
 
 void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)
