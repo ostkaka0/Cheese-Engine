@@ -1,4 +1,5 @@
 #include "World.h"
+#include "Projectile.h"
 #define SIZEXMAX 256
 #define SIZEYMAX 256
 
@@ -76,13 +77,13 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 	}
 
 	//Projectile start
-	/*if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
+	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getCreaturePosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getCreaturePosition().x+8)) * 180 / 3.1415;
+		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
 		if (angle < 0)
 			angle = angle + 360;
-		projectileList.push_back(new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
-	}*/
+		projectileList.push_back(new Projectile(0, 0, 32, 32, 1, 1, "arrow.png", 0, false));//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+	}
 
 	for (std::vector<Projectile>::size_type i = 0; i < projectileList.size(); i++)
 	{

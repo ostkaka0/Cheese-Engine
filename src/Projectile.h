@@ -9,6 +9,8 @@ public:
 	Projectile(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	~Projectile(void);
 	virtual void Update(sf::RenderWindow& app, Camera& camera);
+	std::string getTextureName();
+	char getTextureId();
 	/*virtual void Draw(sf::RenderWindow& app);
 	void Rotate(float degrees);
 	void setAngle(float angle);

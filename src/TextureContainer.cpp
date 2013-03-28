@@ -9,7 +9,7 @@ TextureContainer::TextureContainer(void)
 	AddSpriteSheet("BlockBackground.png", 16, 16);
 	AddSpriteSheet("BlockSolid.png", 16, 16);
 	AddSpriteSheet("BlockGravity.png", 16, 16);
-	AddSpriteSheet("arrowb.png", 32, 8);
+	AddSpriteSheet("arrow.png", 32, 8);
 
 	AddSpriteSheet("graywizard.png", 16, 26);
 }

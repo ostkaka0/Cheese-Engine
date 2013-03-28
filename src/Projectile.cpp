@@ -34,6 +34,9 @@ void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 	setPosition(position);*/
 }
 
+std::string Projectile::getTextureName() { return "arrow.png"; }
+char Projectile::getTextureId() { return 0; }
+
 /*void Projectile::Draw(sf::RenderWindow& app)
 {
 	app.Draw(*sprite);
