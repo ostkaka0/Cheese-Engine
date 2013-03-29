@@ -8,7 +8,7 @@ Projectile::Projectile(float x, float y, short sizeX, short sizeY, float angle, 
 	: Entity(x,y,sizeX,sizeY,angle,speed,friction,spriteName,spriteIndex,isClientControlling)
 {
 	speedX = (float)cos(angle * M_PI/180) * speed;
-	speedY = (float)sin(angle * M_PI/180) * speed;
+	speedY = (float)sin(-angle * M_PI/180) * speed;
 }
 
 
@@ -19,11 +19,10 @@ Projectile::~Projectile(void)
 void Projectile::Update(sf::RenderWindow& app, Camera& camera)
 { 
 	speedX = (float)cos(angle * M_PI/180) * speed;
-	speedY = (float)sin(angle * M_PI/180) * speed;
+	speedY = (float)sin(-angle * M_PI/180) * speed;
 
 	std::cout << "sdf";
 	Entity::Update(app,camera);
-
 	
 }
 

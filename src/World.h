@@ -32,7 +32,7 @@ public:
 	void setBlock(unsigned char layer, short x, short y, Block* block);
 	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
 	void DrawBorder(int blockId);
-	bool isVisible(sf::RenderWindow& app, Camera& camera, float posX, float posY, float sizeX, float sizeY);
+	bool isVisible(sf::RenderWindow& app, Camera& camera, Entity& entity, short position);
 	sf::Vector2i getSize();
 	Block* getBlock(unsigned char layer, short x, short y);
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);

@@ -47,7 +47,7 @@ void World::DrawBorder(int blockId)
 
 void World::Update(sf::RenderWindow& app, Camera &camera)
 {
-	for (std::vector<Projectile*>::size_type i = 0; i < entityList.size(); i++)
+	for (std::vector<Entity*>::size_type i = 0; i < entityList.size(); i++)
 	{
 		entityList[i]->Update(app, camera);
 	}
@@ -82,12 +82,12 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
 		if (angle < 0)
 			angle = angle + 360;
-		entityList.push_back(new Projectile(0, 0, 32, 32, angle, 128, 0, "arrow.png", 0, false));//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+		entityList.push_back(new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 128, 0, "arrow.png", 0, false));//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
 	}
 
 	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)
 	{
-		if(isVisible(app, camera, entityList[i]->getPosition().x, entityList[i]->getPosition().y, entityList[i]->getSize().x, entityList[i]->getSize().y))
+		if(isVisible(app, camera, *entityList[i], i))
 		{
 			entityList[i]->Draw(app, tc);
 		}
@@ -96,7 +96,7 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 	//Player start
 	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
 	{
-		if(isVisible(app, camera, playerList[i]->getPosition().x, playerList[i]->getPosition().y, playerList[i]->getSize().x, playerList[i]->getSize().y))
+		if(isVisible(app, camera, *playerList[i], i))
 		{
 			playerList[i]->Draw(app, tc);
 		}
@@ -151,21 +151,36 @@ std::map<unsigned short, std::function<Block*(unsigned short)>>* World::getBlock
 
 sf::Vector2i World::getSize(){return(sf::Vector2i(sizeX, sizeY));};
 
-bool World::isVisible(sf::RenderWindow& app, Camera& camera, float posX, float posY, float sizeX, float sizeY)
+bool World::isVisible(sf::RenderWindow& app, Camera& camera, Entity& entity, short position)
 {
-	if((posX + sizeX) >= (camera.GetCenter().x - camera.GetHalfSize().x))
+	float posX = entity.getPosition().x;
+	float posY = entity.getPosition().y;
+	float sizeX = entity.getSize().x;
+	float sizeY = entity.getSize().y;
+	//float rotation = entity->getAngle();
+	//std::cout << camera.getEntityPosition().x << " " << camera.getEntityPosition().y << std::endl;
+	if((posX + (2*sizeX)) >= -16 && (posY + (2*sizeY)) >= -16)
 	{
-		if((posY + sizeY) >= (camera.GetCenter().y - camera.GetHalfSize().y))
+		if((posX - sizeX) <= this->sizeX*256 && (posY - sizeY) <= this->sizeY*256)
 		{
-			if(posX <= (camera.GetCenter().x + camera.GetHalfSize().x) && posY <= (camera.GetCenter().y + camera.GetHalfSize().y))
+			if((posX + 2*sizeX) >= (camera.GetCenter().x - camera.GetHalfSize().x))
 			{
-				return true;
+				if((posY + 2*sizeY) >= (camera.GetCenter().y - camera.GetHalfSize().y))
+				{
+					if(posX - sizeX <= (camera.GetCenter().x + camera.GetHalfSize().x))
+					{
+						if(posY - sizeY <= (camera.GetCenter().y + camera.GetHalfSize().y))
+						{
+							return true;
+						}
+					}
+				}
 			}
 			return false;
 		}
-		return false;
 	}
 	return false;
+	//delete entityList[position];
 }
 
 void World::AddCreature(Creature* creature)
