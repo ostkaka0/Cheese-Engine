@@ -16,18 +16,6 @@ void Player::Update(sf::RenderWindow &app, Camera &camera)
 	if (isClientControlling)
 	{
 
-		//Projectile start
-		if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
-		{
-			double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
-			if (angle < 0)
-				angle = angle + 360;
-			Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-			//entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
-			//playerList[0]->setCameraDelay(0.125F);
-			camera.setCameraAt(*projectile);
-		}
-
 		KeyUpdate(
 			app.GetInput().IsKeyDown(sf::Key::D),
 			app.GetInput().IsKeyDown(sf::Key::S),

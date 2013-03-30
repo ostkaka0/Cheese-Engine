@@ -56,11 +56,11 @@ void World::Update(sf::RenderWindow& app, Camera &camera)
 
 void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 {
-	float playerX = camera.getEntityPosition().x;
-	float playerY = camera.getEntityPosition().y;
+	float cameraX = camera.GetCenter().x;
+	float cameraY = camera.GetCenter().y;
 
-	int chunkX = (int)((playerX/16)/16);
-	int chunkY = (int)((playerY/16)/16);
+	int chunkX = (int)((cameraX/16)/16);
+	int chunkY = (int)((cameraY/16)/16);
 
 	for(short x = -2; x < 4; x++)
 	{
@@ -71,6 +71,20 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 				chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc, camera);
 			}
 		}
+	}
+
+	//Projectile start
+	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
+	{
+		//double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
+		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (playerList[0]->getPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (playerList[0]->getPosition().x+8)) * 180 / 3.1415;
+		if (angle < 0)
+			angle = angle + 360;
+		//Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
+		Projectile *projectile = new Projectile(playerList[0]->getPosition().x, playerList[0]->getPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
+		entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+		playerList[0]->setCameraDelay(2.0F);
+		camera.setCameraAt(*projectile);
 	}
 
 	//Entity start
