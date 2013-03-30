@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Creature.h"
+#include "Entity.h"
 
 class Camera : public sf::View
 {

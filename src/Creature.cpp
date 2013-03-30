@@ -1,4 +1,3 @@
-#include "Entity.h"
 #include "Creature.h"
 
 #define PI 3.14159265358979323846264338

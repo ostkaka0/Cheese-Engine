@@ -1,7 +1,12 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <SFML\Graphics.hpp>
 #include "TextureContainer.h"
+#include <iostream>
+#include <math.h>
+//#include "World.h"
 
 class Entity
 {
@@ -34,4 +39,3 @@ public:
 	float getAngle();
 	void setAngle(float angle);
 };
-

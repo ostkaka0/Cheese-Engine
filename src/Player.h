@@ -1,8 +1,13 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "Creature.h"
 #include "TextureContainer.h"
 #include "Camera.h"
+#include "Projectile.h"
+#include <string>
+#include <list>
+#include <SFML/Graphics.hpp>
 
 class Player : public Creature
 {

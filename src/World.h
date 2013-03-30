@@ -1,18 +1,16 @@
 #pragma once
-#include "Chunk.h"
-//#include "Player.h"
-#include "Creature.h"
-#include "TextureContainer.h"
-#include "Projectile.h"
-#include "Camera.h"
-#include <functional>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <memory>
+
+#define SIZEXMAX 256
+#define SIZEYMAX 256
 
 #define SCREENSIZEX 800
 #define SCREENSIZEY 600
+
+#include "Chunk.h"
+#include "Player.h"
+#include "TextureContainer.h"
+#include "Camera.h"
+#include <functional>
 
 class World
 {
@@ -37,8 +35,7 @@ public:
 	Block* getBlock(unsigned char layer, short x, short y);
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
 	std::map<unsigned short, std::function<Block*(unsigned short)>>* getBlockTypeMap();
-	void AddCreature(Creature*);
+	void AddEntity(Entity*);
 	void AddPlayer(Player*, short Id);
 	void RemovePlayer(short Id);
 };
-

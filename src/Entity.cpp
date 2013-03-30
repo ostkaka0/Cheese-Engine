@@ -1,14 +1,5 @@
 #include "Entity.h"
 
-
-#include "Entity.h"
-#include <SFML/Graphics.hpp>
-#include <math.h>
-#include <iostream>
-#include "Camera.h"
-
-#define PI 3.14159265358979323846264338
-
 Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
 {
         this->x = x;
@@ -32,8 +23,8 @@ void Entity::Update(sf::RenderWindow &app, sf::View &camera)
     x += speedX * app.GetFrameTime();
 	y += speedY * app.GetFrameTime();
 
-	speedX *= 1 - tan(friction*PI/2) * app.GetFrameTime();
-    speedY *= 1 - tan(friction*PI/2) * app.GetFrameTime();
+	speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
+    speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
 }
 
 void Entity::Draw(sf::RenderWindow &app, TextureContainer &tc)

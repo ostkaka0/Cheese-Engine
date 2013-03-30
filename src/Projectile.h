@@ -1,8 +1,10 @@
 #pragma once
+
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include "Camera.h"
 #include "Entity.h"
+
 class Projectile : public Entity
 {
 public:

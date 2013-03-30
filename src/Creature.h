@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CREATURE_H_INCLUDED
 #define CREATURE_H_INCLUDED
 

@@ -1,7 +1,4 @@
 #include "World.h"
-#include "Projectile.h"
-#define SIZEXMAX 256
-#define SIZEYMAX 256
 
 World::World(short unsigned sizeX, short unsigned sizeY)
 {
@@ -76,18 +73,7 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 		}
 	}
 
-	//Projectile start
-	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
-	{
-		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
-		if (angle < 0)
-			angle = angle + 360;
-		Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-		entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
-		playerList[0]->setCameraDelay(0.125F);
-		camera.setCameraAt(*projectile);
-	}
-
+	//Entity start
 	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)
 	{
 		if(isVisible(app, camera, *entityList[i], i))
@@ -186,7 +172,7 @@ bool World::isVisible(sf::RenderWindow& app, Camera& camera, Entity& entity, sho
 	//delete entityList[position];
 }
 
-void World::AddCreature(Creature* creature)
+void World::AddEntity(Entity* creature)
 {
 	entityList.push_back(creature);
 }

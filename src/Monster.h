@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MONSTER_H_INCLUDED
 #define MONSTER_H_INCLUDED
 
