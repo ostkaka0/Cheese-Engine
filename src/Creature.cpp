@@ -12,7 +12,6 @@ Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, floa
 
 void Creature::Update(sf::RenderWindow &app, sf::View &camera)
 {
-	
     speedX += horizontal * app.GetFrameTime();
     speedY += vertical * app.GetFrameTime();
 
