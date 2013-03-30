@@ -24,14 +24,18 @@ void Player::Update(sf::RenderWindow &app, Camera &camera)
             app.GetInput().IsKeyDown(sf::Key::A),
             app.GetInput().IsKeyDown(sf::Key::W));
 
-		if (cameraDelay <= 0)
+		if (&camera.getEntity() != this)
 		{
-			camera.setCameraAt(*this);
+			if (cameraDelay <= 0)
+			{
+				camera.setCameraAt(*this);
+				cameraDelay = 0.5;
+			}
+			else
+			{
+				cameraDelay -= app.GetFrameTime();
+			}
 		}
-		else
-		{
-			cameraDelay -= app.GetFrameTime();
-		} 
 	}
 
     Creature::Update(app, camera);
@@ -64,6 +68,11 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up)
             
         }
     }
+}
+
+void Player::setCameraDelay(float delay)
+{
+	cameraDelay = delay;
 }
 
 std::string Player::getTextureName()

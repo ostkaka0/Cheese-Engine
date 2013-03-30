@@ -82,7 +82,10 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
 		if (angle < 0)
 			angle = angle + 360;
-		entityList.push_back(new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 128, 0, "arrow.png", 0, false));//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+		Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
+		entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
+		playerList[0]->setCameraDelay(0.125F);
+		camera.setCameraAt(*projectile);
 	}
 
 	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)

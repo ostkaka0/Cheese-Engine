@@ -24,10 +24,10 @@ void Camera::Update(sf::RenderWindow &app)
 	}
 }
 
-void Camera::setCameraAt(Creature &creature)
+void Camera::setCameraAt(Entity &entity)
 {
-	if (currentEntity != &creature)
-		currentEntity = &creature;
+	if (currentEntity != &entity)
+		currentEntity = &entity;
 }
 
 void Camera::setSpeed(double speed)
@@ -42,3 +42,5 @@ sf::Vector2f Camera::getEntityPosition()
 	else
 		return(sf::Vector2f(0, 0));
 }
+
+Entity &Camera::getEntity() { return *currentEntity; }

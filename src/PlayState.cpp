@@ -9,7 +9,7 @@ using namespace sf;
 
 PlayState::PlayState(sf::RenderWindow *window)
 {
-	camera = new Camera(10);
+	camera = new Camera(8);
 	currentWorld = new World(8, 8);
 	blockMenu = new InGameUI(tc, *currentWorld);
 

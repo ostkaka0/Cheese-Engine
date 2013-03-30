@@ -11,8 +11,9 @@ public:
 	Camera(double speed);
 	~Camera(void);
 	void Update(sf::RenderWindow &app);
-	void setCameraAt(Creature &creature);
+	void setCameraAt(Entity &entity);
 	void setSpeed(double speed);
 	sf::Vector2f getEntityPosition();
+	Entity &Camera::getEntity();
 };
 

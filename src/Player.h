@@ -18,6 +18,7 @@ public:
 	virtual void Update(sf::RenderWindow &app, Camera &camera);
     virtual void Draw(sf::RenderWindow &app, TextureContainer &tc);
     void KeyUpdate(bool Right, bool Down, bool Left, bool Up);
+	void setCameraDelay(float delay);
 	virtual std::string getTextureName();
 	virtual char getTextureId();
 };
