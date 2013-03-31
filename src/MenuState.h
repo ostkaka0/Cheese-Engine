@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MENUSTATE_H_INCLUDED
 #define MENUSTATE_H_INCLUDED
 

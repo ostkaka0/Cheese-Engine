@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef GAMESTATE_H_INCLUDED
 #define GAMESTATE_H_INCLUDED
 

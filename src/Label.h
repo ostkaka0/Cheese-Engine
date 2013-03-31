@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef Label_H_INCLUDED
 #define Label_H_INCLUDED
 
