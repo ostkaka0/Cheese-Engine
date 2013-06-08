@@ -1,13 +1,18 @@
+class Chunk;
 #pragma once
 #define CHUNKWIDTH 16
 #define CHUNKHEIGHT 16
-#include "Block.h"
-#include "BlockSolid.h"
-#include "BlockBackground.h"
-#include "BlockGravity.h"
-#include "Player.h"
-#include "TextureContainer.h"
+//#include "Block.h"
+//#include "BlockSolid.h"
+//#include "BlockBackground.h"
+//#include "BlockGravity.h"
+//#include "Player.h"
+//#include "TextureContainer.h"
 #include <SFML/Graphics.hpp>
+
+class TextureContainer;
+class Camera;
+class Block;
 
 class Chunk
 {

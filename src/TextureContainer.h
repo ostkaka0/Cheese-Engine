@@ -1,7 +1,6 @@
+class TextureContainer;
 #ifndef TEXTURECONTAINER_H_INCLUDED
 #define TEXTURECONTAINER_H_INCLUDED
-#define TEXTURETYPE_BLOCK 0
-#define TEXTURETYPE_SMILEY 1
 
 #include <map>
 #include <string>

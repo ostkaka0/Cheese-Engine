@@ -1,13 +1,11 @@
 #pragma once
 #include "gamestate.h"
-#include "World.h"
-#include "Creature.h"
-#include "Player.h"
-#include "Monster.h"
 #include "TextureContainer.h"
-#include "Camera.h"
-#include "InGameUI.h"
-#include "Projectile.h"
+
+
+class World;
+class InGameUI;
+class Camera;
 
 class PlayState : public GameState
 {

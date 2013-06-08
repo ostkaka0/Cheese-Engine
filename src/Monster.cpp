@@ -12,7 +12,7 @@ Monster::~Monster(void)
 {
 }
 
-void Monster::Update(sf::RenderWindow &App)
+void Monster::Update(sf::RenderWindow &app, Camera &camera, World &world)
 {
-
+	Creature::Update(app, camera, world);
 }

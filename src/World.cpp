@@ -1,4 +1,12 @@
 #include "World.h"
+#include "Entity.h"
+#include "Player.h"
+#include "projectile.h"
+#include "Camera.h"
+#include "Chunk.h"
+#include "Block.h"
+#include "BlockSolid.h"
+#include "BlockBackground.h"
 
 World::World(short unsigned sizeX, short unsigned sizeY)
 {
@@ -46,11 +54,11 @@ void World::Update(sf::RenderWindow& app, Camera &camera)
 {
 	for (std::vector<Entity*>::size_type i = 0; i < entityList.size(); i++)
 	{
-		entityList[i]->Update(app, camera);
+		entityList[i]->Update(app, camera, *this);
 	}
 	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
 	{
-		playerList[i]->Update(app, camera);
+		playerList[i]->Update(app, camera, *this);
 	}
 }
 
@@ -74,18 +82,7 @@ void World::Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera)
 	}
 
 	//Projectile start
-	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
-	{
-		//double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
-		double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (playerList[0]->getPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (playerList[0]->getPosition().x+8)) * 180 / 3.1415;
-		if (angle < 0)
-			angle = angle + 360;
-		//Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-		Projectile *projectile = new Projectile(playerList[0]->getPosition().x, playerList[0]->getPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-		entityList.push_back(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
-		playerList[0]->setCameraDelay(2.0F);
-		camera.setCameraAt(*projectile);
-	}
+
 
 	//Entity start
 	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)

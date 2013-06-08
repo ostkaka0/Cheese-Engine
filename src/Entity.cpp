@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "TextureContainer.h"
 
 Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
 {
@@ -18,7 +19,7 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 		this->spriteIndex = spriteIndex;
 }
 
-void Entity::Update(sf::RenderWindow &app, sf::View &camera)
+void Entity::Update(sf::RenderWindow &app, Camera &camera, World &world)
 {
     x += speedX * app.GetFrameTime();
 	y += speedY * app.GetFrameTime();

@@ -1,16 +1,25 @@
+class World;
 #pragma once
+
+#include <functional>
+#include <vector>
+#include <map>
+#include <list>
+#include <deque>
+#include <SFML\Graphics.hpp>
+ 
+class Chunk;
+class Block;
+class Entity;
+class Player;
+class TextureContainer;
+class Camera;
 
 #define SIZEXMAX 256
 #define SIZEYMAX 256
 
 #define SCREENSIZEX 800
 #define SCREENSIZEY 600
-
-#include "Chunk.h"
-#include "Player.h"
-#include "TextureContainer.h"
-#include "Camera.h"
-#include <functional>
 
 class World
 {

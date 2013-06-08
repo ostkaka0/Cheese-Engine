@@ -1,6 +1,8 @@
+class Camera;
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Entity.h"
+
+class Entity;
 
 class Camera : public sf::View
 {

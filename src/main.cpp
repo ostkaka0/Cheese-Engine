@@ -1,9 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "GameState.h"
-#include "Menu.h"
 #include "PlayState.h"
-using namespace sf;
+//using namespace sf;
 
 int main()
 {

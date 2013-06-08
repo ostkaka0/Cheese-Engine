@@ -1,8 +1,17 @@
+#include <iostream>
 #include <string>
+#include <SFML\Graphics.hpp>
 #include "GameState.h"
 #include "PlayState.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "World.h"
+#include "Camera.h"
+#include "InGameUI.h"
+#include "Player.h"
+#include "BlockSolid.h"
+#include "BlockBackground.h"
+
 using namespace sf;
 
 

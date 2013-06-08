@@ -1,9 +1,11 @@
+class InGameUI;
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "TextureContainer.h"
-#include "Camera.h"
-#include "World.h"
-#include "Block.h"
+
+class TextureContainer;
+class World;
+class Camera;
+class Block;
 
 class InGameUI
 {

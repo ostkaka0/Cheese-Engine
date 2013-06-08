@@ -1,12 +1,15 @@
+//class Entity;
 #pragma once
 
 #define _USE_MATH_DEFINES
 
 #include <SFML\Graphics.hpp>
-#include "TextureContainer.h"
 #include <iostream>
 #include <math.h>
-//#include "World.h"
+
+class TextureContainer;
+class World;
+class Camera;
 
 class Entity
 {
@@ -25,7 +28,7 @@ protected:
 	int spriteIndex;
 public:
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
-	virtual void Update(sf::RenderWindow &app, sf::View &camera);
+	virtual void Update(sf::RenderWindow &app, Camera &camera, World &world);
     virtual void Draw(sf::RenderWindow &app, TextureContainer &tc);
 	virtual std::string getTextureName()=0;
 	virtual char getTextureId()=0;

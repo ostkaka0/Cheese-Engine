@@ -1,6 +1,5 @@
 #include "BlockBackground.h"
 
-
 BlockBackground::BlockBackground(unsigned short texture)
 {
 	this->setMetadata(texture);

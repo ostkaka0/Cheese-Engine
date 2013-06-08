@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Entity.h"
 
 Camera::Camera(double speed)
 {

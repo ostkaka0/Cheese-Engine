@@ -1,5 +1,11 @@
 #include "InGameUI.h"
-
+#include "TextureContainer.h"
+#include "World.h"
+#include "Camera.h"
+#include "Block.h"
+#include "BlockSolid.h"
+#include "BlockBackground.h"
+#include <iostream>
 
 InGameUI::InGameUI(TextureContainer &tc, World &world)
 {

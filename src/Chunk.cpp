@@ -1,4 +1,7 @@
 #include "Chunk.h"
+#include "Block.h"
+#include "TextureContainer.h"
+#include "Camera.h"
 
 Chunk::Chunk()
 { 
