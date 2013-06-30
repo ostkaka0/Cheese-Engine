@@ -23,22 +23,18 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 	this->spriteIndex = spriteIndex;
 }
 
-std::vector<unsigned char*>* Entity::Update(App& app, World &world)
+void Entity::Update(App& app, World* world, std::vector<unsigned char*>* packetDataList)
 {
 	CheckCollision(app, world);
 
     x += speedX * app.GetFrameTime();
 	y += speedY * app.GetFrameTime();
 
-	
-
 	speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
     speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
-
-	return nullptr;
 }
 
-void Entity::CheckCollision(App& app, World &world)
+void Entity::CheckCollision(App& app, World* world)
 {
 	/*if (world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
 		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||

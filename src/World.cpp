@@ -61,16 +61,18 @@ void World::Draw(App& app, TextureContainer& tC)
 
 std::vector<unsigned char*>* World::Update(App& app, TextureContainer& tC)
 {
+	std::vector<unsigned char*>* packetDataList;
+
 	for (Entity* entity : entityList)
 	{
-		entity->Update(app, *this);
+		entity->Update(app, this, packetDataList);
 	}
 
 	for(Player* player : playerList)
 	{
-		player->Update(app, *this);
+		player->Update(app, this, packetDataList);
 	}	
-	return nullptr;
+	return packetDataList;
 }
 
 void World::RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value)

@@ -15,7 +15,7 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	lmb = false;
 }
 
-std::vector<unsigned char*>* Player::Update(App& app, World &world)
+void Player::Update(App& app, World* world, std::vector<unsigned char*>* packetDataList)
 {
 #ifndef _SERVER
 	if (isClientControlling)
@@ -45,7 +45,7 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 			
 			//Projectile *projectile = new Projectile(GetCamera(app).getEntityPosition().x.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
 			Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 1024, 0.03125, "arrow.png", 0, false);
-			world.AddEntity(projectile);//new Projectile(sf::Vector2f(GetCamera(app).getCreaturePosition().x+8.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arroaaawb.png")[0]));
+			world->AddEntity(projectile);//new Projectile(sf::Vector2f(GetCamera(app).getCreaturePosition().x+8.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arroaaawb.png")[0]));
 			cameraDelay = 0.03125F;
 			//GetCamera(app).setCameraAt(*projectile);
 		}
@@ -67,7 +67,7 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 	}
 #endif
 
-	return Creature::Update(app, world);
+	Creature::Update(app, world, packetDataList);
 }
 
 #ifndef _SERVER

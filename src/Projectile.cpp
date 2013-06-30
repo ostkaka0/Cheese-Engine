@@ -17,14 +17,14 @@ Projectile::~Projectile(void)
 {
 }
 
-std::vector<unsigned char*>* Projectile::Update(App& app, World &world)
+void Projectile::Update(App& app, World* world, std::vector<unsigned char*>* packetDataList)
 { 
 	speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
 	friction = 100/speed;
 	if (friction > 1)
 		friction = 1;
 
-	return Entity::Update(app, world);
+	Entity::Update(app, world, packetDataList);
 }
 
 void Projectile::Collision(World &world)

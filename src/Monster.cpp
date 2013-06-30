@@ -12,7 +12,7 @@ Monster::~Monster(void)
 {
 }
 
-std::vector<unsigned char*>* Monster::Update(App& app, World &world)
+void Monster::Update(App& app, World* world, std::vector<unsigned char*>* packetDataList)
 {
-	return Creature::Update(app, world);
+	Creature::Update(app, world, packetDataList);
 }

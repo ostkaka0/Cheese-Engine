@@ -36,11 +36,11 @@ protected:
 	void FixateY();
 public:
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
-	virtual std::vector<unsigned char*>* Update(App& app, World &world);
+	virtual void Update(App& app, World* world, std::vector<unsigned char*>* packetDataList);
 #ifndef _SERVER
     virtual void Draw(App& app, TextureContainer &tc);
 #endif
-	virtual void CheckCollision(App& app, World &world);
+	virtual void CheckCollision(App& app, World* world);
 	virtual void Collision(World &world);
 	virtual std::string getTextureName()=0;
 	virtual char getTextureId()=0;
