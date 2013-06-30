@@ -1,9 +1,12 @@
 enum MessageType
 {
 	InitMessage = 0,
+	WorldInit,
 	CreatureInit,
-	PlayerInit,
+	PlayerJoin,
+	PlayerLeft,
 	ProjectileInit,
-	CreatureMove,
-	BlockPlace
+	EntityMove,
+	BlockPlace,
+	BlockChange
 };
