@@ -1,8 +1,8 @@
-﻿Build started 2013-06-30 16:33:30.
+﻿Build started 2013-06-30 19:58:17.
      1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerState.cpp
-         ServerState.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerConnection.cpp
+         ServerConnection.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
          "Server Release\Block.obj"
@@ -11,7 +11,6 @@
          "Server Release\BlockSolid.obj"
          "Server Release\Camera.obj"
          "Server Release\Chunk.obj"
-         "Server Release\Client.obj"
          "Server Release\Connection.obj"
          "Server Release\Creature.obj"
          "Server Release\Entity.obj"
@@ -36,4 +35,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.23
+Time Elapsed 00:00:01.09

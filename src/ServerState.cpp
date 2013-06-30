@@ -31,5 +31,41 @@ GameState *ServerState::Update(App& app)
 {
 	//std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
 	currentWorld->Update(app, tC);
+	ProcessPackets();
 	return this;
+}
+
+void ServerState::ProcessPackets(void)
+{
+	sC->globalMutex.Lock();
+	auto packets = sC->packets;
+	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
+	sC->globalMutex.Unlock();
+
+	while(packets.size() > 0)
+	{
+		auto data = packets.front();
+		sf::Packet* packet = data.first;
+		Client* client = data.second;
+		//Now process packets
+		sf::Int16 packetType;
+		*packet >> packetType;
+
+		switch(packetType)
+		{
+		case 1: //measure ping between sent 1 and received 1 (type)
+			{
+				float ping = client->pingClock.GetElapsedTime();
+				client->pingClock.Reset();
+				client->ping = ping;
+				std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
+			}
+			break;
+		case 2: //server kicks client (type, string message)
+
+			break;
+		}
+		delete packet;
+		packets.pop();
+	}
 }

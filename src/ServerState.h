@@ -12,6 +12,7 @@ class ServerState : public GameState
 	World* currentWorld;
 	TextureContainer tC;
 	ServerConnection* sC;
+	void ProcessPackets();
 public:
 	ServerState(App& app);
 	~ServerState();
@@ -19,4 +20,3 @@ public:
     virtual GameState *Update(App& app);
 	virtual void Draw(App& app) {}
 };
-

@@ -159,7 +159,6 @@
     <ClCompile Include="BlockSolid.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chunk.cpp" />
-    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Entity.cpp" />

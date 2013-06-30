@@ -5,12 +5,15 @@
 #include <iostream>
 #include <thread>
 #include <queue>
+#include "Client.h"
+
 class ServerConnection : public sf::Thread
 {
 public:
+	sf::Mutex globalMutex;
 	ServerConnection(int port);
 	~ServerConnection(void);
-	std::queue<sf::Packet*> packets;
+	std::queue<std::pair<sf::Packet*, Client*>> packets;
 private:
 	long int maxClients;
 	virtual void Run();
@@ -19,7 +22,7 @@ private:
 	void Accept();
 	void Receive();
 	sf::SocketTCP s;
-	std::map<int, sf::SocketTCP> clients;
+	std::map<int, Client*> clients;
 	sf::IPAddress localIP;
 	sf::IPAddress publicIP;
 	sf::Clock pingTimeout;
