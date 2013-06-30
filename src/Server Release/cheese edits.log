@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿Build started 2013-06-30 16:31:57.
      1>Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -71,6 +72,15 @@
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
 >>>>>>> 3481e03a2bd7fec29404e5bceb81f86ecc218fb8
+=======
+﻿Build started 2013-06-30 16:33:30.
+     1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerState.cpp
+         ServerState.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
+>>>>>>> 3481e03a2bd7fec29404e5bceb81f86ecc218fb8
          "Server Release\Block.obj"
          "Server Release\BlockBackground.obj"
          "Server Release\BlockGravity.obj"
@@ -98,6 +108,7 @@
          "Server Release\World.obj"
      1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
 <<<<<<< HEAD
+<<<<<<< HEAD
          cheese edits.vcxproj -> C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
      1>Done Building Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
 
@@ -105,10 +116,15 @@ Build succeeded.
 
 Time Elapsed 00:00:32.08
 =======
+=======
+>>>>>>> 3481e03a2bd7fec29404e5bceb81f86ecc218fb8
          cheese edits.vcxproj -> C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
      1>Done Building Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
 
 Build succeeded.
 
 Time Elapsed 00:00:01.23
+<<<<<<< HEAD
+>>>>>>> 3481e03a2bd7fec29404e5bceb81f86ecc218fb8
+=======
 >>>>>>> 3481e03a2bd7fec29404e5bceb81f86ecc218fb8
