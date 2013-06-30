@@ -1,7 +1,7 @@
 #pragma once
 #include "gamestate.h"
 #include "TextureContainer.h"
-
+#include "ServerConnection.h"
 
 class World;
 class InGameUI;
@@ -11,6 +11,7 @@ class ServerState : public GameState
 {
 	World* currentWorld;
 	TextureContainer tC;
+	ServerConnection* sC;
 public:
 	ServerState(App& app);
 	~ServerState();
