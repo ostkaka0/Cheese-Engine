@@ -4,9 +4,9 @@
 class BlockSolid : public Block
 {
 public:
-	BlockSolid(unsigned short);
+	BlockSolid(unsigned short id);
 	virtual unsigned short getId();
-	virtual unsigned char getTextureId();
+	virtual unsigned char getTextureId(App &app, unsigned short metadata);
 	virtual unsigned char getLayer();
 	virtual std::string getTextureName();
 	virtual bool isSeeThrough();

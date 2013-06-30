@@ -4,9 +4,9 @@
 class BlockGravity : public Block
 {
 public:
-	BlockGravity(short int texture);
+	BlockGravity(unsigned short id);
 	virtual unsigned short getId()=0;
-	virtual unsigned char getTextureId()=0;
+	virtual unsigned char getTextureId(App &app, unsigned short metadata)=0;
 	virtual unsigned char getLayer()=0;
 	virtual std::string getTextureName()=0;
 	virtual bool isSeeThrough()=0;

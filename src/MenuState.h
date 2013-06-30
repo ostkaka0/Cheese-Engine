@@ -15,9 +15,9 @@ public:
 	MenuState();
 	~MenuState();
     //virtual void Initialize();
-    virtual void EventUpdate(sf::Event &event);
-    virtual GameState *Update(sf::RenderWindow &app);
-    virtual void Draw(sf::RenderWindow &app);
+    virtual void EventUpdate(sf::Event& event);
+    virtual GameState *Update(App& app);
+    virtual void Draw(App& app);
     //virtual void Shutdown();
 };
 

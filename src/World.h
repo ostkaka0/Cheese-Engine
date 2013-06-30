@@ -1,16 +1,88 @@
 #pragma once
 
-#define SIZEXMAX 256
-#define SIZEYMAX 256
+#include <functional>
+#include <vector>
+#include <map>
+#include <list>
+#include <deque>
+#include "App.h"
+
+class Entity;
+class Player;
+class Block;
+class Chunk;
+class TextureContainer;
+
+#define ChunkWidthHeight 256
+
+/*struct Chunk
+{
+	Block *blocks[256][256];
+};*/
+
+typedef	std::pair<std::deque<Chunk*>, long> ChunkColumnType;
+typedef std::pair<std::deque<ChunkColumnType>,long> ChunkMatrixType; // deque(y)<pair<deque<chunk>(x)>,long(chunkCenterY)>
+
+
+class World
+{
+private:
+	short int sizeX;
+	short int sizeY;
+	ChunkMatrixType chunkMatrix;
+	//long chunkMatrixCenterRow;
+	//std::pair<std::deque<std::pair<std::deque<Chunk*>,long>>,long> chunkMatrix;
+	std::map<unsigned short, std::function<Block*(unsigned short)>> blockTypeMap;
+	std::vector<Entity*> entityList;
+	std::vector<Player*> playerList;
+	std::map<std::pair<short,short>,Block*> BlockMap;
+public:
+	World();
+#ifndef _SERVER
+	void Draw(App& app, TextureContainer& tC);
+#endif
+	std::vector<unsigned char*>* Update(App& app, TextureContainer& tC);
+	void RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value);
+	void setBlock(long x, long y, long layer, short id);
+	void setBlockAndMetadata(long x, long y, long layer, short id, unsigned short metadata);
+	void setBlockMetadata(long x, long y, long layer, unsigned short metadata);
+	Block* getBlock(long x, long y, long layer);
+	void Expand(long x, long y, Chunk* chunk);
+	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
+	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
+	std::map<unsigned short, std::function<Block*(unsigned short)>>& getBlockTypeMap();
+	int AddEntity(Entity*);
+	void RemoveEntity(int id);
+	int AddPlayer(Player*);
+	void RemovePlayer(int id);
+};
+
+/*#include <functional>
+#include <vector>
+#include <map>
+#include <list>
+#include <deque>
+#include <SFML\System.hpp>
+ 
+#ifndef _SERVER
+#include <SFML\Graphics.hpp>
+#include "App.h"
+#else
+class App;
+#endif
+
+class Chunk;
+class Block;
+class Entity;
+class Player;
+class TextureContainer;
+class Camera;
+
+#define SIZEXMAX 1024
+#define SIZEYMAX 1024
 
 #define SCREENSIZEX 800
 #define SCREENSIZEY 600
-
-#include "Chunk.h"
-#include "Player.h"
-#include "TextureContainer.h"
-#include "Camera.h"
-#include <functional>
 
 class World
 {
@@ -25,17 +97,22 @@ private:
 public:
 	World(unsigned short, unsigned short);
 	~World(void);
-	void Draw(sf::RenderWindow& app, TextureContainer& tc, Camera &camera);
-	void Update(sf::RenderWindow& app, Camera &camera);
-	void setBlock(unsigned char layer, short x, short y, Block* block);
-	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
+#ifndef _SERVER
+	void Draw(App& app, TextureContainer& tC);
+#endif
+	void Update(App& app);
+	void setBlock(unsigned char layer, short x, short y, unsigned short id);
+	void setBlockAndMetadata(unsigned char layer, short x, short y, unsigned short id, unsigned short metadata);
+	void setBlockMetadata(unsigned char layer, short x, short y, unsigned short metadata);
+	void RegisterBlock(unsigned short, std::function<Block*(unsigned short)>);
 	void DrawBorder(int blockId);
-	bool isVisible(sf::RenderWindow& app, Camera& camera, Entity& entity, short position);
+	bool isVisible(App& app, Entity& entity, short position);
 	sf::Vector2i getSize();
 	Block* getBlock(unsigned char layer, short x, short y);
-	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
+	bool isBlockSolid(short x,short y);
+	Block* getBlockType(unsigned short id, unsigned short metadata);
 	std::map<unsigned short, std::function<Block*(unsigned short)>>* getBlockTypeMap();
 	void AddEntity(Entity*);
 	void AddPlayer(Player*, short Id);
 	void RemovePlayer(short Id);
-};
+};*/

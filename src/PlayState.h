@@ -1,28 +1,25 @@
+#ifndef _SERVER
 #pragma once
+#include "App.h"
 #include "gamestate.h"
-#include "World.h"
-#include "Creature.h"
-#include "Player.h"
-#include "Monster.h"
 #include "TextureContainer.h"
-#include "Camera.h"
-#include "InGameUI.h"
-#include "Projectile.h"
+#include <SFML\Graphics.hpp>
+
+class World;
+class InGameUI;
+class Camera;
 
 class PlayState : public GameState
 {
-public:
-	PlayState(sf::RenderWindow *window);
-	~PlayState();
-    virtual void EventUpdate(sf::Event &event);
-    virtual GameState *Update(sf::RenderWindow &app);
-    virtual void Draw(sf::RenderWindow &app);
-	World* currentWorld;
-	sf::Image playerImage;
-	sf::Sprite* playerSprite;
-	sf::Sprite *spriteList;
-	TextureContainer tc;
+	TextureContainer tC;
 	Camera *camera;
 	InGameUI *blockMenu;
+public:
+	PlayState(App& app);
+	~PlayState();
+    virtual void EventUpdate(sf::Event& event);
+    virtual GameState *Update(App& app);
+    virtual void Draw(App& app);
+	World* currentWorld;
 };
-
+#endif

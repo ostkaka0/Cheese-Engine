@@ -1,0 +1,42 @@
+﻿Build started 2013-06-30 14:44:32.
+     1>Project "C:\Users\Gustav\Desktop\src2\cheese edits.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\SFML-1.6\lib\vc2008" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _SERVER /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Debug\\" /Fd"Server Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerConnection.cpp ServerState.cpp main.cpp
+         ServerState.cpp
+         ServerConnection.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Desktop\src2\Server Debug\cheese edits Server.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-1.6\lib" "sfml-window.lib" "sfml-system.lib" "sfml-graphics.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Desktop\src2\Server Debug\cheese edits Server.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Desktop\src2\Server Debug\cheese edits Server.lib" /MACHINE:X86 "Server Debug\App.obj"
+         "Server Debug\Block.obj"
+         "Server Debug\BlockBackground.obj"
+         "Server Debug\BlockGravity.obj"
+         "Server Debug\BlockSolid.obj"
+         "Server Debug\Camera.obj"
+         "Server Debug\Chunk.obj"
+         "Server Debug\Connection.obj"
+         "Server Debug\Creature.obj"
+         "Server Debug\Entity.obj"
+         "Server Debug\InGameUI.obj"
+         "Server Debug\Label.obj"
+         "Server Debug\main.obj"
+         "Server Debug\MainMenu.obj"
+         "Server Debug\Menu.obj"
+         "Server Debug\MenuItem.obj"
+         "Server Debug\MenuState.obj"
+         "Server Debug\Monster.obj"
+         "Server Debug\Player.obj"
+         "Server Debug\PlayState.obj"
+         "Server Debug\Projectile.obj"
+         "Server Debug\ServerConnection.obj"
+         "Server Debug\ServerState.obj"
+         "Server Debug\TextureContainer.obj"
+         "Server Debug\World.obj"
+         cheese edits.vcxproj -> C:\Users\Gustav\Desktop\src2\Server Debug\cheese edits Server.exe
+     1>Done Building Project "C:\Users\Gustav\Desktop\src2\cheese edits.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.37

@@ -52,5 +52,5 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 sf::Sprite *TextureContainer::getTextures(std::string textureName)
 {
 	auto it = textureList.find(textureName);
-	return (it == textureList.end()) ? NULL : it->second;
+	return (it == textureList.end()) ? nullptr : it->second;
 }

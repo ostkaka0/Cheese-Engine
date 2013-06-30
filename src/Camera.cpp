@@ -1,9 +1,11 @@
-#include "Camera.h"
+#ifndef _SERVER
+#include "camera.h"
+#include "Entity.h"
 
 Camera::Camera(double speed)
 {
 	this->speed = speed;
-	currentEntity = NULL;
+	currentEntity = nullptr;
 }
 
 
@@ -12,9 +14,9 @@ Camera::~Camera(void)
 
 }
 
-void Camera::Update(sf::RenderWindow &app)
+void Camera::Update(App& app)
 {
-	if (currentEntity != NULL)
+	if (currentEntity != nullptr)
 	{
 		float deltaX = currentEntity->getX()+8-GetCenter().x;
 		float deltaY = currentEntity->getY()+8-GetCenter().y;
@@ -37,10 +39,11 @@ void Camera::setSpeed(double speed)
 
 sf::Vector2f Camera::getEntityPosition()
 {
-	if(currentEntity != NULL)
+	if(currentEntity != nullptr)
 		return(currentEntity->getPosition());
 	else
 		return(sf::Vector2f(0, 0));
 }
 
 Entity &Camera::getEntity() { return *currentEntity; }
+#endif

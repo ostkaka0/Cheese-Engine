@@ -19,7 +19,7 @@ MenuItem::~MenuItem()
 
 }
 
-void MenuItem::EventUpdate(sf::Event &event, sf::RenderWindow &app)
+void MenuItem::EventUpdate(sf::Event& event, App& app)
 {
     if (event.Type == sf::Event::MouseMoved)
     {
@@ -42,7 +42,7 @@ void MenuItem::EventUpdate(sf::Event &event, sf::RenderWindow &app)
     }
 }
 
-GameState *MenuItem::Update(sf::RenderWindow &app)
+GameState *MenuItem::Update(App& app)
 {
 	if (clicked && selected && clickEvent != 0)
 			clickEvent();

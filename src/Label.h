@@ -12,9 +12,9 @@ class Label : public MenuItem
 public:
 	Label(int x, int y, int width, int height, std::function<void()> &clickEvent);
 	~Label();
-	virtual void EventUpdate(sf::Event &event, sf::RenderWindow &app);
-    virtual GameState *Update(sf::RenderWindow &app);
-    virtual void Draw(sf::RenderWindow &app);
+	virtual void EventUpdate(sf::Event& event, App& app);
+    virtual GameState *Update(App& app);
+    virtual void Draw(App& app);
 };
 
 #endif
