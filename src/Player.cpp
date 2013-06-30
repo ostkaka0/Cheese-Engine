@@ -1,6 +1,10 @@
 #include "player.h"
 #include "World.h"
+<<<<<<< HEAD
 #include "Camera.h"
+=======
+#include "camera.h"
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Projectile.h"
 
 Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
@@ -15,8 +19,13 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	lmb = false;
 }
 
+<<<<<<< HEAD
 void Player::Update(sf::RenderWindow &app, Camera &camera, World &world)
+=======
+std::vector<unsigned char*>* Player::Update(App& app, World &world)
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 {
+#ifndef _SERVER
 	if (isClientControlling)
 	{
 		KeyUpdate(
@@ -27,6 +36,7 @@ void Player::Update(sf::RenderWindow &app, Camera &camera, World &world)
 
 		if(!lmb && (lmb=app.GetInput().IsMouseButtonDown(sf::Mouse::Left)))
 		{
+<<<<<<< HEAD
 			//double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
 			double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (x+8)) * 180 / 3.1415;
 			if (angle < 0)
@@ -39,10 +49,37 @@ void Player::Update(sf::RenderWindow &app, Camera &camera, World &world)
 		}
 
 		if (&camera.getEntity() != this)
+=======
+			//double angle = atan2((GetCamera(app).GetCenter().y + app.GetInput().GetMouseY() - 256) - (GetCamera(app).getEntityPosition().y+8), (GetCamera(app).GetCenter().x + app.GetInput().GetMouseX() - 384) - (GetCamera(app).getEntityPosition().x+8)) * 180 / 3.1415;
+			double angle = atan2((GetCamera(app).GetCenter().y + app.GetInput().GetMouseY() - 256) - (y+8), (GetCamera(app).GetCenter().x + app.GetInput().GetMouseX() - 384) - (x+8)) * 180 / 3.1415;
+			if (angle < 0)
+				angle = angle + 360;
+
+			double deltaSpeedX = cos(angle*3.1415926535)*speedX;
+			double deltaSpeedY = sin(angle*3.1415926535)*speedY;
+
+			if (angle > 180)
+				deltaSpeedX *= -1;
+
+			if (angle < 90 || angle > 270)
+				deltaSpeedY *= -1;
+
+			
+			//Projectile *projectile = new Projectile(GetCamera(app).getEntityPosition().x.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
+			Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 1024, 0.03125, "arrow.png", 0, false);
+			world.AddEntity(projectile);//new Projectile(sf::Vector2f(GetCamera(app).getCreaturePosition().x+8.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arroaaawb.png")[0]));
+			cameraDelay = 0.03125F;
+			//GetCamera(app).setCameraAt(*projectile);
+		}
+
+		lmb = app.GetInput().IsMouseButtonDown(sf::Mouse::Left);
+
+		if (&GetCamera(app).getEntity() != this)
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 		{
 			if (cameraDelay <= 0)
 			{
-				camera.setCameraAt(*this);
+				GetCamera(app).setCameraAt(*this);
 				cameraDelay = 0.5;
 			}
 			else
@@ -51,14 +88,21 @@ void Player::Update(sf::RenderWindow &app, Camera &camera, World &world)
 			}
 		}
 	}
+#endif
 
+<<<<<<< HEAD
 	Creature::Update(app, camera, world);
+=======
+	return Creature::Update(app, world);
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 }
 
-void Player::Draw(sf::RenderWindow &app, TextureContainer &tc)
+#ifndef _SERVER
+void Player::Draw(App& app, TextureContainer &tc)
 {
 	Creature::Draw(app, tc);
 }
+#endif
 
 void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up)
 {

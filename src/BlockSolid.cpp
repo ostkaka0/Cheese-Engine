@@ -1,9 +1,8 @@
 #include "BlockSolid.h"
 
-
-BlockSolid::BlockSolid(unsigned short texture)
+BlockSolid::BlockSolid(unsigned short id) : Block(id)
 {
-	this->setMetadata(texture);
+
 }
 
 std::string BlockSolid::getTextureName()
@@ -11,9 +10,9 @@ std::string BlockSolid::getTextureName()
 	return "BlockSolid.png";
 }
 
-unsigned char BlockSolid::getTextureId()
+unsigned char BlockSolid::getTextureId(App &app, unsigned short metadata)
 {
-	return(getMetadata());
+	return metadata;
 }
 
 unsigned short BlockSolid::getId()

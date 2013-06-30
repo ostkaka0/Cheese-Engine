@@ -2,7 +2,8 @@
 #include "Entity.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
-
+#include "World.h"
+#include "BlockSolid.h"
 
 Projectile::Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) 
 	: Entity(x,y,sizeX,sizeY,angle,speed,friction,spriteName,spriteIndex,isClientControlling)
@@ -16,20 +17,35 @@ Projectile::~Projectile(void)
 {
 }
 
+<<<<<<< HEAD
 void Projectile::Update(sf::RenderWindow &app, Camera &camera, World &world)
+=======
+std::vector<unsigned char*>* Projectile::Update(App& app, World &world)
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 { 
-	speedX = (float)cos(angle * M_PI/180) * speed;
-	speedY = (float)sin(-angle * M_PI/180) * speed;
+	speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
+	friction = 100/speed;
+	if (friction > 1)
+		friction = 1;
 
+<<<<<<< HEAD
 	std::cout << "sdf";
 	Entity::Update(app,camera, world);
 	
+=======
+	return Entity::Update(app, world);
+}
+
+void Projectile::Collision(World &world)
+{
+	//world.setBlock(2, (int)x<<4-16, (int)y<<4,1);
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }
 char Projectile::getTextureId() { return 0; }
 
-/*void Projectile::Draw(sf::RenderWindow& app)
+/*void Projectile::Draw(App& app)
 {
 	app.Draw(*sprite);
 }

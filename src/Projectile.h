@@ -13,10 +13,15 @@ class Projectile : public Entity
 public:
 	Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	~Projectile(void);
+<<<<<<< HEAD
 	virtual void Update(sf::RenderWindow &app, Camera &camera, World &world);
+=======
+	virtual std::vector<unsigned char*>* Update(App& app, World &world);
+	virtual void Collision(World &world);
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 	std::string getTextureName();
 	char getTextureId();
-	/*virtual void Draw(sf::RenderWindow& app);
+	/*virtual void Draw(App& app);
 	void Rotate(float degrees);
 	void setAngle(float angle);
 	float getAngle();

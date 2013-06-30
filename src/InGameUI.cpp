@@ -1,7 +1,12 @@
+#ifndef _SERVER
 #include "InGameUI.h"
 #include "TextureContainer.h"
 #include "World.h"
+<<<<<<< HEAD
 #include "Camera.h"
+=======
+#include "camera.h"
+>>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Block.h"
 #include "BlockSolid.h"
 #include "BlockBackground.h"
@@ -21,10 +26,18 @@ InGameUI::~InGameUI(void)
 {
 }
 
-void InGameUI::Update(sf::RenderWindow &app, TextureContainer &tc, Camera &camera, World &world)
+void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = camera.GetCenter() - camera.GetHalfSize();
-	sf::Vector2f mousePos = sf::Vector2f(camera.GetCenter().x  - camera.GetHalfSize().x + app.GetInput().GetMouseX()-(8*16), camera.GetCenter().y - camera.GetHalfSize().y + app.GetInput().GetMouseY());
+	sf::Vector2f bla = GetCamera(app).GetCenter() - GetCamera(app).GetHalfSize();
+	sf::Vector2f mousePos = sf::Vector2f(
+		GetCamera(app).GetCenter().x 
+		- GetCamera(app).GetHalfSize().x
+		+ app.GetInput().GetMouseX()
+		- (8*16),
+		+ GetCamera(app).GetCenter().y
+		- GetCamera(app).GetHalfSize().y
+		+ app.GetInput().GetMouseY());
+
 	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
 		for(int i = 0; i < 16; i++)
@@ -38,7 +51,7 @@ void InGameUI::Update(sf::RenderWindow &app, TextureContainer &tc, Camera &camer
 		}
 		for(int i = 0; i < 16; i++)
 		{
-			if(mousePos.x > 96 + bla.x + 16 * i + 128 + 16 && mousePos.x < 96 + bla.x + 16 * i + 16 + 128 + 16 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
+			if(mousePos.x > 96 + bla.x + 16 * i + 144 && mousePos.x < 96 + bla.x + 16 * i + 16 + 128 + 16 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
 			{
 				selectedBlockSolid = -1;
 				selectedBackground = i;
@@ -51,20 +64,25 @@ void InGameUI::Update(sf::RenderWindow &app, TextureContainer &tc, Camera &camer
 		if(app.GetInput().GetMouseY() < 512 - 24)
 		{
 			if(selectedBlockSolid != -1)
-				world.setBlock(2,(short)( camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), new BlockSolid(selectedBlockSolid));
+				world.setBlockAndMetadata((short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
 			else if(selectedBackground != -1)
-				world.setBlock(0, (short)(camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), new BlockBackground(selectedBackground));
+				world.setBlockAndMetadata((short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
+				
+				//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
 		}
 	}
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
-		world.setBlock(2, (short)(camera.GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(camera.GetCenter().y + app.GetInput().GetMouseY()), NULL);	
+		int layer = 2;
+		if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
+			layer = 0;
+		world.setBlock(2, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0);	
 	}
 }
 
-void InGameUI::Draw(sf::RenderWindow &app, TextureContainer &tc, Camera &camera, World &world)
+void InGameUI::Draw(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = camera.GetCenter() - camera.GetHalfSize();
+	sf::Vector2f bla = GetCamera(app).GetCenter() - GetCamera(app).GetHalfSize();
 
 	sf::Sprite *mainStripSprite = &(tc.getTextures("UIMainStrip.png")[0]);
 	sf::Sprite *buttonBlocksSprite = &(tc.getTextures("UIMainButtonBlocks.png")[0]);
@@ -75,27 +93,27 @@ void InGameUI::Draw(sf::RenderWindow &app, TextureContainer &tc, Camera &camera,
 	app.Draw(*mainStripSprite);
 	app.Draw(*buttonBlocksSprite);
 
-	for (std::map<unsigned short, std::function<Block*(unsigned short)>>::iterator b = world.getBlockTypeMap()->begin(); b != world.getBlockTypeMap()->end(); b++)
+	for (auto b : world.getBlockTypeMap())//for (std::map<unsigned short, std::function<Block*(unsigned short)>>::iterator b = world.getBlockTypeMap()->begin(); b != world.getBlockTypeMap()->end(); b++)
 	{
+		//return;
 		for(int i = 0; i < 32; i++)
 		{
-			Block* block = b->second(i);
-			if(block->getLayer() == 2 && i <= 16)
+			Block* block = b.second(i);
+			if(block->getLayer() == 2 && i < 18)
 			{
-				sf::Sprite *tempSprite = &(tc.getTextures(block->getTextureName())[block->getTextureId()]);
-				tempSprite->SetPosition(96 + bla.x + 16 * i, bla.y + 492);
-				app.Draw(*tempSprite);
+				block->Draw((i<<4)+bla.x + 96, 1+bla.y+492, app, tc, i);
+				//sf::Sprite *tempSprite = &(tc.getTextures(block->getTextureName())[block->getTextureId(app, 0)]);
+				//tempSprite->SetPosition(96 + bla.x + 16 * i, bla.y + 492);
+				//app.Draw(*tempSprite);
 			}
-			else if(block->getLayer() == 0 && i >= 17)
+			else if(block->getLayer() == 0 && i >= 18)
 			{
-				Block* blockk = b->second(i-16);
-				sf::Sprite *tempSprite = &(tc.getTextures(blockk->getTextureName())[blockk->getTextureId()]);
-				tempSprite->SetPosition(96 + bla.x + 16 * i + 16, bla.y + 492);
-				app.Draw(*tempSprite);
-				delete blockk;
+				block->Draw((i<<4)+bla.x + 96, 1+bla.y+492, app, tc, i-18);
+				//sf::Sprite *tempSprite = &(tc.getTextures(blockk->getTextureName())[blockk->getTextureId(app, 0)]);
+				//tempSprite->SetPosition(96 + bla.x + 16 * i + 16, bla.y + 492);
+				//app.Draw(*tempSprite);
 			}
-			delete block;
 		}
 	}
 }
-
+#endif
