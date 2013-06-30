@@ -14,7 +14,8 @@
 ServerState::ServerState(App& app)
 {
 	currentWorld = new World();
-
+	sC = new ServerConnection(5001);
+	sC->Launch();
 	//unsigned short i = 1;
 
 	//currentWorld->RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i++));
@@ -28,7 +29,7 @@ ServerState::~ServerState()
 
 GameState *ServerState::Update(App& app)
 {
-	std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
+	//std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
 	currentWorld->Update(app, tC);
 	return this;
 }
