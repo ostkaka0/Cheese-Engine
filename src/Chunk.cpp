@@ -1,16 +1,12 @@
 #include "Chunk.h"
 #include "Block.h"
 #include "TextureContainer.h"
-<<<<<<< HEAD
-#include "Camera.h"
-=======
 #include "camera.h"
 #include "App.h"
 
 #ifndef _SERVER
 #include <SFML\Graphics.hpp>
 #endif
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 Chunk::Chunk()
 { 

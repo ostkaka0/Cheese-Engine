@@ -3,11 +3,6 @@
 #ifndef _SERVER
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-<<<<<<< HEAD
-#include "GameState.h"
-#include "PlayState.h"
-//using namespace sf;
-=======
 #include "PlayState.h"
 #else
 #include "ServerState.h"
@@ -20,11 +15,10 @@
 #else
 	#define _APP app
 #endif*/
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 int main()
 {
-	
+
 #ifndef _SERVER
     App app(sf::VideoMode(768, 512), "Cheese Multiplayer - Alpha");
 	GameState *gameState = new PlayState(app);

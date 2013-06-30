@@ -2,11 +2,7 @@
 #include "InGameUI.h"
 #include "TextureContainer.h"
 #include "World.h"
-<<<<<<< HEAD
-#include "Camera.h"
-=======
 #include "camera.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Block.h"
 #include "BlockSolid.h"
 #include "BlockBackground.h"
@@ -64,9 +60,9 @@ void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 		if(app.GetInput().GetMouseY() < 512 - 24)
 		{
 			if(selectedBlockSolid != -1)
-				world.setBlockAndMetadata((short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
+				world.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
 			else if(selectedBackground != -1)
-				world.setBlockAndMetadata((short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
+				world.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
 				
 				//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
 		}

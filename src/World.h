@@ -1,4 +1,3 @@
-class World;
 #pragma once
 
 #include <functional>
@@ -6,10 +5,6 @@ class World;
 #include <map>
 #include <list>
 #include <deque>
-<<<<<<< HEAD
-#include <SFML\Graphics.hpp>
- 
-=======
 #include "App.h"
 
 class Entity;
@@ -76,7 +71,6 @@ public:
 class App;
 #endif
 
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 class Chunk;
 class Block;
 class Entity;
@@ -84,13 +78,8 @@ class Player;
 class TextureContainer;
 class Camera;
 
-<<<<<<< HEAD
-#define SIZEXMAX 256
-#define SIZEYMAX 256
-=======
 #define SIZEXMAX 1024
 #define SIZEYMAX 1024
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 #define SCREENSIZEX 800
 #define SCREENSIZEY 600
@@ -126,8 +115,4 @@ public:
 	void AddEntity(Entity*);
 	void AddPlayer(Player*, short Id);
 	void RemovePlayer(short Id);
-<<<<<<< HEAD
-};
-=======
 };*/
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d

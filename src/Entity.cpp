@@ -2,11 +2,8 @@
 
 #include "Entity.h"
 #include "TextureContainer.h"
-<<<<<<< HEAD
-=======
 #include "World.h"
 #include "Block.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling)
 {
@@ -26,11 +23,7 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 	this->spriteIndex = spriteIndex;
 }
 
-<<<<<<< HEAD
-void Entity::Update(sf::RenderWindow &app, Camera &camera, World &world)
-=======
 std::vector<unsigned char*>* Entity::Update(App& app, World &world)
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 {
 	CheckCollision(app, world);
 

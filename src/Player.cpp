@@ -1,14 +1,10 @@
 #include "player.h"
 #include "World.h"
-<<<<<<< HEAD
-#include "Camera.h"
-=======
 #include "camera.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Projectile.h"
 
 Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
-	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
+	: Creature(X, Y, sizeX, sizeY, 40960, 0.875, spriteName, spriteIndex, IsClientControlling)
 {
 	name = Name;
 	cameraDelay = 0;
@@ -19,11 +15,7 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	lmb = false;
 }
 
-<<<<<<< HEAD
-void Player::Update(sf::RenderWindow &app, Camera &camera, World &world)
-=======
 std::vector<unsigned char*>* Player::Update(App& app, World &world)
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 {
 #ifndef _SERVER
 	if (isClientControlling)
@@ -36,20 +28,6 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 
 		if(!lmb && (lmb=app.GetInput().IsMouseButtonDown(sf::Mouse::Left)))
 		{
-<<<<<<< HEAD
-			//double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (camera.getEntityPosition().y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (camera.getEntityPosition().x+8)) * 180 / 3.1415;
-			double angle = atan2((camera.GetCenter().y + app.GetInput().GetMouseY() - 256) - (y+8), (camera.GetCenter().x + app.GetInput().GetMouseX() - 384) - (x+8)) * 180 / 3.1415;
-			if (angle < 0)
-				angle = angle + 360;
-			//Projectile *projectile = new Projectile(camera.getEntityPosition().x, camera.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-			Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-			world.AddEntity(projectile);//new Projectile(sf::Vector2f(camera.getCreaturePosition().x+8, camera.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arrowb.png")[0]));
-			cameraDelay = 2.0F;
-			camera.setCameraAt(*projectile);
-		}
-
-		if (&camera.getEntity() != this)
-=======
 			//double angle = atan2((GetCamera(app).GetCenter().y + app.GetInput().GetMouseY() - 256) - (GetCamera(app).getEntityPosition().y+8), (GetCamera(app).GetCenter().x + app.GetInput().GetMouseX() - 384) - (GetCamera(app).getEntityPosition().x+8)) * 180 / 3.1415;
 			double angle = atan2((GetCamera(app).GetCenter().y + app.GetInput().GetMouseY() - 256) - (y+8), (GetCamera(app).GetCenter().x + app.GetInput().GetMouseX() - 384) - (x+8)) * 180 / 3.1415;
 			if (angle < 0)
@@ -75,7 +53,6 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 		lmb = app.GetInput().IsMouseButtonDown(sf::Mouse::Left);
 
 		if (&GetCamera(app).getEntity() != this)
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 		{
 			if (cameraDelay <= 0)
 			{
@@ -90,11 +67,7 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 	}
 #endif
 
-<<<<<<< HEAD
-	Creature::Update(app, camera, world);
-=======
 	return Creature::Update(app, world);
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 }
 
 #ifndef _SERVER

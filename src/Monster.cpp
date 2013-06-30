@@ -12,13 +12,7 @@ Monster::~Monster(void)
 {
 }
 
-<<<<<<< HEAD
-void Monster::Update(sf::RenderWindow &app, Camera &camera, World &world)
-{
-	Creature::Update(app, camera, world);
-=======
 std::vector<unsigned char*>* Monster::Update(App& app, World &world)
 {
 	return Creature::Update(app, world);
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 }

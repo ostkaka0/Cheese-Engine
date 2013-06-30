@@ -1,10 +1,4 @@
 #include "World.h"
-<<<<<<< HEAD
-#include "Entity.h"
-#include "Player.h"
-#include "projectile.h"
-#include "Camera.h"
-=======
 #include "App.h"
 #include "TextureContainer.h"
 #include "Camera.h"
@@ -48,7 +42,7 @@ void World::Draw(App& app, TextureContainer& tC)
 		{
 			if (chunkMatrix.first[x].first[y] != nullptr)
 			{
-				chunkMatrix.first[x].first[y]->Draw(x, y, app, tC);
+				chunkMatrix.first[x].first[y]->Draw(x-chunkMatrix.second, y-chunkMatrix.first[x].second, app, tC);
 			}
 		}
 	}
@@ -116,13 +110,10 @@ void World::setBlock(long x, long y, long layer, short id)
 
 void World::setBlockAndMetadata(long x, long y, long layer, short id, unsigned short metadata)
 {
-	long xx = (x * 0.0625);
+	long xx = floor(x * 0.0625);
 
-	unsigned short xxx = (x < 0)? (x^0XFFFFFFF0+1)&0XF : x&0XF;
-	unsigned short yyy = (y < 0)? (y^0XFFFFFFF0+1)&0XF : y&0XF;
-
-	if (x < 0)
-		xx--;
+	unsigned short xxx = x&0xF;//(x < 0)? (abs(x+1)&0xF)^0xF : x&0XF;
+	unsigned short yyy = y&0xF;//(y < 0)? y&0XF : y&0XF;
 
 	std::cout << xx <<"?\n";
 	//if (!isColumnInsideChunkMatrix(xx+chunkMatrix.second))
@@ -131,19 +122,18 @@ void World::setBlockAndMetadata(long x, long y, long layer, short id, unsigned s
 	}
 	{
 		std::cout << "NU?\n";
-		auto &it = chunkMatrix.first.at(xx+chunkMatrix.second);
-		long yy = (y * 0.0625);
-
-		if (y < 0)
-			yy--;
+		long yy = floor(y * 0.0625);
 
 		//if (!isChunkInsideChunkColumn(yy + it.second,it.first))
 		{
 			Expand(xx, yy, nullptr);
 		}
+
+		auto &it = chunkMatrix.first.at(xx+chunkMatrix.second);
+
 		{
-			std::cout << "JAHA?\n";
-			Chunk *c = it.first.at(yy + it.second);
+			std::cout << xx << " " << yy << " " << xx+chunkMatrix.second << " " << yy+it.second << " s " << chunkMatrix.first.size() << " " << it.first.size() <<" JAHA?\n";
+			Chunk* c = it.first.at(yy + it.second);
 			if (c == nullptr)
 			{
 				c = it.first.at(yy + it.second) = new Chunk();
@@ -196,7 +186,7 @@ Block* World::getBlock(long x, long y, long layer)
 
 void World::Expand(long x, long y, Chunk* chunk)
 {
-	std::cout << "EXPAND!!!\n";
+	std::cout << sizeof(int);
 	long xx = x + chunkMatrix.second;
 	if (xx < 0)
 	{
@@ -229,7 +219,7 @@ void World::Expand(long x, long y, Chunk* chunk)
 		}
 		yy = y + it.second;
 	}
-	else if (yy >= chunkMatrix.first.size())
+	else if (yy >= it.first.size())
 	{
 		for (long i = 0; i <= yy; i++)
 		{
@@ -281,19 +271,15 @@ void World::RemovePlayer(int id)
 #include "Player.h"
 #include "projectile.h"
 #include "camera.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Chunk.h"
 #include "Block.h"
 #include "BlockSolid.h"
 #include "BlockBackground.h"
-<<<<<<< HEAD
-=======
 #include "App.h"
 
 #ifndef _SERVER
 #include <SFML\Graphics.hpp>
 #endif
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 World::World(short unsigned sizeX, short unsigned sizeY)
 {
@@ -344,19 +330,11 @@ void World::Update(App& app)
 {
 	for (std::vector<Entity*>::size_type i = 0; i < entityList.size(); i++)
 	{
-<<<<<<< HEAD
-		entityList[i]->Update(app, camera, *this);
-	}
-	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
-	{
-		playerList[i]->Update(app, camera, *this);
-=======
 		entityList[i]->Update(app, *this);
 	}
 	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
 	{
 		playerList[i]->Update(app, *this);
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 	}
 }
 

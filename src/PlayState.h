@@ -3,11 +3,7 @@
 #include "App.h"
 #include "gamestate.h"
 #include "TextureContainer.h"
-<<<<<<< HEAD
-
-=======
 #include <SFML\Graphics.hpp>
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 class World;
 class InGameUI;

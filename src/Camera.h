@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-class Camera;
-#pragma once
-#include <SFML/Graphics.hpp>
-=======
 #ifndef _SERVER
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "App.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 class Entity;
 

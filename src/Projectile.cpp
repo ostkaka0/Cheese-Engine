@@ -17,29 +17,19 @@ Projectile::~Projectile(void)
 {
 }
 
-<<<<<<< HEAD
-void Projectile::Update(sf::RenderWindow &app, Camera &camera, World &world)
-=======
 std::vector<unsigned char*>* Projectile::Update(App& app, World &world)
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 { 
 	speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
 	friction = 100/speed;
 	if (friction > 1)
 		friction = 1;
 
-<<<<<<< HEAD
-	std::cout << "sdf";
-	Entity::Update(app,camera, world);
-	
-=======
 	return Entity::Update(app, world);
 }
 
 void Projectile::Collision(World &world)
 {
 	//world.setBlock(2, (int)x<<4-16, (int)y<<4,1);
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }

@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-class GameState;
-=======
 #pragma once
 
 class GameState;
@@ -8,7 +5,6 @@ class GameState;
 #include <SFML\Graphics.hpp>
 #include "App.h"
 
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #ifndef GAMESTATE_H_INCLUDED
 #define GAMESTATE_H_INCLUDED
 

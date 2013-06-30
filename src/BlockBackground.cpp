@@ -1,11 +1,7 @@
 #include "BlockBackground.h"
 #include "World.h"
 
-<<<<<<< HEAD
-BlockBackground::BlockBackground(unsigned short texture)
-=======
 BlockBackground::BlockBackground(unsigned short id) : Block(id)
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 {
 
 }

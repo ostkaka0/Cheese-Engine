@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-#include "Camera.h"
-=======
 #ifndef _SERVER
 #include "camera.h"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "Entity.h"
 
 Camera::Camera(double speed)

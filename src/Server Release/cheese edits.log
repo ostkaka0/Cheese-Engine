@@ -1,80 +1,837 @@
-<<<<<<< HEAD
-﻿Build started 2013-06-30 13:02:43.
-     1>Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2013-06-30 16:18:46.
+     1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /D SFML_STATIC /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
-         World.cpp
-     1>World.cpp(113): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(128): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(147): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(148): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(155): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(156): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(159): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(163): warning C4244: 'argument' : conversion from 'long' to 'unsigned short', possible loss of data
-     1>World.cpp(163): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(170): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(177): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(180): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(185): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(187): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(208): warning C4018: '>=' : signed/unsigned mismatch
-     1>World.cpp(228): warning C4018: '>=' : signed/unsigned mismatch
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
-=======
-﻿Build started 2013-06-30 15:16:55.
-     1>Project "C:\Users\Gustav\Desktop\src2\cheese edits.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerConnection.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Block.cpp BlockBackground.cpp BlockGravity.cpp BlockSolid.cpp Camera.cpp Chunk.cpp Client.cpp Connection.cpp Creature.cpp Entity.cpp InGameUI.cpp Label.cpp main.cpp MainMenu.cpp Menu.cpp MenuItem.cpp MenuState.cpp Monster.cpp Player.cpp PlayState.cpp Projectile.cpp ServerConnection.cpp ServerState.cpp TextureContainer.cpp World.cpp
+         App.cpp
+         Block.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(3): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2065: 'Uint8' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2923: 'std::basic_string' : 'Uint8' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2065: 'Uint16' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2923: 'std::basic_string' : 'Uint16' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2065: 'Uint32' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2923: 'std::basic_string' : 'Uint32' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(87): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(88): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(99): error C2535: 'sf::Unicode::Text::operator sf::Unicode::UTF8String(void) const' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(98) : see declaration of 'sf::Unicode::Text::operator sf::Unicode::UTF8String'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(154): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(169): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(184): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(199): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(214): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(229): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C2146: syntax error : missing ';' before identifier 'UTF8Offsets'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C2146: syntax error : missing ';' before identifier 'UTF8FirstBytes'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): warning C4346: 'sf::Unicode::UTF8ToUTF16' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): warning C4346: 'sf::Unicode::UTF8ToUTF32' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): warning C4346: 'sf::Unicode::UTF16ToUTF8' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): warning C4346: 'sf::Unicode::UTF16ToUTF32' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): warning C4346: 'sf::Unicode::UTF32ToUTF8' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): warning C4346: 'sf::Unicode::UTF32ToUTF16' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2146: syntax error : missing ';' before identifier 'Unicode'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2208: 'sf::Unicode' : no members defined using this type
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         BlockBackground.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(3): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2065: 'Uint8' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2923: 'std::basic_string' : 'Uint8' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2065: 'Uint16' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2923: 'std::basic_string' : 'Uint16' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2065: 'Uint32' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2923: 'std::basic_string' : 'Uint32' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(87): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(88): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(99): error C2535: 'sf::Unicode::Text::operator sf::Unicode::UTF8String(void) const' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(98) : see declaration of 'sf::Unicode::Text::operator sf::Unicode::UTF8String'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(154): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(169): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(184): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(199): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(214): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(229): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C2146: syntax error : missing ';' before identifier 'UTF8Offsets'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C2146: syntax error : missing ';' before identifier 'UTF8FirstBytes'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): warning C4346: 'sf::Unicode::UTF8ToUTF16' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): warning C4346: 'sf::Unicode::UTF8ToUTF32' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): warning C4346: 'sf::Unicode::UTF16ToUTF8' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): warning C4346: 'sf::Unicode::UTF16ToUTF32' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): warning C4346: 'sf::Unicode::UTF32ToUTF8' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): warning C4346: 'sf::Unicode::UTF32ToUTF16' : dependent name is not a type
+                 prefix with 'typename' to indicate a type
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2146: syntax error : missing ';' before identifier 'Unicode'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2208: 'sf::Unicode' : no members defined using this type
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         BlockGravity.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(3): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2065: 'Uint8' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2923: 'std::basic_string' : 'Uint8' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2065: 'Uint16' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2923: 'std::basic_string' : 'Uint16' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2065: 'Uint32' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2923: 'std::basic_string' : 'Uint32' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(87): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(88): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(99): error C2535: 'sf::Unicode::Text::operator sf::Unicode::UTF8String(void) const' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(98) : see declaration of 'sf::Unicode::Text::operator sf::Unicode::UTF8String'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(154): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(169): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(184): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(199): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(214): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(229): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C2146: syntax error : missing ';' before identifier 'UTF8Offsets'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C2146: syntax error : missing ';' before identifier 'UTF8FirstBytes'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2146: syntax error : missing ';' before identifier 'Unicode'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2208: 'sf::Unicode' : no members defined using this type
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         BlockSolid.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(3): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2065: 'Uint8' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2923: 'std::basic_string' : 'Uint8' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2065: 'Uint16' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2923: 'std::basic_string' : 'Uint16' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2065: 'Uint32' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2923: 'std::basic_string' : 'Uint32' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(87): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(88): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(99): error C2535: 'sf::Unicode::Text::operator sf::Unicode::UTF8String(void) const' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(98) : see declaration of 'sf::Unicode::Text::operator sf::Unicode::UTF8String'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(154): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(169): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(184): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(199): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(214): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(229): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C2146: syntax error : missing ';' before identifier 'UTF8Offsets'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C2146: syntax error : missing ';' before identifier 'UTF8FirstBytes'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2146: syntax error : missing ';' before identifier 'Unicode'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2208: 'sf::Unicode' : no members defined using this type
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         Camera.cpp
+     1>Camera.cpp(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Camera.h(5): error C2059: syntax error : '=='
+         Chunk.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Chunk.h(11): error C2059: syntax error : '<<'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Chunk.h(13): error C2059: syntax error : '=='
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(12): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(12): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(228): error C2065: 'stack' : undeclared identifier
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(228): error C2974: 'std::uses_allocator' : invalid template argument for '_Ty', type expected
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(228): error C2143: syntax error : missing ';' before ','
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(228): error C2977: 'std::uses_allocator' : too many template arguments
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(228): error C2059: syntax error : ','
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(230): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stack(230): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Chunk.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Chunk.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(3): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(7): error C2059: syntax error : '=='
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xfunctional(21): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xfunctional(21): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(184): error C2065: 'value' : undeclared identifier
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(205) : see reference to class template instantiation 'std::_Tuple_val<_Ty>' being compiled
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(184): error C2975: '_Test' : invalid template argument for 'std::enable_if', expected compile-time constant expression
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(184): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtr1common(64) : see declaration of '_Test'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(188): error C2065: 'value' : undeclared identifier
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(922): error C2976: 'std::uses_allocator' : too few template arguments
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(933): error C2953: 'std::uses_allocator' : class template has already been defined
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\tuple(933): error C2977: 'std::uses_allocator' : too many template arguments
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\functional(1568): error C2953: 'std::uses_allocator' : class template has already been defined
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(3660) : see declaration of 'std::uses_allocator'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(13): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(13): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(33): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(46): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(5): error C2059: syntax error : 'bad suffix on number'
+     1>Chunk.cpp(4): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Camera.h(5): error C2059: syntax error : '=='
+     1>Chunk.cpp(13): error C2059: syntax error : 'bad suffix on number'
+     1>Chunk.cpp(16): error C2143: syntax error : missing ';' before '{'
+     1>Chunk.cpp(16): error C2447: '{' : missing function header (old-style formal list?)
+     1>Chunk.cpp(38): warning C4150: deletion of pointer to incomplete type 'Block'; no destructor called
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16) : see declaration of 'Block'
+     1>Chunk.cpp(48): error C2027: use of undefined type 'Block'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16) : see declaration of 'Block'
+     1>Chunk.cpp(48): error C2227: left of '->isSolid' must point to class/struct/union/generic type
+     1>Chunk.cpp(58): error C2027: use of undefined type 'Block'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16) : see declaration of 'Block'
+     1>Chunk.cpp(58): error C2227: left of '->isSeeThrough' must point to class/struct/union/generic type
+     1>Chunk.cpp(125): error C2027: use of undefined type 'Block'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16) : see declaration of 'Block'
+     1>Chunk.cpp(125): error C2227: left of '->getId' must point to class/struct/union/generic type
+         Client.cpp
+         Connection.cpp
+         Creature.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(6): error C2059: syntax error : '<<'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(8): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(9): error C2059: syntax error : 'bad suffix on number'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(13): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(46): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(47): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(48): error C2061: syntax error : identifier 'TextureContainer'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(49): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(50): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(54): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(57): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(4): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(7): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(19): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(20): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(21): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(22): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2238: unexpected token(s) preceding ';'
+     1>Creature.cpp(12): error C2059: syntax error : '<<'
+     1>Creature.cpp(13): error C2039: 'Update' : is not a member of 'Creature'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(12) : see declaration of 'Creature'
+     1>Creature.cpp(15): error C2039: 'Update' : is not a member of 'Creature'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(12) : see declaration of 'Creature'
+     1>Creature.cpp(16): error C2059: syntax error : 'bad suffix on number'
+     1>Creature.cpp(17): error C2143: syntax error : missing ';' before '{'
+     1>Creature.cpp(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>Creature.cpp(25): error C2059: syntax error : 'bad suffix on number'
+         Entity.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(6): error C2059: syntax error : '<<'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\yvals.h(491): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\yvals.h(491): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(307): error C2065: '_Bool' : undeclared identifier
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(308): error C2923: 'std::numeric_limits' : '_Bool' is not a valid template type argument for parameter '_Ty'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(364): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(423): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(482): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(542): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(603): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(724): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(784): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(844): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(904): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(1025): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(1085): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(1153): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(1220): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\limits(1287): error C2913: explicit specialization; 'std::numeric_limits' is not a specialization of a class template
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(309): error C2061: syntax error : identifier '_Bool'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(1072) : see reference to class template instantiation 'std::num_get<_Elem,_InIt>' being compiled
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(389): error C2061: syntax error : identifier '_Bool'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(1129): error C2061: syntax error : identifier '_Bool'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(1564) : see reference to class template instantiation 'std::num_put<_Elem,_OutIt>' being compiled
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xlocnum(1180): error C2061: syntax error : identifier '_Bool'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(221): error C2061: syntax error : identifier '_Bool'
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(628) : see reference to class template instantiation 'std::basic_ostream<_Elem,_Traits>' being compiled
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(222): error C2805: binary 'operator <<' has too few parameters
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(222): error C2333: 'std::basic_ostream<_Elem,_Traits>::operator <<' : error in function declaration; skipping function body
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(223): error C2864: 'std::basic_ostream<_Elem,_Traits>::_State' : only static const integral data members can be initialized within a class
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(224): error C2059: syntax error : '*'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\ostream(224): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         InGameUI.cpp
+         Label.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(3): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(11): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(11): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(17): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C2433: 'MenuItem::GameState' : 'virtual' not permitted on data declarations
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): warning C4183: 'Update': missing return type; assumed to be a member function returning 'int'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Label.h(16): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Label.h(16): error C2433: 'Label::GameState' : 'virtual' not permitted on data declarations
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Label.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Label.h(16): warning C4183: 'Update': missing return type; assumed to be a member function returning 'int'
+     1>Label.cpp(23): error C2143: syntax error : missing ';' before '*'
+     1>Label.cpp(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>Label.cpp(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+         main.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(3): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(11): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(11): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(17): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(5): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(4): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Network/SocketHelper.hpp(35): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Network/SocketHelper.hpp(35): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C2146: syntax error : missing ';' before identifier 'GetErrorStatus'
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): warning C4183: 'GetErrorStatus': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C2146: syntax error : missing ';' before identifier 'Connect'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): warning C4183: 'Connect': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C2146: syntax error : missing ';' before identifier 'Accept'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): warning C4183: 'Accept': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(8): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(8): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(15): error C2504: 'GameState' : base class undefined
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(16): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(18): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(20): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(22): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(22): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(23): error C2334: unexpected token(s) preceding ':'; skipping apparent function body
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(24): error C2760: syntax error : expected '{' not ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2143: syntax error : missing '}' before '~'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2059: syntax error : 'type'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C2433: 'ServerState::GameState' : 'virtual' not permitted on data declarations
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): warning C4183: 'Update': missing return type; assumed to be a member function returning 'int'
+     1>main.cpp(23): error C2059: syntax error : '>>'
+     1>main.cpp(23): error C2059: syntax error : 'bad suffix on number'
+     1>main.cpp(26): error C2143: syntax error : missing ';' before '{'
+     1>main.cpp(26): error C2447: '{' : missing function header (old-style formal list?)
+         MainMenu.cpp
+         Menu.cpp
+         MenuItem.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(3): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(11): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(11): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(17): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\GameState.h(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C2433: 'MenuItem::GameState' : 'virtual' not permitted on data declarations
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\MenuItem.h(25): warning C4183: 'Update': missing return type; assumed to be a member function returning 'int'
+     1>MenuItem.cpp(45): error C2143: syntax error : missing ';' before '*'
+     1>MenuItem.cpp(45): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>MenuItem.cpp(46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+         MenuState.cpp
+         Monster.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(6): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(9): error C2059: syntax error : 'bad suffix on number'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(13): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(46): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(47): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(48): error C2061: syntax error : identifier 'TextureContainer'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(49): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(50): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(54): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(57): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(4): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(7): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(19): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(20): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(21): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(22): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(10): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(11): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(12): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(13): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(14): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(14): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(15): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(15): error C2238: unexpected token(s) preceding ';'
+     1>Monster.cpp(15): error C2059: syntax error : '<<'
+     1>Monster.cpp(16): error C2039: 'Update' : is not a member of 'Monster'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Monster.h(5) : see declaration of 'Monster'
+     1>Monster.cpp(17): error C2143: syntax error : missing ';' before '{'
+     1>Monster.cpp(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>Monster.cpp(23): error C2059: syntax error : 'bad suffix on number'
+     1>Monster.cpp(25): fatal error C1004: unexpected end-of-file found
+         Player.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(6): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(9): error C2059: syntax error : 'bad suffix on number'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\iostream(12): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(13): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(46): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(47): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(48): error C2061: syntax error : identifier 'TextureContainer'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(49): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(50): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(54): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(57): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(4): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(7): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(19): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(20): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(21): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(22): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(23): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Creature.h(24): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(25): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(26): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(28): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(29): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(33): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(33): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(34): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(9): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(49): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(133): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(133): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Camera.h(5): error C2059: syntax error : '=='
+     1>Player.cpp(7): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(16): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(17): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(18): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(19): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(22): error C2238: unexpected token(s) preceding ';'
+     1>Player.cpp(22): error C2059: syntax error : '<<'
+     1>Player.cpp(23): error C2039: 'Update' : is not a member of 'Player'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(13) : see declaration of 'Player'
+     1>Player.cpp(25): error C2039: 'Update' : is not a member of 'Player'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(13) : see declaration of 'Player'
+     1>Player.cpp(26): error C2059: syntax error : 'bad suffix on number'
+     1>Player.cpp(27): error C2143: syntax error : missing ';' before '{'
+     1>Player.cpp(27): error C2447: '{' : missing function header (old-style formal list?)
+     1>Player.cpp(97): error C2059: syntax error : 'bad suffix on number'
+     1>Player.cpp(107): error C2039: 'KeyUpdate' : is not a member of 'Player'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\player.h(13) : see declaration of 'Player'
+     1>Player.cpp(109): error C2065: 'right' : undeclared identifier
+     1>Player.cpp(109): warning C4805: '!=' : unsafe mix of type 'bool' and type ''unknown-type'' in operation
+     1>Player.cpp(109): error C2065: 'down' : undeclared identifier
+     1>Player.cpp(109): error C2065: 'left' : undeclared identifier
+     1>Player.cpp(109): error C2065: 'up' : undeclared identifier
+     1>Player.cpp(111): error C2065: 'horizontal' : undeclared identifier
+     1>Player.cpp(112): error C2065: 'vertical' : undeclared identifier
+     1>Player.cpp(114): error C2065: 'horizontal' : undeclared identifier
+     1>Player.cpp(114): error C2065: 'speed' : undeclared identifier
+     1>Player.cpp(115): error C2065: 'vertical' : undeclared identifier
+     1>Player.cpp(115): error C2065: 'speed' : undeclared identifier
+     1>Player.cpp(116): error C2065: 'horizontal' : undeclared identifier
+     1>Player.cpp(116): error C2065: 'speed' : undeclared identifier
+     1>Player.cpp(117): error C2065: 'vertical' : undeclared identifier
+     1>Player.cpp(117): error C2065: 'speed' : undeclared identifier
+     1>Player.cpp(119): error C2065: 'right' : undeclared identifier
+     1>Player.cpp(120): error C2065: 'down' : undeclared identifier
+     1>Player.cpp(121): error C2065: 'left' : undeclared identifier
+     1>Player.cpp(122): error C2065: 'up' : undeclared identifier
+     1>Player.cpp(124): error C2065: 'isClientControlling' : undeclared identifier
+         Generating Code...
+         Compiling...
+         PlayState.cpp
+     1>PlayState.cpp(1): error C2059: syntax error : '<<'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2143: syntax error : missing ';' before '{'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\sal.h(2367): error C2447: '{' : missing function header (old-style formal list?)
+     1>PlayState.cpp(5): error C2059: syntax error : '=='
+         Projectile.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(6): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(9): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\App.h(9): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(46): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(47): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(48): error C2061: syntax error : identifier 'TextureContainer'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(49): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(50): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(54): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(56): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Entity.h(57): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(16): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(17): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(18): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(19): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(21): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(21): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(22): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(9): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(49): error C2061: syntax error : identifier 'App'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(133): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(133): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(7): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(13): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(13): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(33): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(46): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockSolid.h(5): error C2504: 'Block' : base class undefined
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockSolid.h(9): error C2061: syntax error : identifier 'App'
+     1>Projectile.cpp(20): error C2059: syntax error : '<<'
+     1>Projectile.cpp(21): error C2039: 'Update' : is not a member of 'Projectile'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(11) : see declaration of 'Projectile'
+     1>Projectile.cpp(23): error C2039: 'Update' : is not a member of 'Projectile'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(11) : see declaration of 'Projectile'
+     1>Projectile.cpp(24): error C2059: syntax error : 'bad suffix on number'
+     1>Projectile.cpp(25): error C2143: syntax error : missing ';' before '{'
+     1>Projectile.cpp(25): error C2447: '{' : missing function header (old-style formal list?)
+     1>Projectile.cpp(42): error C2143: syntax error : missing ';' before '>>'
+     1>Projectile.cpp(42): error C2059: syntax error : 'bad suffix on number'
+     1>Projectile.cpp(45): error C2039: 'getTextureName' : is not a member of 'Projectile'
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\Projectile.h(11) : see declaration of 'Projectile'
          ServerConnection.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Desktop\src2\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Desktop\src2\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Desktop\src2\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
-         "Server Release\Block.obj"
-         "Server Release\BlockBackground.obj"
-         "Server Release\BlockGravity.obj"
-         "Server Release\BlockSolid.obj"
-         "Server Release\Camera.obj"
-         "Server Release\Chunk.obj"
-<<<<<<< HEAD
-=======
-         "Server Release\Connection.obj"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
-         "Server Release\Creature.obj"
-         "Server Release\Entity.obj"
-         "Server Release\InGameUI.obj"
-         "Server Release\Label.obj"
-         "Server Release\main.obj"
-         "Server Release\MainMenu.obj"
-         "Server Release\Menu.obj"
-         "Server Release\MenuItem.obj"
-         "Server Release\MenuState.obj"
-         "Server Release\Monster.obj"
-         "Server Release\Player.obj"
-         "Server Release\PlayState.obj"
-         "Server Release\Projectile.obj"
-<<<<<<< HEAD
-=======
-         "Server Release\ServerConnection.obj"
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
-         "Server Release\ServerState.obj"
-         "Server Release\TextureContainer.obj"
-         "Server Release\World.obj"
-     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
-<<<<<<< HEAD
-         cheese edits.vcxproj -> C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
-     1>Done Building Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
+         ServerState.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(3): error C2059: syntax error : '=='
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(11): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(11): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(17): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\gamestate.h(17): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(5): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(4): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Network/SocketHelper.hpp(35): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Network/SocketHelper.hpp(35): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C2146: syntax error : missing ';' before identifier 'GetErrorStatus'
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/Win32/SocketHelper.hpp(84): warning C4183: 'GetErrorStatus': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C2146: syntax error : missing ';' before identifier 'Connect'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(74): warning C4183: 'Connect': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C2146: syntax error : missing ';' before identifier 'Accept'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(96): warning C4183: 'Accept': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(107): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(120): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(130): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketTCP.hpp(141): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(93): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(108): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C2146: syntax error : missing ';' before identifier 'Send'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(120): warning C4183: 'Send': missing return type; assumed to be a member function returning 'int'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C2653: 'Socket' : is not a class or namespace name
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C2146: syntax error : missing ';' before identifier 'Receive'
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Network/SocketUDP.hpp(133): warning C4183: 'Receive': missing return type; assumed to be a member function returning 'int'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(8): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(8): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(15): error C2504: 'GameState' : base class undefined
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(16): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(18): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(20): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(22): error C2059: syntax error : '>>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(22): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(23): error C2334: unexpected token(s) preceding ':'; skipping apparent function body
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(24): error C2760: syntax error : expected '{' not ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2143: syntax error : missing '}' before '~'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2059: syntax error : 'type'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(25): error C2238: unexpected token(s) preceding ';'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C2433: 'ServerState::GameState' : 'virtual' not permitted on data declarations
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\ServerState.h(27): warning C4183: 'Update': missing return type; assumed to be a member function returning 'int'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(9): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(41): error C2065: 'Entity' : undeclared identifier
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(41): error C2059: syntax error : '>'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(49): error C2065: 'tC' : undeclared identifier
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(49): error C2275: 'TextureContainer' : illegal use of this type as an expression
+                 c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(16) : see declaration of 'TextureContainer'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(49): error C2143: syntax error : missing ',' before ')'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(55): error C2146: syntax error : missing ',' before identifier 'chunk'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(55): error C2065: 'chunk' : undeclared identifier
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(55): error C2143: syntax error : missing ',' before ')'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(63): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(133): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(13): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(16): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(33): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(41): error C2146: syntax error : missing ',' before identifier 'app'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(41): error C2065: 'app' : undeclared identifier
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(41): error C2146: syntax error : missing ',' before identifier 'tc'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(41): error C2065: 'tc' : undeclared identifier
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(41): error C2143: syntax error : missing ',' before ')'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(46): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\Block.h(47): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockSolid.h(5): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockSolid.h(14): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockBackground.h(5): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\BlockBackground.h(14): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(15): error C2143: syntax error : missing ';' before '{'
+     1>ServerState.cpp(22): error C2059: syntax error : 'bad suffix on number'
+     1>ServerState.cpp(27): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(30): error C2143: syntax error : missing ';' before '{'
+     1>ServerState.cpp(32): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(35): error C2143: syntax error : missing ';' before '{'
+     1>ServerState.cpp(38): error C2065: 'tC' : undeclared identifier
+     1>ServerState.cpp(42): error C2065: 'tC' : undeclared identifier
+     1>ServerState.cpp(45): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(48): error C2143: syntax error : missing ';' before '{'
+     1>ServerState.cpp(50): error C2143: syntax error : missing ';' before '{'
+     1>ServerState.cpp(54): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(55): error C2059: syntax error : 'bad suffix on number'
+     1>ServerState.cpp(56): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(57): error C2143: syntax error : missing ';' before '}'
+     1>ServerState.cpp(57): fatal error C1004: unexpected end-of-file found
+         TextureContainer.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(1): error C2059: syntax error : '<<'
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\TextureContainer.h(5): error C2059: syntax error : 'bad suffix on number'
+         World.cpp
+     1>c:\users\gustav\documents\github\cheese_multiplayer\src\World.h(9): error C2059: syntax error : '<<'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2143: syntax error : missing ';' before '{'
+     1>C:\SFML-1.6\include\SFML/Config.hpp(125): error C2447: '{' : missing function header (old-style formal list?)
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2065: 'Uint8' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(54): error C2923: 'std::basic_string' : 'Uint8' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2065: 'Uint16' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(55): error C2923: 'std::basic_string' : 'Uint16' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2065: 'Uint32' : undeclared identifier
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(56): error C2923: 'std::basic_string' : 'Uint32' is not a valid template type argument for parameter '_Elem'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(81): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(82): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2143: syntax error : missing ',' before '*'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(83): error C2535: 'sf::Unicode::Text::Text(const int)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(81) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(87): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(88): error C2535: 'sf::Unicode::Text::Text(const sf::Unicode::UTF8String &)' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(86) : see declaration of 'sf::Unicode::Text::Text'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(99): error C2535: 'sf::Unicode::Text::operator sf::Unicode::UTF8String(void) const' : member function already defined or declared
+                 C:\SFML-1.6\include\SFML/System/Unicode.hpp(98) : see declaration of 'sf::Unicode::Text::operator sf::Unicode::UTF8String'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(154): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(169): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(184): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(199): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(214): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(229): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(281): error C2146: syntax error : missing ';' before identifier 'UTF8Offsets'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/System/Unicode.hpp(282): error C2146: syntax error : missing ';' before identifier 'UTF8FirstBytes'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(102): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(163): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(207): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(280): error C2061: syntax error : identifier 'Uint32'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(326): error C2061: syntax error : identifier 'Uint8'
+     1>C:\SFML-1.6\include\SFML/System/Unicode.inl(379): error C2061: syntax error : identifier 'Uint16'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2146: syntax error : missing ';' before identifier 'Unicode'
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): error C2208: 'sf::Unicode' : no members defined using this type
+     1>C:\SFML-1.6\include\SFML/Window/Event.hpp(217): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         Generating Code...
+     1>Done Building Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.89
-=======
-         cheese edits.vcxproj -> C:\Users\Gustav\Desktop\src2\Server Release\cheese edits Server d.exe
-     1>Done Building Project "C:\Users\Gustav\Desktop\src2\cheese edits.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:01.10
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
+Time Elapsed 00:00:09.98

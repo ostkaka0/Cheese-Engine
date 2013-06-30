@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-#include <iostream>
-#include <string>
-#include <SFML\Graphics.hpp>
-=======
 #ifndef _SERVER
 
 #include <iostream>
 #include <string>
 //#include <SFML\Graphics.hpp>
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 #include "GameState.h"
 #include "PlayState.h"
 #define _USE_MATH_DEFINES
@@ -20,14 +14,10 @@
 #include "BlockSolid.h"
 #include "BlockBackground.h"
 
-<<<<<<< HEAD
-using namespace sf;
-=======
 namespace sf
 {
 	class RenderWindow;
 }
->>>>>>> 7a55cfd848be568878e4143aa9b86f7d0468e19d
 
 
 
