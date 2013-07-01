@@ -87,6 +87,7 @@ void ServerState::ProcessPackets(void)
 				temp->setSpeedY(speedY);
 				temp->setAngle(angle);
 				currentWorld->SetPlayer(client->ID, temp);
+				std::cout << "Moved player! :D" << std::endl;
 			}
 			break;
 		}
