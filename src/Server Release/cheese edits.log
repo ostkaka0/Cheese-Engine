@@ -1,23 +1,10 @@
-﻿Build started 2013-07-01 15:21:23.
+﻿Build started 2013-07-01 15:23:57.
      1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Connection.cpp Creature.cpp Entity.cpp Monster.cpp PlayState.cpp Player.cpp Projectile.cpp ServerState.cpp World.cpp main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Connection.cpp PlayState.cpp Player.cpp ServerState.cpp World.cpp main.cpp
          Connection.cpp
-         Creature.cpp
-         Entity.cpp
-     1>Entity.cpp(35): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>Entity.cpp(36): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>Entity.cpp(135): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
-     1>Entity.cpp(135): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(139): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(148): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
-     1>Entity.cpp(148): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(152): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(185): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Monster.cpp
          PlayState.cpp
          Player.cpp
-         Projectile.cpp
          ServerState.cpp
      1>ServerState.cpp(71): warning C4244: '=' : conversion from 'float' to 'sf::Int16', possible loss of data
          World.cpp
@@ -72,4 +59,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.66
+Time Elapsed 00:00:04.47
