@@ -98,9 +98,9 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<sf:
 
 		if (isClientControlling)
 		{
-			//sf::Packet packet;
-			//packet << (sf::Uint16)PlayerMove << x << y << speedX << speedY << horizontal << vertical;
-			//packetDataList->push(packet);
+			sf::Packet packet;
+			packet << (sf::Uint16)PlayerMove << x << y << speedX << speedY << horizontal << vertical;
+			packetDataList->push(packet);
 		}
 	}
 }
