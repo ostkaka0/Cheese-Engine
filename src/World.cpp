@@ -286,7 +286,8 @@ void World::RemovePlayer(int id)
 
 Player* World::GetPlayer(int id)
 {
-	return(playerList.find(id)->second);
+	auto it = playerList.find(id);
+	return (it == playerList.end()) ? nullptr : it->second;
 }
 
 void World::SetPlayer(int id, Player* player)

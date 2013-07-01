@@ -95,15 +95,14 @@ void PlayState::ProcessPackets(void)
 		sf::Uint16 wtf;
 		if(!(*packet >> packetType))
 			std::cout << "ERROR: Client could not extract data" << std::endl;
-		//std::cout << "Client got packet " << packetType << " wtf?: " << wtf << std::endl;
+		std::cout << "Client got packet " << packetType << " wtf?: " << wtf << std::endl;
 
 		switch(packetType)
 		{
 		case ClientID:
 			{
 				sf::Uint16 ID;
-				sf::Uint16 blabla;
-				if(!(*packet >> blabla >> ID))
+				if(!(*packet >> ID))
 					std::cout << "ERROR: Client could not extract data" << std::endl;
 				connection->client->ID = ID;
 				std::cout << "My ID is now " << ID << std::endl;
@@ -145,9 +144,6 @@ void PlayState::ProcessPackets(void)
 				if(type == 0)
 				{
 					Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
-
-
-					std::cout << "Added player -> clientid received " << clientID << " this clientid " << connection->client->ID << std::endl;
 					if(clientID == connection->client->ID)
 					{
 						temp->isClientControlling = true;
@@ -162,26 +158,18 @@ void PlayState::ProcessPackets(void)
 			}
 		case PlayerMove:
 			{
-				short id;
 				float xPos;
 				float yPos;
 				float speedX;
 				float speedY;
 				float angle;
-				float horizontal;
-				float vertical;
-				*packet >> id >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
-				Player* p = currentWorld->GetPlayer(id);
-				if (p != nullptr)
-				{
-					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
-					//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
-					//temp->setSpeedX(speedX);
-					//temp->setSpeedY(speedY);
-					//temp->setAngle(angle);
-					//currentWorld->SetPlayer(client->ID, temp);
-					std::cout << "Moved player! :D" << std::endl;
-				}
+				*packet >> xPos >> yPos >> speedX >> speedY >> angle;
+				//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				//temp->setSpeedX(speedX);
+				//temp->setSpeedY(speedY);
+				//temp->setAngle(angle);
+				//currentWorld->SetPlayer(client->ID, temp);
+				std::cout << "Moved player! :D" << std::endl;
 			}
 			break;
 			std::cout << packetType << std::endl;
