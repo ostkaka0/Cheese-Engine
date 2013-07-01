@@ -55,8 +55,9 @@ void ServerState::ProcessPackets(void)
 		sf::Packet* packet = data.first;
 		Client* client = data.second;
 		//Now process packets
-		sf::Int16 packetType;
-		*packet >> packetType;
+		sf::Uint16 packetType;
+		if(!(*packet >> packetType))
+			std::cout << "ERROR: Server could not extract data" << std::endl;
 
 		switch(packetType)
 		{
@@ -73,20 +74,25 @@ void ServerState::ProcessPackets(void)
 			break;
 		case PlayerJoinLeft:
 			{
-				std::cout << "Received PlayerJoinLeft" << std::endl;
-				sf::Int16 type;
-				float xPos;
+				sf::Uint16 type;
+				float xPos;///aspfkaposgkjASGJASPOGKASPGagds
 				float yPos;
-				*packet >>  type >> xPos >> yPos;
+				if(!(*packet >> type >> xPos >> yPos))
+					std::cout << "ERROR: Server could not extract data" << std::endl;
+				std::cout << "Server got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << client->ID << std::endl;
 				if(type == 0)
 					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
 				else if(type == 1)
 					currentWorld->RemovePlayer(client->ID);
 
 				sf::Packet send;
-				sf::Int16 packetType = PlayerJoinLeft;
-				send << PlayerJoinLeft << type << xPos << yPos << client->ID;
+				sf::Uint16 packetTypeTemp = PlayerJoinLeft;
+				sf::Uint16 clientidtemp = client->ID;
+
+				if(!(send << packetType << type << xPos << yPos << clientidtemp))
+					std::cout << "ERROR: Server could not import data" << std::endl;
 				sC->Broadcast(send);
+				std::cout << "Server sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientidtemp << std::endl;
 				break;
 			}
 		case PlayerMove:
@@ -101,13 +107,16 @@ void ServerState::ProcessPackets(void)
 				float vertical;
 				*packet >> id >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
 				Player* p = currentWorld->GetPlayer(id);
-				p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
-				//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
-				//temp->setSpeedX(speedX);
-				//temp->setSpeedY(speedY);
-				//temp->setAngle(angle);
-				//currentWorld->SetPlayer(client->ID, temp);
-				std::cout << "Moved player! :D" << std::endl;
+				if (p != nullptr)
+				{
+					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
+					//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+					//temp->setSpeedX(speedX);
+					//temp->setSpeedY(speedY);
+					//temp->setAngle(angle);
+					//currentWorld->SetPlayer(client->ID, temp);
+					std::cout << "Moved player! :D" << std::endl;
+				}
 			}
 			break;
 		}
