@@ -34,8 +34,9 @@ private:
 	//std::pair<std::deque<std::pair<std::deque<Chunk*>,long>>,long> chunkMatrix;
 	std::map<unsigned short, std::function<Block*(unsigned short)>> blockTypeMap;
 	std::vector<Entity*> entityList;
-	std::vector<Player*> playerList;
+	std::map<short, Player*> playerList;
 	std::map<std::pair<short,short>,Block*> BlockMap;
+	std::vector<unsigned char*>* packetDataList;
 public:
 	World();
 #ifndef _SERVER
@@ -53,8 +54,10 @@ public:
 	std::map<unsigned short, std::function<Block*(unsigned short)>>& getBlockTypeMap();
 	int AddEntity(Entity*);
 	void RemoveEntity(int id);
-	int AddPlayer(Player*);
+	int AddPlayer(int id, Player*);
 	void RemovePlayer(int id);
+	Player* GetPlayer(int id);
+	void SetPlayer(int id, Player* player);
 };
 
 /*#include <functional>

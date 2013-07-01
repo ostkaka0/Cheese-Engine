@@ -12,5 +12,5 @@ protected:
     float vertical;
 public:
 	Creature(float x, float y, short sizeX, short sizeY, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
-	virtual void Update(App& app, World* world, std::vector<unsigned char*>* packetDataList);
+	virtual std::vector<unsigned char*>* Update(App& app, World* world);
 };

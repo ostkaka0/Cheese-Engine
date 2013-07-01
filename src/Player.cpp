@@ -67,7 +67,7 @@ std::vector<unsigned char*>* Player::Update(App& app, World &world)
 	}
 #endif
 
-	return Creature::Update(app, world);
+	return Creature::Update(app, &world);
 }
 
 #ifndef _SERVER

@@ -30,9 +30,9 @@ PlayState::PlayState(App& app)
 	app.SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
 
-	Player* player = new Player(128, 128, 16, 16, true, "graywizard.png", 0, "Karl-Bertil");
-	currentWorld->AddPlayer(player);
-	camera->setCameraAt(*player);
+	//Player* player = new Player(128, 128, 16, 16, true, "graywizard.png", 0, "Karl-Bertil");
+	//currentWorld->AddPlayer(2,player); //MÅSTE FIXAS!!!!!!!!!!!!!
+	//camera->setCameraAt(*player);
 
 	//unsigned short i = 1;
 

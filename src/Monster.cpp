@@ -14,5 +14,5 @@ Monster::~Monster(void)
 
 std::vector<unsigned char*>* Monster::Update(App& app, World &world)
 {
-	return Creature::Update(app, world);
+	return Creature::Update(app, &world);
 }

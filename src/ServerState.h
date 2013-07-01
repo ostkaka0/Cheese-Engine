@@ -2,6 +2,8 @@
 #include "gamestate.h"
 #include "TextureContainer.h"
 #include "ServerConnection.h"
+#include "MessageType.h"
+#include "Player.h"
 
 class World;
 class InGameUI;

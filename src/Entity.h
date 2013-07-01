@@ -34,6 +34,7 @@ protected:
 	int spriteIndex;
 	void FixateX();
 	void FixateY();
+	std::vector<unsigned char*>* packetDataList;
 public:
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	virtual std::vector<unsigned char*>* Update(App& app, World &world);
@@ -47,6 +48,8 @@ public:
     void setPosition(float x, float y);
 	sf::Vector2f getPosition();
 	sf::Vector2f getSize();
+	void setSpeedX(float speedX);
+	void setSpeedY(float speedY);
     void setX(float x);
     void setY(float y);
     float getX();

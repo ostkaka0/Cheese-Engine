@@ -187,3 +187,5 @@ float Entity::getY() { return y; }
 sf::Vector2f Entity::getSize() { return sf::Vector2f(sizeX, sizeY); }
 void Entity::setAngle(float angle) {this->angle = angle; }
 float Entity::getAngle() { return angle;  }
+void Entity::setSpeedX(float speedX){ this->speedX = speedX; }
+void Entity::setSpeedY(float speedY){ this->speedY = speedY; }

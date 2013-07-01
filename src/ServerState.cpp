@@ -53,7 +53,7 @@ void ServerState::ProcessPackets(void)
 
 		switch(packetType)
 		{
-		case 1: //measure ping between sent 1 and received 1 (type)
+		case PingMessage: //measure ping between sent 1 and received 1 (type)
 			{
 				float ping = client->pingClock.GetElapsedTime();
 				client->pingClock.Reset();
@@ -61,8 +61,33 @@ void ServerState::ProcessPackets(void)
 				std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
 			break;
-		case 2: //server kicks client (type, string message)
+		case KickMessage: //server kicks client (type, string message)
 
+			break;
+		case PlayerJoinLeft:
+			sf::Int16 type;
+			float xPos;
+			float yPos;
+			*packet >>  type >> xPos >> yPos;
+			if(type == 0)
+				currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+			else if(type == 1)
+				currentWorld->RemovePlayer(client->ID);
+			break;
+		case PlayerMove:
+			{
+				float xPos;
+				float yPos;
+				float speedX;
+				float speedY;
+				float angle;
+				*packet >> xPos >> yPos >> speedX >> speedY >> angle;
+				Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				temp->setSpeedX(speedX);
+				temp->setSpeedY(speedY);
+				temp->setAngle(angle);
+				currentWorld->SetPlayer(client->ID, temp);
+			}
 			break;
 		}
 		delete packet;

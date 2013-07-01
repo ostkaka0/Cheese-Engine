@@ -52,9 +52,9 @@ void World::Draw(App& app, TextureContainer& tC)
 		entity->Draw(app, tC);
 	}
 
-	for(Player* player : playerList)
+	for(std::pair<short, Player*> pair : playerList)
 	{
-		player->Draw(app, tC);
+		pair.second->Draw(app, tC);
 	}
 }
 #endif
@@ -63,12 +63,14 @@ std::vector<unsigned char*>* World::Update(App& app, TextureContainer& tC)
 {
 	for (Entity* entity : entityList)
 	{
-		entity->Update(app, *this);
+		std::vector<unsigned char*>* tempPackets = entity->Update(app, *this);
+		packetDataList->reserve(tempPackets->size());
+		packetDataList->insert(packetDataList->end(), tempPackets->begin(), tempPackets->end());
 	}
 
-	for(Player* player : playerList)
+	for(std::pair<short, Player*> pair : playerList)
 	{
-		player->Update(app, *this);
+		pair.second->Update(app, *this);
 	}	
 	return nullptr;
 }
@@ -81,25 +83,25 @@ void World::RegisterBlock(unsigned short key, std::function<Block*(unsigned shor
 /*#ifndef _SERVER
 void World::Draw(App& app, TextureContainer& tC)
 {
-	for (auto chunkColumn : chunkMatrix.first)
-	{
-		for (auto chunk : chunkColumn.first)
-		{
-			chunk->Draw(0, 0, app, tC);
-		}
-	}
-	/*ChunkColumnType::size_type x,y;
-	for (x = (int)abs((int)floor(GetCamera(app).GetCenter().x-GetCamera(app).GetHalfSize().x)>>4 + chunkMatrixCenterRow);
-		x != chunkMatrix.size && x < (int)abs((int)floor(GetCamera(app).GetCenter().x+GetCamera(app).GetHalfSize().x)>>4 + chunkMatrixCenterRow);
-		x++)
-	{
-		for (y = (int)abs((int)floor(GetCamera(app).GetCenter().y-GetCamera(app).GetHalfSize().y)<<4 + chunkMatrix.at(x).second);
-			y != chunkMatrix.size && y < (int)abs((int)floor(GetCamera(app).GetCenter().y+GetCamera(app).GetHalfSize().y)>>4 + chunkMatrix.at(x).second);
-			y++)
-		{
-			chunkMatrix.at(x).first.at(y)->Draw(x-(int)(GetCamera(app).GetCenter().x-GetCamera(app).GetHalfSize().x), y-(int)(GetCamera(app).GetCenter().y-GetCamera(app).GetHalfSize().y), app, tC);
-		}
-	}*/
+for (auto chunkColumn : chunkMatrix.first)
+{
+for (auto chunk : chunkColumn.first)
+{
+chunk->Draw(0, 0, app, tC);
+}
+}
+/*ChunkColumnType::size_type x,y;
+for (x = (int)abs((int)floor(GetCamera(app).GetCenter().x-GetCamera(app).GetHalfSize().x)>>4 + chunkMatrixCenterRow);
+x != chunkMatrix.size && x < (int)abs((int)floor(GetCamera(app).GetCenter().x+GetCamera(app).GetHalfSize().x)>>4 + chunkMatrixCenterRow);
+x++)
+{
+for (y = (int)abs((int)floor(GetCamera(app).GetCenter().y-GetCamera(app).GetHalfSize().y)<<4 + chunkMatrix.at(x).second);
+y != chunkMatrix.size && y < (int)abs((int)floor(GetCamera(app).GetCenter().y+GetCamera(app).GetHalfSize().y)>>4 + chunkMatrix.at(x).second);
+y++)
+{
+chunkMatrix.at(x).first.at(y)->Draw(x-(int)(GetCamera(app).GetCenter().x-GetCamera(app).GetHalfSize().x), y-(int)(GetCamera(app).GetCenter().y-GetCamera(app).GetHalfSize().y), app, tC);
+}
+}*/
 //}
 //#endif
 
@@ -255,15 +257,41 @@ void World::RemoveEntity(int id)
 
 }
 
-int World::AddPlayer(Player* player)
+int World::AddPlayer(int id, Player* player)
 {
-	playerList.push_back(player);
+	auto it = playerList.find(id);
+	if(it == playerList.end())
+	{
+		playerList.insert(std::pair<short, Player*>(id, player));
+	}
+	else
+		std::cout << "Attempt to add player that already exists! " << id << std::endl;
+
 	return 0;
 }
 
 void World::RemovePlayer(int id)
 {
+	auto it = playerList.find(id);
+	if(it != playerList.end())
+	{
+		delete(it->second);
+		playerList.erase(id);
+	}
+	else
+		std::cout << "Attempt to remove player that doesn't exist! " << id << std::endl;
+}
 
+Player* World::GetPlayer(int id)
+{
+	return(playerList.find(id)->second);
+}
+
+void World::SetPlayer(int id, Player* player)
+{
+	delete(playerList.find(id)->second);
+	playerList.erase(id);
+	playerList.insert(std::pair<short, Player*>(id, player));
 }
 
 /*#include "World.h"
@@ -283,28 +311,28 @@ void World::RemovePlayer(int id)
 
 World::World(short unsigned sizeX, short unsigned sizeY)
 {
-	unsigned short i = 1;
+unsigned short i = 1;
 
-	RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i));i++;
-	RegisterBlock(i,(new BlockBackground(i))->RegisterBlock(i));i++;
+RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i));i++;
+RegisterBlock(i,(new BlockBackground(i))->RegisterBlock(i));i++;
 
-	this->sizeX = sizeX+1;
-	this->sizeY = sizeY+1;
+this->sizeX = sizeX+1;
+this->sizeY = sizeY+1;
 
-	if(this->sizeX > SIZEXMAX)
-		this->sizeX = SIZEXMAX;
-	if(this->sizeY > SIZEYMAX)
-		this->sizeY = SIZEYMAX;
+if(this->sizeX > SIZEXMAX)
+this->sizeX = SIZEXMAX;
+if(this->sizeY > SIZEYMAX)
+this->sizeY = SIZEYMAX;
 
-	for(int x = 0; x < this->sizeX; x++)
-	{
-		for(int y = 0; y < this->sizeY; y++)
-		{
-			chunkList[x][y] = new Chunk();
-		}
-	}
-	
-	DrawBorder(2);
+for(int x = 0; x < this->sizeX; x++)
+{
+for(int y = 0; y < this->sizeY; y++)
+{
+chunkList[x][y] = new Chunk();
+}
+}
+
+DrawBorder(2);
 }
 
 World::~World(void)
@@ -314,157 +342,157 @@ World::~World(void)
 
 void World::DrawBorder(int blockId)
 {
-	for(int xx = 0; xx < this->sizeX * 16; xx++)
-	{
-		setBlock(2, 256 + xx * 16, 256, 1);
-		setBlock(2, 256 + xx * 16, sizeY * 16 * 16 - 16, 1);
-	}
-	for(int yy = 0; yy < this->sizeY * 16; yy++)
-	{
-		setBlock(2, 256, 256 + yy * 16, 1);
-		setBlock(2, sizeX * 16 * 16 - 16, 256 + yy * 16, 1);
-	}
+for(int xx = 0; xx < this->sizeX * 16; xx++)
+{
+setBlock(2, 256 + xx * 16, 256, 1);
+setBlock(2, 256 + xx * 16, sizeY * 16 * 16 - 16, 1);
+}
+for(int yy = 0; yy < this->sizeY * 16; yy++)
+{
+setBlock(2, 256, 256 + yy * 16, 1);
+setBlock(2, sizeX * 16 * 16 - 16, 256 + yy * 16, 1);
+}
 }
 
 void World::Update(App& app)
 {
-	for (std::vector<Entity*>::size_type i = 0; i < entityList.size(); i++)
-	{
-		entityList[i]->Update(app, *this);
-	}
-	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
-	{
-		playerList[i]->Update(app, *this);
-	}
+for (std::vector<Entity*>::size_type i = 0; i < entityList.size(); i++)
+{
+entityList[i]->Update(app, *this);
+}
+for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
+{
+playerList[i]->Update(app, *this);
+}
 }
 
 #ifndef _SERVER
 void World::Draw(App& app, TextureContainer& tc)
 {
-	float cameraX = (*reinterpret_cast<const Camera*>(&app.GetView())).GetCenter().x;
-	float cameraY = GetCamera(app).GetCenter().y;
+float cameraX = (*reinterpret_cast<const Camera*>(&app.GetView())).GetCenter().x;
+float cameraY = GetCamera(app).GetCenter().y;
 
-	int chunkX = (int)((cameraX/16)/16);
-	int chunkY = (int)((cameraY/16)/16);
+int chunkX = (int)((cameraX/16)/16);
+int chunkY = (int)((cameraY/16)/16);
 
-	for(short x = -2; x < 4; x++)
-	{
-		for(short y = -2; y < 4; y++)
-		{
-			if(chunkX+x > 0 && chunkY+y > 0 && chunkX+x < sizeX && chunkY+y < sizeY)
-			{
-				chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc);
-			}
-		}
-	}
+for(short x = -2; x < 4; x++)
+{
+for(short y = -2; y < 4; y++)
+{
+if(chunkX+x > 0 && chunkY+y > 0 && chunkX+x < sizeX && chunkY+y < sizeY)
+{
+chunkList[chunkX + x][chunkY + y]->Draw(chunkX + x, chunkY + y, app, tc);
+}
+}
+}
 
-	//Projectile start
+//Projectile start
 
 
-	//Entity start
-	for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)
-	{
-		if(isVisible(app, *entityList[i], i))
-		{
-			entityList[i]->Draw(app, tc);
-		}
-	}
+//Entity start
+for (std::vector<Entity>::size_type i = 0; i < entityList.size(); i++)
+{
+if(isVisible(app, *entityList[i], i))
+{
+entityList[i]->Draw(app, tc);
+}
+}
 
-	//Player start
-	for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
-	{
-		if(isVisible(app, *playerList[i], i))
-		{
-			playerList[i]->Draw(app, tc);
-		}
-	}
+//Player start
+for (std::vector<Player*>::size_type i = 0; i < playerList.size(); i++)
+{
+if(isVisible(app, *playerList[i], i))
+{
+playerList[i]->Draw(app, tc);
+}
+}
 }
 #endif
 
 void World::setBlock(unsigned char layer, short x, short y, unsigned short id)
 {
-	setBlockAndMetadata(layer, x, y, id, 0);
+setBlockAndMetadata(layer, x, y, id, 0);
 }
 
 void World::setBlockAndMetadata(unsigned char layer, short x, short y, unsigned short id, unsigned short metadata)
 §{
-	int chunkX = (x/16)/16;
-	int chunkY = (y/16)/16;
-	int blockX = (x/16) % 16;
-	int blockY = (y/16) % 16;
-	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
-	{
-		chunkList[chunkX][chunkY]->setBlock(layer, blockX, blockY, getBlockType(id, metadata));
-		chunkList[chunkX][chunkY]->setMetadata(layer, blockX, blockY, metadata);
-	}
+int chunkX = (x/16)/16;
+int chunkY = (y/16)/16;
+int blockX = (x/16) % 16;
+int blockY = (y/16) % 16;
+if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
+{
+chunkList[chunkX][chunkY]->setBlock(layer, blockX, blockY, getBlockType(id, metadata));
+chunkList[chunkX][chunkY]->setMetadata(layer, blockX, blockY, metadata);
+}
 }
 
 void World::setBlockMetadata(unsigned char layer, short x, short y, unsigned short metadata)
 {
-	int chunkX = (x/16)/16;
-	int chunkY = (y/16)/16;
-	int blockX = (x/16) % 16;
-	int blockY = (y/16) % 16;
-	if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
-	{
-		chunkList[chunkX][chunkY]->setMetadata(layer, blockX, blockY, metadata);
-	}
+int chunkX = (x/16)/16;
+int chunkY = (y/16)/16;
+int blockX = (x/16) % 16;
+int blockY = (y/16) % 16;
+if(chunkX*16 + blockX >= 0 && chunkX*16 + blockX < sizeX*16 && chunkY*16 + blockY>= 0 && chunkY*16 + blockY < sizeY*16)
+{
+chunkList[chunkX][chunkY]->setMetadata(layer, blockX, blockY, metadata);
+}
 }
 
 
 Block* World::getBlock(unsigned char layer, short x, short y)
 {
-	/*x+=16;
-	y+=16;
-	int chunkX = x>>4;
-	int chunkY = y>>4;
-	int blockX = x&0xF;
-	int blockY = y&0xF;
-	if(x >= 0 && x < sizeX<<4 && y >= 0 && y < sizeY<<4)
-	{
-		return(chunkList[chunkX][chunkY]->getBlock(layer, blockX, blockY));
-	}
-	else
-	{
-		return(nullptr);
-	}* /
-	return nullptr;
+/*x+=16;
+y+=16;
+int chunkX = x>>4;
+int chunkY = y>>4;
+int blockX = x&0xF;
+int blockY = y&0xF;
+if(x >= 0 && x < sizeX<<4 && y >= 0 && y < sizeY<<4)
+{
+return(chunkList[chunkX][chunkY]->getBlock(layer, blockX, blockY));
+}
+else
+{
+return(nullptr);
+}* /
+return nullptr;
 }
 
 bool World::isBlockSolid(short x,short y)
 {
-	Block* block = getBlock(2,x,y);
+Block* block = getBlock(2,x,y);
 
-	if (block == nullptr)
-		return false;
+if (block == nullptr)
+return false;
 
-	return block->isSolid();
+return block->isSolid();
 
 
-	//return block->isSolid();
-	//return block->isSolid();
-	/*Block* block = getBlock(2,x,y);
+//return block->isSolid();
+//return block->isSolid();
+/*Block* block = getBlock(2,x,y);
 
-	if (block == nullptr)
-		return false;
+if (block == nullptr)
+return false;
 
-	return block->isSolid();* /
+return block->isSolid();* /
 }
 
 void World::RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value)
 {
-	blockTypeMap.emplace(key, value);
+blockTypeMap.emplace(key, value);
 }
 
 Block* World::getBlockType(unsigned short id, unsigned short metadata)
 {
-	auto it = blockTypeMap.find(id);
-	return ((it == blockTypeMap.end()) ? nullptr : it->second(metadata));
+auto it = blockTypeMap.find(id);
+return ((it == blockTypeMap.end()) ? nullptr : it->second(metadata));
 }
 
 std::map<unsigned short, std::function<Block*(unsigned short)>>* World::getBlockTypeMap()
 {
-	return &blockTypeMap;
+return &blockTypeMap;
 }
 
 sf::Vector2i World::getSize(){return(sf::Vector2i(sizeX, sizeY));};
@@ -472,47 +500,47 @@ sf::Vector2i World::getSize(){return(sf::Vector2i(sizeX, sizeY));};
 #ifndef _SERVER
 bool World::isVisible(App& app, Entity& entity, short position)
 {
-	float posX = entity.getPosition().x;
-	float posY = entity.getPosition().y;
-	float sizeX = entity.getSize().x;
-	float sizeY = entity.getSize().y;
+float posX = entity.getPosition().x;
+float posY = entity.getPosition().y;
+float sizeX = entity.getSize().x;
+float sizeY = entity.getSize().y;
 
-	if((posX + (2*sizeX)) >= -16 && (posY + (2*sizeY)) >= -16)
-	{
-		if((posX - sizeX) <= this->sizeX*256 && (posY - sizeY) <= this->sizeY*256)
-		{
-			if((posX + 2*sizeX) >= (GetCamera(app).GetCenter().x - GetCamera(app).GetHalfSize().x))
-			{
-				if((posY + 2*sizeY) >= (GetCamera(app).GetCenter().y - GetCamera(app).GetHalfSize().y))
-				{
-					if(posX - sizeX <= (GetCamera(app).GetCenter().x + GetCamera(app).GetHalfSize().x))
-					{
-						if(posY - sizeY <= (GetCamera(app).GetCenter().y + GetCamera(app).GetHalfSize().y))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-		}
-	}
-	return false;
-	//delete entityList[position];
+if((posX + (2*sizeX)) >= -16 && (posY + (2*sizeY)) >= -16)
+{
+if((posX - sizeX) <= this->sizeX*256 && (posY - sizeY) <= this->sizeY*256)
+{
+if((posX + 2*sizeX) >= (GetCamera(app).GetCenter().x - GetCamera(app).GetHalfSize().x))
+{
+if((posY + 2*sizeY) >= (GetCamera(app).GetCenter().y - GetCamera(app).GetHalfSize().y))
+{
+if(posX - sizeX <= (GetCamera(app).GetCenter().x + GetCamera(app).GetHalfSize().x))
+{
+if(posY - sizeY <= (GetCamera(app).GetCenter().y + GetCamera(app).GetHalfSize().y))
+{
+return true;
+}
+}
+}
+}
+return false;
+}
+}
+return false;
+//delete entityList[position];
 }
 #endif
 
 void World::AddEntity(Entity* creature)
 {
-	entityList.push_back(creature);
+entityList.push_back(creature);
 }
 
 void World::AddPlayer(Player* player, short Id)
 {
-	playerList.insert((playerList.begin() + Id), player);
+playerList.insert((playerList.begin() + Id), player);
 }
 
 void World::RemovePlayer(short Id)
 {
-	playerList.erase(playerList.begin() + Id);
+playerList.erase(playerList.begin() + Id);
 }*/
