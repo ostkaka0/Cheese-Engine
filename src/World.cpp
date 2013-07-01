@@ -133,7 +133,7 @@ void World::setBlockAndMetadata(long x, long y, long layer, short id, unsigned s
 			Expand(xx, yy, nullptr);
 		}
 
-		auto &it = chunkMatrix.first.at(xx+chunkMatrix.second);
+		auto &it = chunkMatrix.first.at(xx + chunkMatrix.second);
 
 		{
 			std::cout << xx << " " << yy << " " << xx+chunkMatrix.second << " " << yy+it.second << " s " << chunkMatrix.first.size() << " " << it.first.size() <<" JAHA?\n";
@@ -165,20 +165,15 @@ void World::setBlockMetadata(long x, long y, long layer, unsigned short metadata
 
 Block* World::getBlock(long x, long y, long layer)
 {
-	long xx = (x * 0.0625) + chunkMatrix.second;
-	unsigned short xxx = (x < 0)? (x^0XFFFFFFF0+1)&0XF : x&0XF;
-	unsigned short yyy = (y < 0)? (y^0XFFFFFFF0+1)&0XF : y&0XF;
+	long xx = floor(x * 0.0625) + chunkMatrix.second;
 
-	if (x < 0)
-		xx--;
+	unsigned short xxx = x&0xF;
+	unsigned short yyy = y&0xF;
 
 	if (isColumnInsideChunkMatrix(xx))
 	{
 		auto it = chunkMatrix.first.at(xx);
-		long yy = (y * 0.0625) + it.second;
-
-		if (y < 0)
-			yy--;
+		long yy = floor(y * 0.0625) + it.second;
 
 		if (isChunkInsideChunkColumn(yy,it.first))
 		{
@@ -295,6 +290,16 @@ void World::SetPlayer(int id, Player* player)
 	delete(playerList.find(id)->second);
 	playerList.erase(id);
 	playerList.insert(std::pair<short, Player*>(id, player));
+}
+
+bool World::isBlockSolid(long x,long y)
+{
+	Block* block = getBlock(x+16, y+16, 2);
+	if (block != nullptr)
+	{
+		return block->isSolid();
+	}
+	return false;
 }
 
 /*#include "World.h"

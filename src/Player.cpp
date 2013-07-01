@@ -6,7 +6,7 @@
 #include "MessageType.h"
 
 Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
-	: Creature(X, Y, sizeX, sizeY, 40960, 0.875, spriteName, spriteIndex, IsClientControlling)
+	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
 {
 	name = Name;
 	cameraDelay = 0;

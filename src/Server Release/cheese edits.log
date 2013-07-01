@@ -1,9 +1,25 @@
-﻿Build started 2013-07-01 21:54:55.
+﻿Build started 2013-07-01 22:49:44.
      1>Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerState.cpp World.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BlockBackground.cpp Connection.cpp Entity.cpp PlayState.cpp Player.cpp Projectile.cpp ServerState.cpp World.cpp
+         BlockBackground.cpp
+     1>BlockBackground.cpp(16): warning C4244: 'return' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+         Connection.cpp
+         Entity.cpp
+     1>Entity.cpp(35): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>Entity.cpp(36): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>Entity.cpp(135): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
+     1>Entity.cpp(135): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Entity.cpp(139): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Entity.cpp(148): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
+     1>Entity.cpp(148): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Entity.cpp(152): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Entity.cpp(185): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         PlayState.cpp
+         Player.cpp
+         Projectile.cpp
          ServerState.cpp
-     1>ServerState.cpp(67): warning C4244: '=' : conversion from 'float' to 'sf::Uint16', possible loss of data
+     1>ServerState.cpp(68): warning C4244: '=' : conversion from 'float' to 'sf::Uint16', possible loss of data
          World.cpp
      1>World.cpp(117): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
      1>World.cpp(129): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
@@ -55,4 +71,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.94
+Time Elapsed 00:00:12.69
