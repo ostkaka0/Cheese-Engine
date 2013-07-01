@@ -130,20 +130,21 @@ void PlayState::ProcessPackets(void)
 			sf::Int16 type;
 			float xPos;
 			float yPos;
-			int ID;
-			*packet >>  type >> xPos >> yPos >> ID;
+			int clientID;
+			*packet >>  type >> xPos >> yPos >> clientID;
 			if(type == 0)
 			{
 				Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
-				currentWorld->AddPlayer(ID, temp);
-				if(ID == connection->client->ID)
+				if(clientID == connection->client->ID)
 				{
+					temp->isClientControlling = true;
 					std::cout << "Camera set" << std::endl;
 					camera->setCameraAt(*temp);
 				}
+				currentWorld->AddPlayer(clientID, temp);
 			}
 			else if(type == 1)
-				currentWorld->RemovePlayer(ID);
+				currentWorld->RemovePlayer(clientID);
 			break;
 		case PlayerMove:
 			{

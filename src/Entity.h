@@ -31,12 +31,12 @@ protected:
     float friction;
     float angle;
     float speed;
-    bool isClientControlling;
 	std::string spriteName;
 	int spriteIndex;
 	void FixateX();
 	void FixateY();
 public:
+    bool isClientControlling;
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	void Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList);
 #ifndef _SERVER
