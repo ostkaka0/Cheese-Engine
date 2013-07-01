@@ -1,69 +1,7 @@
-<<<<<<< HEAD
-﻿Build started 2013-07-01 14:13:50.
+﻿Build started 2013-07-01 14:52:47.
      1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Block.cpp BlockBackground.cpp BlockGravity.cpp BlockSolid.cpp Chunk.cpp Connection.cpp Creature.cpp Entity.cpp Label.cpp MenuItem.cpp Monster.cpp PlayState.cpp Player.cpp Projectile.cpp ServerConnection.cpp ServerState.cpp TextureContainer.cpp World.cpp main.cpp
-         App.cpp
-         Block.cpp
-         BlockBackground.cpp
-     1>BlockBackground.cpp(16): warning C4244: 'return' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
-         BlockGravity.cpp
-         BlockSolid.cpp
-     1>BlockSolid.cpp(15): warning C4244: 'return' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
-         Chunk.cpp
-         Connection.cpp
-         Creature.cpp
-         Entity.cpp
-     1>Entity.cpp(35): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>Entity.cpp(36): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>Entity.cpp(135): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
-     1>Entity.cpp(135): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(139): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(148): warning C4554: '>>' : check operator precedence for possible error; use parentheses to clarify precedence
-     1>Entity.cpp(148): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(152): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Entity.cpp(185): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Label.cpp
-         MenuItem.cpp
-         Monster.cpp
-         PlayState.cpp
-         Player.cpp
-         Projectile.cpp
-         ServerConnection.cpp
-         ServerState.cpp
-     1>ServerState.cpp(60): warning C4244: '=' : conversion from 'float' to 'sf::Int16', possible loss of data
-         TextureContainer.cpp
-         World.cpp
-     1>World.cpp(115): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(127): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(143): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(144): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(151): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(152): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(155): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(156): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(159): warning C4244: 'argument' : conversion from 'long' to 'unsigned short', possible loss of data
-     1>World.cpp(159): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(166): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(173): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(176): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(181): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(183): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(204): warning C4018: '>=' : signed/unsigned mismatch
-     1>World.cpp(224): warning C4018: '>=' : signed/unsigned mismatch
-         main.cpp
-         Generating Code...
-       Link:
+     1>Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
-=======
-﻿Build started 2013-07-01 14:13:17.
-     1>Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt PlayState.cpp
-         PlayState.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
->>>>>>> f4ec04004f94f35182f75647f5bca050a9166d6b
          "Server Release\Block.obj"
          "Server Release\BlockBackground.obj"
          "Server Release\BlockGravity.obj"
@@ -89,18 +27,9 @@
          "Server Release\TextureContainer.obj"
          "Server Release\World.obj"
      1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
-<<<<<<< HEAD
          cheese edits.vcxproj -> C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
      1>Done Building Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:12.10
-=======
-         cheese edits.vcxproj -> C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
-     1>Done Building Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.57
->>>>>>> f4ec04004f94f35182f75647f5bca050a9166d6b
+Time Elapsed 00:00:00.20
