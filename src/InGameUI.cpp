@@ -70,9 +70,9 @@ void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
 	{
 		int layer = 2;
-		if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
-			layer = 0;
-		world.setBlock(2, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0);	
+		//if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
+		//	layer = 0;
+		world.setBlock((short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 0);	
 	}
 }
 
