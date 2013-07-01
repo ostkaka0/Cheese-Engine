@@ -30,7 +30,18 @@ ServerState::~ServerState()
 GameState *ServerState::Update(App& app)
 {
 	//std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
-	currentWorld->Update(app, tC);
+	std::queue<std::pair<MessageType, unsigned char*>>* packetDataList = currentWorld->Update(app, tC);
+	while (!packetDataList->empty())
+	{
+		sf::Packet packet;
+
+		packet << (sf::Int16)packetDataList->front().first;
+		packet.Append(reinterpret_cast<void*>(packetDataList->front().second), sizeof(packetDataList->front().second));
+		sC->Broadcast(packet);
+
+		packetDataList->pop();
+	}
+	delete packetDataList;
 	ProcessPackets();
 	return this;
 }

@@ -31,6 +31,8 @@ World::World()
 			chunkMatrix.first[x].first.push_back(chunk);
 		}
 	}
+
+	packetDataList = new std::queue<std::pair<MessageType, unsigned char*>>();
 }
 
 #ifndef _SERVER
