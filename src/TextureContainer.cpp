@@ -25,6 +25,11 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 	sf::Image image;
 	bool success = image.LoadFromFile(fileName);
 
+	if (!success)
+	{
+		std::cout << "Failed to load " << fileName << '\n';
+	}
+
 	int width = image.GetWidth()/spriteWidth;
 	int height = image.GetHeight()/spriteHeight;
 
