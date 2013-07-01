@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <SFML\Network.hpp>
 //#include <SFML\Graphics.hpp>
 #include "GameState.h"
 #include "PlayState.h"
@@ -59,15 +60,10 @@ void PlayState::EventUpdate(sf::Event& event)
 
 GameState *PlayState::Update(App& app)
 {
-	std::queue<std::pair<MessageType, unsigned char*>>* packetDataList = currentWorld->Update(app, tC);
+	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC);
 	while (!packetDataList->empty())
 	{
-		sf::Packet packet;
-
-		packet << (sf::Int16)packetDataList->front().first;
-		packet.Append(reinterpret_cast<void*>(packetDataList->front().second), sizeof(packetDataList->front().second));
-		connection->client->socket.Send(packet);//send(packet);
-
+		connection->client->socket.Send(packetDataList->front());
 		packetDataList->pop();
 	}
 	//delete packetDataList;

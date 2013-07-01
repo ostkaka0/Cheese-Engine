@@ -17,7 +17,7 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	lmb = false;
 }
 
-void Player::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
+void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
 {
 #ifndef _SERVER
 	if (isClientControlling)
@@ -79,7 +79,7 @@ void Player::Draw(App& app, TextureContainer &tc)
 }
 #endif
 
-void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
+void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<sf::Packet>* packetDataList)
 {
 	if (Right != right || Down != down || Left != left || Up != up)
 	{
@@ -98,7 +98,9 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<std
 
 		if (isClientControlling)
 		{
-			packetDataList->push(std::pair<MessageType, unsigned char*>(PlayerMove, reinterpret_cast<unsigned char*>(new std::tuple<float, float, float, float, float, float>(x, y, speedX, speedY, horizontal, vertical))));
+			sf::Packet packet;
+			packet << (sf::Int16)PlayerMove << x << y << speedX << speedY << horizontal << vertical;
+			packetDataList->push(packet);
 		}
 	}
 }

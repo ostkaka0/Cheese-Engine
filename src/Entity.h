@@ -13,6 +13,7 @@
 #else
 #include <SFML\Graphics.hpp>
 #endif
+#include <SFML\Network.hpp>
 
 enum MessageType;
 class TextureContainer;
@@ -38,7 +39,7 @@ protected:
 public:
     bool isClientControlling;
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
-	void Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList);
+	void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList);
 #ifndef _SERVER
     virtual void Draw(App& app, TextureContainer &tc);
 #endif

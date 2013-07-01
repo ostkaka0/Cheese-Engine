@@ -17,7 +17,7 @@ Projectile::~Projectile(void)
 {
 }
 
-void Projectile::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
+void Projectile::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
 { 
 	speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
 	friction = 100/speed;

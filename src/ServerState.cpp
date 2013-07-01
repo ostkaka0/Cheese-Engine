@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <SFML\Network.hpp>
 #include "ServerState.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -30,15 +31,10 @@ ServerState::~ServerState()
 GameState *ServerState::Update(App& app)
 {
 	//std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
-	std::queue<std::pair<MessageType, unsigned char*>>* packetDataList = currentWorld->Update(app, tC);
+	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC);
 	while (!packetDataList->empty())
 	{
-		sf::Packet packet;
-
-		packet << (sf::Int16)packetDataList->front().first;
-		packet.Append(reinterpret_cast<void*>(packetDataList->front().second), sizeof(packetDataList->front().second));
-		sC->Broadcast(packet);
-
+		sC->Broadcast(packetDataList->front());
 		packetDataList->pop();
 	}
 	//delete packetDataList;

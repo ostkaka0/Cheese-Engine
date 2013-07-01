@@ -12,7 +12,7 @@ Monster::~Monster(void)
 {
 }
 
-void Monster::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
+void Monster::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
 {
 	Creature::Update(app, world, packetDataList);
 }

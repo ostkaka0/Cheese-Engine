@@ -9,7 +9,7 @@ Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, floa
     vertical = 0;
 }
 
-void Creature::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
+void Creature::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
 {
     speedX += horizontal * app.GetFrameTime();
     speedY += vertical * app.GetFrameTime();

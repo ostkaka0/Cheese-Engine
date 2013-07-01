@@ -32,7 +32,7 @@ World::World()
 		}
 	}
 
-	packetDataList = new std::queue<std::pair<MessageType, unsigned char*>>();
+	packetDataList = new std::queue<sf::Packet>();
 }
 
 #ifndef _SERVER
@@ -61,7 +61,7 @@ void World::Draw(App& app, TextureContainer& tC)
 }
 #endif
 
-std::queue<std::pair<MessageType, unsigned char*>>* World::Update(App& app, TextureContainer& tC)
+std::queue<sf::Packet>* World::Update(App& app, TextureContainer& tC)
 {
 	for (Entity* entity : entityList)
 	{
@@ -74,7 +74,7 @@ std::queue<std::pair<MessageType, unsigned char*>>* World::Update(App& app, Text
 	}	
 
 	return packetDataList;
-	packetDataList = new std::queue<std::pair<MessageType, unsigned char*>>();
+	packetDataList = new std::queue<sf::Packet>();
 }
 
 void World::RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value)
