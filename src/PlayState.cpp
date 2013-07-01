@@ -70,7 +70,7 @@ GameState *PlayState::Update(App& app)
 
 		packetDataList->pop();
 	}
-	delete packetDataList;
+	//delete packetDataList;
 
 	camera->Update(app);
 	blockMenu->Update(app, tC, *currentWorld);

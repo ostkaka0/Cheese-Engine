@@ -41,7 +41,7 @@ GameState *ServerState::Update(App& app)
 
 		packetDataList->pop();
 	}
-	delete packetDataList;
+	//delete packetDataList;
 	ProcessPackets();
 	return this;
 }
