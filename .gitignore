@@ -66,6 +66,12 @@ local.properties
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
 
+# Mina!
+*.exe
+*.log
+*.lastbuildstate
+*.tlog
+
 # Visual C++ cache files
 ipch/
 *.aps
