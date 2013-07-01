@@ -131,7 +131,7 @@ void Entity::Collision(World* world)
 
 }
 
-void Entity::FixateX()
+/*void Entity::FixateX()
 {
 	if (speedX > 0)
 	{
@@ -155,7 +155,7 @@ void Entity::FixateY()
 		y = (int)(y+12)>>4<<4;
 	}
 	speedY = 0;
-}
+}*/
 
 #ifndef _SERVER
 void Entity::Draw(App& app, TextureContainer &tc)
