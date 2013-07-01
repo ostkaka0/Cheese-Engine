@@ -2,6 +2,8 @@
 #include "World.h"
 #include "camera.h"
 #include "Projectile.h"
+#include <tuple>
+#include "MessageType.h"
 
 Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
 	: Creature(X, Y, sizeX, sizeY, 40960, 0.875, spriteName, spriteIndex, IsClientControlling)
@@ -24,7 +26,7 @@ void Player::Update(App& app, World* world, std::queue<std::pair<MessageType, un
 			app.GetInput().IsKeyDown(sf::Key::D),
 			app.GetInput().IsKeyDown(sf::Key::S),
 			app.GetInput().IsKeyDown(sf::Key::A),
-			app.GetInput().IsKeyDown(sf::Key::W));
+			app.GetInput().IsKeyDown(sf::Key::W), packetDataList);
 
 		if(!lmb && (lmb=app.GetInput().IsMouseButtonDown(sf::Mouse::Left)))
 		{
@@ -77,7 +79,7 @@ void Player::Draw(App& app, TextureContainer &tc)
 }
 #endif
 
-void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up)
+void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
 {
 	if (Right != right || Down != down || Left != left || Up != up)
 	{
@@ -96,7 +98,7 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up)
 
 		if (isClientControlling)
 		{
-
+			packetDataList->push(std::pair<MessageType, unsigned char*>(PlayerMove, reinterpret_cast<unsigned char*>(new std::tuple<float, float, float, float, float, float>(x, y, speedX, speedY, horizontal, vertical))));
 		}
 	}
 }

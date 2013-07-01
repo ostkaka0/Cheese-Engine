@@ -26,7 +26,7 @@ public:
 #ifndef _SERVER
     virtual void Draw(App& app, TextureContainer &tc);
 #endif
-    void KeyUpdate(bool Right, bool Down, bool Left, bool Up);
+    void KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList);
 	void setCameraDelay(float delay);
 	virtual std::string getTextureName();
 	virtual char getTextureId();
