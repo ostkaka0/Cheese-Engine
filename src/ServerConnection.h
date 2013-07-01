@@ -14,6 +14,7 @@ public:
 	ServerConnection(int port);
 	~ServerConnection(void);
 	std::queue<std::pair<sf::Packet*, Client*>> packets;
+	void Broadcast(sf::Packet packet);
 private:
 	long int maxClients;
 	virtual void Run();

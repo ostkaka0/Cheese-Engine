@@ -26,6 +26,8 @@ PlayState::PlayState(App& app)
 	camera = new Camera(32);
 	currentWorld = new World();
 	blockMenu = new InGameUI(tC, *currentWorld);
+	connection = new Connection(5001, sf::IPAddress::GetLocalAddress());
+	connection->Launch();
 
 	app.SetView(*camera);
 	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
@@ -60,6 +62,7 @@ GameState *PlayState::Update(App& app)
 	currentWorld->Update(app, tC);
 	camera->Update(app);
 	blockMenu->Update(app, tC, *currentWorld);
+	ProcessPackets();
 	return this;
 }
 
@@ -67,5 +70,89 @@ void PlayState::Draw(App& app)
 {
 	currentWorld->Draw(app, tC);
 	blockMenu->Draw(app, tC, *currentWorld);
+}
+
+void PlayState::ProcessPackets(void)
+{
+	connection->globalMutex.Lock();
+	std::queue<sf::Packet*> packets = connection->packets;
+	connection->packets = std::queue<sf::Packet*>();
+	connection->globalMutex.Unlock();
+
+	while(packets.size() > 0)
+	{
+		sf::Packet* packet = packets.front();
+		//Now process packets
+		sf::Int16 packetType;
+		*packet >> packetType;
+
+		switch(packetType)
+		{
+		case ClientID:
+			{
+				int ID;
+				*packet >> ID;
+				connection->client->ID = ID;
+				std::cout << "My ID is now " << ID << std::endl;
+
+				sf::Packet send;
+				sf::Int16 packetType = PlayerJoinLeft;
+				sf::Int16 type = 0;
+				float speedX = 0;
+				float speedY = 0;
+				send << packetType << type << speedX << speedY;
+				connection->client->socket.Send(send);
+				std::cout << "Sent PlayerJoinLeft" << std::endl;
+			}
+			break;
+		case PingMessage: //measure ping between sent 1 and received 1 (type)
+			{
+				/////////////////////////////////////
+			}
+			break;
+		case KickMessage: //server kicks client (type, string message)
+
+			break;
+		case PlayerJoinLeft:
+			std::cout << "Got PlayerJoinLeft" << std::endl;
+			sf::Int16 type;
+			float xPos;
+			float yPos;
+			int ID;
+			*packet >>  type >> xPos >> yPos >> ID;
+			if(type == 0)
+			{
+				Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				currentWorld->AddPlayer(ID, temp);
+				if(ID == connection->client->ID)
+				{
+					std::cout << "Camera set" << std::endl;
+					camera->setCameraAt(*temp);
+				}
+			}
+			else if(type == 1)
+				currentWorld->RemovePlayer(ID);
+			break;
+		case PlayerMove:
+			{
+				float xPos;
+				float yPos;
+				float speedX;
+				float speedY;
+				float angle;
+				*packet >> xPos >> yPos >> speedX >> speedY >> angle;
+				//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				//temp->setSpeedX(speedX);
+				//temp->setSpeedY(speedY);
+				//temp->setAngle(angle);
+				//currentWorld->SetPlayer(client->ID, temp);
+				std::cout << "Moved player! :D" << std::endl;
+			}
+			break;
+			std::cout << packetType << std::endl;
+		}
+		delete packet;
+		packets.pop();
+	}
 }
 #endif

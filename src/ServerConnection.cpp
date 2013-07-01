@@ -65,6 +65,9 @@ void ServerConnection::Accept()
 				client->socket.SetBlocking(false);
 				client->ID = i;
 				clients.insert(std::pair<int, Client*>(i, client));
+				sf::Packet packet;
+				packet << ClientID << i;
+				client->socket.Send(packet); 
 				std::cout << client->IP << " connected on socket " << i << std::endl;
 				if(i >= maxClients-1)
 				{
@@ -136,5 +139,13 @@ void ServerConnection::KickClient(int ID, std::string reason)
 		client->second->socket.Close();
 		clients.erase(ID);
 		std::cout << "Kicked client " << ID << " - " << reason << std::endl;
+	}
+}
+
+void ServerConnection::Broadcast(sf::Packet packet)
+{
+	for(auto it = clients.begin(); it != clients.end(); it++)
+	{
+		it->second->socket.Send(packet);
 	}
 }

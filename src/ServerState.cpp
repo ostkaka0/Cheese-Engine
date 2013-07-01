@@ -65,15 +65,23 @@ void ServerState::ProcessPackets(void)
 
 			break;
 		case PlayerJoinLeft:
-			sf::Int16 type;
-			float xPos;
-			float yPos;
-			*packet >>  type >> xPos >> yPos;
-			if(type == 0)
-				currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
-			else if(type == 1)
-				currentWorld->RemovePlayer(client->ID);
-			break;
+			{
+				std::cout << "Received PlayerJoinLeft" << std::endl;
+				sf::Int16 type;
+				float xPos;
+				float yPos;
+				*packet >>  type >> xPos >> yPos;
+				if(type == 0)
+					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+				else if(type == 1)
+					currentWorld->RemovePlayer(client->ID);
+
+				sf::Packet send;
+				sf::Int16 packetType = PlayerJoinLeft;
+				send << PlayerJoinLeft << type << xPos << yPos << client->ID;
+				sC->Broadcast(send);
+				break;
+			}
 		case PlayerMove:
 			{
 				float xPos;

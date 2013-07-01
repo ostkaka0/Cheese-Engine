@@ -3,6 +3,7 @@
 #include "App.h"
 #include "gamestate.h"
 #include "TextureContainer.h"
+#include "Connection.h"
 #include <SFML\Graphics.hpp>
 
 class World;
@@ -14,6 +15,8 @@ class PlayState : public GameState
 	TextureContainer tC;
 	Camera *camera;
 	InGameUI *blockMenu;
+	Connection *connection;
+	void ProcessPackets();
 public:
 	PlayState(App& app);
 	~PlayState();
