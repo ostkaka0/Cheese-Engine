@@ -22,7 +22,7 @@ private:
     std::string name;
 public:
     Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name);
-	virtual std::vector<unsigned char*>* Update(App& app, World &world);
+	void Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList);
 #ifndef _SERVER
     virtual void Draw(App& app, TextureContainer &tc);
 #endif

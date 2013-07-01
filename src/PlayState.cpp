@@ -122,7 +122,7 @@ void PlayState::ProcessPackets(void)
 			*packet >>  type >> xPos >> yPos >> ID;
 			if(type == 0)
 			{
-				Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
 				currentWorld->AddPlayer(ID, temp);
 				if(ID == connection->client->ID)
 				{

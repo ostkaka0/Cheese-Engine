@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include <deque>
+#include <queue>
 #include "App.h"
 
 class Entity;
@@ -12,6 +13,8 @@ class Player;
 class Block;
 class Chunk;
 class TextureContainer;
+
+enum MessageType;
 
 #define ChunkWidthHeight 256
 
@@ -36,13 +39,13 @@ private:
 	std::vector<Entity*> entityList;
 	std::map<short, Player*> playerList;
 	std::map<std::pair<short,short>,Block*> BlockMap;
-	std::vector<unsigned char*>* packetDataList;
+	std::queue<std::pair<MessageType, unsigned char*>>* packetDataList;
 public:
 	World();
 #ifndef _SERVER
 	void Draw(App& app, TextureContainer& tC);
 #endif
-	std::vector<unsigned char*>* Update(App& app, TextureContainer& tC);
+	std::queue<std::pair<MessageType, unsigned char*>>* Update(App& app, TextureContainer& tC);
 	void RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value);
 	void setBlock(long x, long y, long layer, short id);
 	void setBlockAndMetadata(long x, long y, long layer, short id, unsigned short metadata);

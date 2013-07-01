@@ -84,17 +84,22 @@ void ServerState::ProcessPackets(void)
 			}
 		case PlayerMove:
 			{
+				short id;
 				float xPos;
 				float yPos;
 				float speedX;
 				float speedY;
 				float angle;
-				*packet >> xPos >> yPos >> speedX >> speedY >> angle;
-				Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
-				temp->setSpeedX(speedX);
-				temp->setSpeedY(speedY);
-				temp->setAngle(angle);
-				currentWorld->SetPlayer(client->ID, temp);
+				float horizontal;
+				float vertical;
+				*packet >> id >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
+				Player* p = currentWorld->GetPlayer(id);
+				p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
+				//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
+				//temp->setSpeedX(speedX);
+				//temp->setSpeedY(speedY);
+				//temp->setAngle(angle);
+				//currentWorld->SetPlayer(client->ID, temp);
 				std::cout << "Moved player! :D" << std::endl;
 			}
 			break;

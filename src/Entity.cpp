@@ -23,7 +23,7 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 	this->spriteIndex = spriteIndex;
 }
 
-std::vector<unsigned char*>* Entity::Update(App& app, World &world)
+void Entity::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
 {
 	CheckCollision(app, world);
 
@@ -34,11 +34,9 @@ std::vector<unsigned char*>* Entity::Update(App& app, World &world)
 
 	speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
     speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
-
-	return nullptr;
 }
 
-void Entity::CheckCollision(App& app, World &world)
+void Entity::CheckCollision(App& app, World* world)
 {
 	/*if (world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
 		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
@@ -125,7 +123,7 @@ void Entity::CheckCollision(App& app, World &world)
 	}*/
 }
 
-void Entity::Collision(World &world)
+void Entity::Collision(World* world)
 {
 
 }
@@ -187,5 +185,3 @@ float Entity::getY() { return y; }
 sf::Vector2f Entity::getSize() { return sf::Vector2f(sizeX, sizeY); }
 void Entity::setAngle(float angle) {this->angle = angle; }
 float Entity::getAngle() { return angle;  }
-void Entity::setSpeedX(float speedX){ this->speedX = speedX; }
-void Entity::setSpeedY(float speedY){ this->speedY = speedY; }

@@ -59,20 +59,20 @@ void World::Draw(App& app, TextureContainer& tC)
 }
 #endif
 
-std::vector<unsigned char*>* World::Update(App& app, TextureContainer& tC)
+std::queue<std::pair<MessageType, unsigned char*>>* World::Update(App& app, TextureContainer& tC)
 {
 	for (Entity* entity : entityList)
 	{
-		std::vector<unsigned char*>* tempPackets = entity->Update(app, *this);
-		packetDataList->reserve(tempPackets->size());
-		packetDataList->insert(packetDataList->end(), tempPackets->begin(), tempPackets->end());
+		entity->Update(app, this, packetDataList);
 	}
 
 	for(std::pair<short, Player*> pair : playerList)
 	{
-		pair.second->Update(app, *this);
+		pair.second->Update(app, this, packetDataList);
 	}	
-	return nullptr;
+
+	return packetDataList;
+	packetDataList = new std::queue<std::pair<MessageType, unsigned char*>>();
 }
 
 void World::RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value)

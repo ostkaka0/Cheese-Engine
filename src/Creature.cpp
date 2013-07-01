@@ -9,10 +9,21 @@ Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, floa
     vertical = 0;
 }
 
-std::vector<unsigned char*>* Creature::Update(App& app, World* world)
+void Creature::Update(App& app, World* world, std::queue<std::pair<MessageType, unsigned char*>>* packetDataList)
 {
     speedX += horizontal * app.GetFrameTime();
     speedY += vertical * app.GetFrameTime();
 
-	return Entity::Update(app, *world);
+	Entity::Update(app, world, packetDataList);
+}
+
+void Creature::CreatureMove(float x, float y, float speedX, float speedY, float angle, float horizontal, float vertical)
+{
+	this->x = x;
+	this->y = y;
+	this->speedX = speedX;
+	this->speedY = speedY;
+	this->angle = angle;
+	this->horizontal = horizontal;
+	this->vertical = vertical;
 }
