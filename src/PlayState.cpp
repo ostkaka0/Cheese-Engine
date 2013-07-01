@@ -91,57 +91,71 @@ void PlayState::ProcessPackets(void)
 	{
 		sf::Packet* packet = packets.front();
 		//Now process packets
-		sf::Int16 packetType;
-		*packet >> packetType;
+		sf::Uint16 packetType;
+		sf::Uint16 wtf;
+		if(!(*packet >> packetType))
+			std::cout << "ERROR: Client could not extract data" << std::endl;
+		std::cout << "Client got packet " << packetType << " wtf?: " << wtf << std::endl;
 
 		switch(packetType)
 		{
 		case ClientID:
 			{
-				int ID;
-				*packet >> ID;
+				sf::Uint16 ID;
+				if(!(*packet >> ID))
+					std::cout << "ERROR: Client could not extract data" << std::endl;
 				connection->client->ID = ID;
 				std::cout << "My ID is now " << ID << std::endl;
-
 				sf::Packet send;
-				sf::Int16 packetType = PlayerJoinLeft;
-				sf::Int16 type = 0;
-				float speedX = 0;
-				float speedY = 0;
-				send << packetType << type << speedX << speedY;
+				sf::Uint16 packetType = PlayerJoinLeft;
+				sf::Uint16 type = 0;
+				float xPos = 0;
+				float yPos = 0;
+				send << packetType << type << xPos << yPos;
 				connection->client->socket.Send(send);
-				std::cout << "Sent PlayerJoinLeft" << std::endl;
+				std::cout << "Client sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << connection->client->ID << std::endl;
 			}
 			break;
 		case PingMessage: //measure ping between sent 1 and received 1 (type)
 			{
-				/////////////////////////////////////
+				if (packetType == 1)
+				{
+					sf::Packet packet;
+					sf::Uint16 type = 1;
+					packet << type;
+					connection->client->socket.Send(packet);
+
+				}
 			}
 			break;
 		case KickMessage: //server kicks client (type, string message)
 
 			break;
 		case PlayerJoinLeft:
-			std::cout << "Got PlayerJoinLeft" << std::endl;
-			sf::Int16 type;
-			float xPos;
-			float yPos;
-			int clientID;
-			*packet >>  type >> xPos >> yPos >> clientID;
-			if(type == 0)
 			{
-				Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
-				if(clientID == connection->client->ID)
+				sf::Uint16 type;
+				sf::Uint16 packetType;
+				float xPos;
+				float yPos;
+				sf::Uint16 clientID;
+				if(!(*packet >> type >> xPos >> yPos >> clientID))
+					std::cout << "ERROR: Client could not extract data" << std::endl;
+				std::cout << "Client got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientID << std::endl;
+				if(type == 0)
 				{
-					temp->isClientControlling = true;
-					std::cout << "Camera set" << std::endl;
-					camera->setCameraAt(*temp);
+					Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
+					if(clientID == connection->client->ID)
+					{
+						temp->isClientControlling = true;
+						std::cout << "Camera set" << std::endl;
+						camera->setCameraAt(*temp);
+					}
+					currentWorld->AddPlayer(clientID, temp);
 				}
-				currentWorld->AddPlayer(clientID, temp);
+				else if(type == 1)
+					currentWorld->RemovePlayer(clientID);
+				break;
 			}
-			else if(type == 1)
-				currentWorld->RemovePlayer(clientID);
-			break;
 		case PlayerMove:
 			{
 				float xPos;

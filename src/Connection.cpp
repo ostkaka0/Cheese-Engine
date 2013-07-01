@@ -51,17 +51,6 @@ void Connection::Receive()
 			globalMutex.Lock();
 			packets.push(received);
 			globalMutex.Unlock();
-			sf::Int16 packetType = 0;
-
-			*received >> packetType;
-			if (packetType == 1)
-			{
-				sf::Packet packet;
-				sf::Int16 type = 1;
-				packet << type;
-				client->socket.Send(packet);
-
-			}
 		}
 		else if(status == sf::Socket::Disconnected)
 		{
