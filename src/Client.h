@@ -10,10 +10,10 @@ public:
 	//Client(void);
 	//~Client(void);
 	sf::SocketTCP socket;
-	sf::Int16 ID;
+	sf::Uint16 ID;
 	std::string name;
 	sf::IPAddress IP;
-	sf::Int16 ping;
+	sf::Uint16 ping;
 	sf::Clock pingClock;
 };
 

@@ -43,7 +43,7 @@ void ServerConnection::PingClients(void)
 		if(clients.find(i) != clients.end())
 		{
 			sf::Packet send;
-			sf::Int16 ping = 1;
+			sf::Uint16 ping = 1;
 			send << ping;
 			client->socket.Send(send);
 			client->pingClock.Reset();
@@ -66,7 +66,8 @@ void ServerConnection::Accept()
 				client->ID = i;
 				clients.insert(std::pair<int, Client*>(i, client));
 				sf::Packet packet;
-				packet << ClientID << i;
+				sf::Uint16 clientid = ClientID;
+				packet << clientid << i;
 				client->socket.Send(packet); 
 				std::cout << client->IP << " connected on socket " << i << std::endl;
 				if(i >= maxClients-1)
@@ -144,8 +145,9 @@ void ServerConnection::KickClient(int ID, std::string reason)
 
 void ServerConnection::Broadcast(sf::Packet packet)
 {
-	for(auto it = clients.begin(); it != clients.end(); it++)
+	std::cout << packet << std::endl;
+	for(std::pair<int, Client*> pair : clients)
 	{
-		it->second->socket.Send(packet);
+		pair.second->socket.Send(packet);
 	}
 }
