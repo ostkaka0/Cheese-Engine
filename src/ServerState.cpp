@@ -66,7 +66,7 @@ void ServerState::ProcessPackets(void)
 				float ping = client->pingClock.GetElapsedTime();
 				client->pingClock.Reset();
 				client->ping = ping;
-				std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
+				//std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
 			break;
 		case KickMessage: //server kicks client (type, string message)
@@ -75,29 +75,44 @@ void ServerState::ProcessPackets(void)
 		case PlayerJoinLeft:
 			{
 				sf::Uint16 type;
-				float xPos;///aspfkaposgkjASGJASPOGKASPGagds
+				float xPos;
 				float yPos;
-				if(!(*packet >> type >> xPos >> yPos))
-					std::cout << "ERROR: Server could not extract data" << std::endl;
-				std::cout << "Server got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << client->ID << std::endl;
-				if(type == 0)
-					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
-				else if(type == 1)
-					currentWorld->RemovePlayer(client->ID);
+				*packet >> type >> xPos >> yPos;
+
+				//std::cout << "Server got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << client->ID << std::endl;
 
 				sf::Packet send;
 				sf::Uint16 packetTypeTemp = PlayerJoinLeft;
 				sf::Uint16 clientidtemp = client->ID;
 
-				if(!(send << packetType << type << xPos << yPos << clientidtemp))
-					std::cout << "ERROR: Server could not import data" << std::endl;
+				if(type == 0) //Player has joined
+				{
+					// Send the init message
+					send << (sf::Uint16) InitMessage;
+					for(std::pair<int, Client*> pair : sC->clients)
+					{
+						Player* temp = currentWorld->GetPlayer(pair.first);
+						if(temp != nullptr)
+							send << (sf::Int16)pair.first << (sf::Int16)temp->getPosition().x << (sf::Int16)temp->getPosition().y << (sf::Int16)temp->getSize().x << (sf::Int16)temp->getSize().y;
+					}
+					client->socket.Send(send);
+					send.Clear();
+
+					//Add the player to the server world
+					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+				}
+				else if(type == 1) //Player has left
+				{
+					currentWorld->RemovePlayer(client->ID);
+				}
+
+				send << packetType << type << xPos << yPos << clientidtemp;
 				sC->Broadcast(send);
-				std::cout << "Server sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientidtemp << std::endl;
+				//std::cout << "Server sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientidtemp << std::endl;
 				break;
 			}
 		case PlayerMove:
 			{
-				short id;
 				float xPos;
 				float yPos;
 				float speedX;
@@ -105,17 +120,18 @@ void ServerState::ProcessPackets(void)
 				float angle;
 				float horizontal;
 				float vertical;
-				*packet >> id >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
-				Player* p = currentWorld->GetPlayer(id);
+				*packet >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
+				Player* p = currentWorld->GetPlayer(client->ID);
 				if (p != nullptr)
 				{
+					//Broadcast playermove data
+					sf::Packet packet;
+					sf::Int16 clientid = client->ID;
+					packet << (sf::Uint16)PlayerMove << clientid << xPos << yPos << speedX << speedY << angle << horizontal << vertical;
+					sC->Broadcast(packet);
+
+					//Move player in server world
 					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
-					//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
-					//temp->setSpeedX(speedX);
-					//temp->setSpeedY(speedY);
-					//temp->setAngle(angle);
-					//currentWorld->SetPlayer(client->ID, temp);
-					std::cout << "Moved player! :D" << std::endl;
 				}
 			}
 			break;

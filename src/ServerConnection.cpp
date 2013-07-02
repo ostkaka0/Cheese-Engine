@@ -69,6 +69,7 @@ void ServerConnection::Accept()
 				sf::Uint16 clientid = ClientID;
 				packet << clientid << i;
 				client->socket.Send(packet); 
+				
 				std::cout << client->IP << " connected on socket " << i << std::endl;
 				if(i >= maxClients-1)
 				{
@@ -145,7 +146,7 @@ void ServerConnection::KickClient(int ID, std::string reason)
 
 void ServerConnection::Broadcast(sf::Packet packet)
 {
-	std::cout << packet << std::endl;
+	//std::cout << packet << std::endl;
 	for(std::pair<int, Client*> pair : clients)
 	{
 		pair.second->socket.Send(packet);

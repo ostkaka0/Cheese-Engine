@@ -99,6 +99,24 @@ void PlayState::ProcessPackets(void)
 
 		switch(packetType)
 		{
+		case InitMessage:
+			{
+				while(!packet->EndOfPacket())
+				{
+					sf::Int16 ID;
+					float xPos;
+					float yPos;
+					sf::Int16 sizeX;
+					sf::Int16 sizeY;
+
+					if(!(*packet >> ID  >> xPos >> yPos >> sizeX >> sizeY))
+						std::cout << "ERROR: Client could not extract data" << std::endl;
+
+					Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
+					currentWorld->AddPlayer(ID, player);
+				}
+			}
+			break;
 		case ClientID:
 			{
 				sf::Uint16 ID;
@@ -157,12 +175,15 @@ void PlayState::ProcessPackets(void)
 					currentWorld->AddPlayer(clientID, temp);
 				}
 				else if(type == 1)
+				{
 					currentWorld->RemovePlayer(clientID);
+				}
 				break;
 			}
 		case PlayerMove:
 			{
-				short id;
+				//std::cout << "Client got playermove" << std::endl;
+				sf::Int16 ID;
 				float xPos;
 				float yPos;
 				float speedX;
@@ -170,9 +191,9 @@ void PlayState::ProcessPackets(void)
 				float angle;
 				float horizontal;
 				float vertical;
-				*packet >> id >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
-				Player* p = currentWorld->GetPlayer(id);
-				if (p != nullptr)
+				*packet >> ID  >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
+				Player* p = currentWorld->GetPlayer(ID);
+				if (p != nullptr && ID != connection->client->ID)
 				{
 					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
 					//Player* temp = new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp");
@@ -180,7 +201,7 @@ void PlayState::ProcessPackets(void)
 					//temp->setSpeedY(speedY);
 					//temp->setAngle(angle);
 					//currentWorld->SetPlayer(client->ID, temp);
-					std::cout << "Moved player! :D" << std::endl;
+					//std::cout << "Moved player! :D" << std::endl;
 				}
 			}
 			break;

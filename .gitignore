@@ -40,6 +40,9 @@ local.properties
 *.suo
 *.user
 *.sln.docstates
+*.log
+*.tlog
+*.lastbuildstate
 
 # Build results
 [Dd]ebug/

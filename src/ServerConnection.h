@@ -15,15 +15,15 @@ public:
 	~ServerConnection(void);
 	std::queue<std::pair<sf::Packet*, Client*>> packets;
 	void Broadcast(sf::Packet packet);
-private:
 	long int maxClients;
+	std::map<int, Client*> clients;
+private:
 	virtual void Run();
 	void KickClient(int ID, std::string reason);
 	void PingClients();
 	void Accept();
 	void Receive();
 	sf::SocketTCP s;
-	std::map<int, Client*> clients;
 	sf::IPAddress localIP;
 	sf::IPAddress publicIP;
 	sf::Clock pingTimeout;
