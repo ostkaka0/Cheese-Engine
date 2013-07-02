@@ -8,6 +8,9 @@
 #include "ServerState.h"
 
 #endif
+
+int _argc;
+char** _argv;
 //using namespace sf;
 
 /*#ifdef _SERVER
@@ -16,8 +19,10 @@
 	#define _APP app
 #endif*/
 
-int main()
+int main(int argc, char** argv)
 {
+	_argc = argc;
+	_argv = argv;
 
 #ifndef _SERVER
     App app(sf::VideoMode(768, 512), "Cheese Multiplayer - Alpha");

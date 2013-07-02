@@ -20,14 +20,28 @@ namespace sf
 	class RenderWindow;
 }
 
-
+extern int _argc;
+extern char** _argv;
 
 PlayState::PlayState(App& app)
 {
+	char* str_ip = "127.0.0.1";
+
+	if (_argc >= 2)
+	{
+		str_ip = _argv[1];
+	}
+	std::cout << "Connectiong to " << str_ip << " ...\n";
+
+	sf::IPAddress ip(str_ip);//std::string ip;
+	int port;
+
+
+
 	camera = new Camera(32);
 	currentWorld = new World();
 	blockMenu = new InGameUI(tC, *currentWorld);
-	connection = new Connection(5001, sf::IPAddress::GetLocalAddress());
+	connection = new Connection(5001, ip);
 	connection->Launch();
 
 	app.SetView(*camera);
