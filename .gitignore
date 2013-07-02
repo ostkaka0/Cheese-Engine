@@ -43,6 +43,7 @@ local.properties
 *.log
 *.tlog
 *.lastbuildstate
+*.exe
 
 # Build results
 [Dd]ebug/
