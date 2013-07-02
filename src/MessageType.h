@@ -12,5 +12,5 @@ enum MessageType
 	EntityMove,
 	EntityUpdate,
 	BlockPlace,
-	BlockChange
+	BlockMetadataChange
 };

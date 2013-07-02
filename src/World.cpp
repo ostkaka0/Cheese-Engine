@@ -6,6 +6,7 @@
 #include "BlockSolid.h"
 #include "BlockBackground.h"
 #include "Player.h"
+#include "MessageType.h"
 #include <deque>
 
 #define getChunkMatrixIndexX(x) (int)abs(x>>4 + chunkMatrix.second)
@@ -107,12 +108,41 @@ chunkMatrix.at(x).first.at(y)->Draw(x-(int)(GetCamera(app).GetCenter().x-GetCame
 //}
 //#endif
 
-void World::setBlock(long x, long y, long layer, short id)
+void World::setBlock(long x, long y, long layer, unsigned short id)
 {
 	setBlockAndMetadata(x, y, layer, id, 0);
 }
 
-void World::setBlockAndMetadata(long x, long y, long layer, short id, unsigned short metadata)
+void World::setBlockAndMetadata(long x, long y, long layer,  unsigned short id, unsigned short metadata)
+{
+	sf::Packet packet;
+	packet << (sf::Int16)BlockPlace << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)id << (sf::Uint16)metadata;
+
+	packetDataList->push(packet);
+	setBlockAndMetadataClientOnly(x, y, layer, id, metadata);
+}
+
+void World::setBlockMetadata(long x, long y, long layer, unsigned short metadata)
+{
+	long xx = (x * 0.0625) + chunkMatrix.second;
+	if (isColumnInsideChunkMatrix(xx))
+	{
+		auto &it = chunkMatrix.first.at(xx);
+		long yy = (y * 0.0625) + it.second;
+		if (isChunkInsideChunkColumn(yy,it.first))
+		{
+			Chunk *c = it.first.at(yy);
+			c->setMetadata(layer, x, y, metadata);
+
+			sf::Packet packet;
+			packet << (sf::Int16)BlockMetadataChange << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)metadata;
+
+			packetDataList->push(packet);
+		}
+	}
+}
+
+void World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata)
 {
 	long xx = floor(x * 0.0625);
 
@@ -148,7 +178,7 @@ void World::setBlockAndMetadata(long x, long y, long layer, short id, unsigned s
 	}
 }
 
-void World::setBlockMetadata(long x, long y, long layer, unsigned short metadata)
+void World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
 {
 	long xx = (x * 0.0625) + chunkMatrix.second;
 	if (isColumnInsideChunkMatrix(xx))

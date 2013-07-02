@@ -48,9 +48,11 @@ public:
 #endif
 	std::queue<sf::Packet>* Update(App& app, TextureContainer& tC);
 	void RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value);
-	void setBlock(long x, long y, long layer, short id);
-	void setBlockAndMetadata(long x, long y, long layer, short id, unsigned short metadata);
+	void setBlock(long x, long y, long layer, unsigned short id);
+	void setBlockAndMetadata(long x, long y, long layer, unsigned short id, unsigned short metadata);
 	void setBlockMetadata(long x, long y, long layer, unsigned short metadata);
+	void setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata);
+	void setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata);
 	Block* getBlock(long x, long y, long layer);
 	void Expand(long x, long y, Chunk* chunk);
 	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
