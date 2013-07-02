@@ -54,6 +54,7 @@ public:
 	Block* getBlock(long x, long y, long layer);
 	void Expand(long x, long y, Chunk* chunk);
 	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
+	bool isBlockSolid(long x, long y);
 	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
 	std::map<unsigned short, std::function<Block*(unsigned short)>>& getBlockTypeMap();
 	int AddEntity(Entity*);

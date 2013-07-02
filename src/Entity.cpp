@@ -38,28 +38,31 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 void Entity::CheckCollision(App& app, World* world)
 {
-	/*if (world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
-		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
-		world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4) ||
-		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4))
+	if (speedX == 0 && speedY == 0)
+		return;
+
+	if (world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4))
 	{
 		speedX = 0;
 		Collision(world);
 	}
 
-	if (world.isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
+	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
 	{
 		speedY = 0;
 		Collision(world);
 	}
 
-	if (world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
-		world.isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
+	if (world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
 	{
 		if (abs(speedX) > abs(speedY))
 			speedX = 0;
@@ -68,13 +71,13 @@ void Entity::CheckCollision(App& app, World* world)
 
 		CheckCollision(app, world);
 		Collision(world);
-	}*/
+	}
 
 	/*bool solid[2][2] = {{
-		world.isBlockSolid((int)(x)>>4,(int)(y)>>4),
-		world.isBlockSolid((int)(x+15)>>4,(int)(y)>>4)},{
-		world.isBlockSolid((int)(x)>>4,(int)(y+16)>>4),
-		world.isBlockSolid((int)(x+15)>>4,(int)(y+16)>>4)}};
+		world->isBlockSolid((int)(x)>>4,(int)(y)>>4),
+		world->isBlockSolid((int)(x+15)>>4,(int)(y)>>4)},{
+		world->isBlockSolid((int)(x)>>4,(int)(y+16)>>4),
+		world->isBlockSolid((int)(x+15)>>4,(int)(y+16)>>4)}};
 
 	if (!solid[0][0] || !solid[1][0] || !solid[0][1] || !solid[1][1])
 	{
@@ -128,7 +131,7 @@ void Entity::Collision(World* world)
 
 }
 
-void Entity::FixateX()
+/*void Entity::FixateX()
 {
 	if (speedX > 0)
 	{
@@ -152,7 +155,7 @@ void Entity::FixateY()
 		y = (int)(y+12)>>4<<4;
 	}
 	speedY = 0;
-}
+}*/
 
 #ifndef _SERVER
 void Entity::Draw(App& app, TextureContainer &tc)

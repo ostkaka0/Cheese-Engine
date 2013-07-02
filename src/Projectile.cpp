@@ -27,9 +27,11 @@ void Projectile::Update(App& app, World* world, std::queue<sf::Packet>* packetDa
 	Entity::Update(app, world, packetDataList);
 }
 
-void Projectile::Collision(World &world)
+void Projectile::Collision(World* world)
 {
 	//world.setBlock(2, (int)x<<4-16, (int)y<<4,1);
+	speedX = 0;
+	speedY = 0;
 }
 
 std::string Projectile::getTextureName() { return "arrow.png"; }
