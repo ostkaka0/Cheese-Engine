@@ -1,7 +1,8 @@
 #include "ServerConnection.h"
 
-ServerConnection::ServerConnection(int port)
+ServerConnection::ServerConnection(int port, World* world)
 {
+	currentWorld = world;
 	maxClients = 1024;
 	s.SetBlocking(false);
 	pingTimeout.Reset();
@@ -20,7 +21,7 @@ ServerConnection::~ServerConnection(void)
 
 void ServerConnection::Run(void)
 {
-	while(true)
+	//while(true)
 	{
 		Accept();
 		Receive();
@@ -31,7 +32,7 @@ void ServerConnection::Run(void)
 			pingTimeout.Reset();
 			PingClients();
 		}
-		Sleep(10);
+		//Sleep(10);
 	}
 }
 
@@ -140,6 +141,7 @@ void ServerConnection::KickClient(int ID, std::string reason)
 		//Sleep(100);
 		client->second->socket.Close();
 		clients.erase(ID);
+		currentWorld->RemovePlayer(ID);
 		std::cout << "Kicked client " << ID << " - " << reason << std::endl;
 	}
 }

@@ -15,8 +15,8 @@
 ServerState::ServerState(App& app)
 {
 	currentWorld = new World();
-	sC = new ServerConnection(5001);
-	sC->Launch();
+	sC = new ServerConnection(5001, currentWorld);
+	//sC->Launch();
 	//unsigned short i = 1;
 
 	//currentWorld->RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i++));
@@ -38,6 +38,7 @@ GameState *ServerState::Update(App& app)
 		packetDataList->pop();
 	}
 	//delete packetDataList;
+	sC->Run();
 	ProcessPackets();
 	return this;
 }
@@ -66,6 +67,10 @@ void ServerState::ProcessPackets(void)
 				float ping = client->pingClock.GetElapsedTime();
 				client->pingClock.Reset();
 				client->ping = ping;
+				if(ping > 5)
+				{
+					sC->KickClient(client->ID, "Too high ping");
+				}
 				//std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
 			break;
