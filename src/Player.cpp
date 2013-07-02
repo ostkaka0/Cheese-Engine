@@ -10,7 +10,7 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 {
 	name = Name;
 	cameraDelay = 0;
-	right = false;
+	right = true;
 	down = false;
 	left = false;
 	up = false;
@@ -28,6 +28,7 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 			app.GetInput().IsKeyDown(sf::Key::A),
 			app.GetInput().IsKeyDown(sf::Key::W), packetDataList);
 
+
 		if(!lmb && (lmb=app.GetInput().IsMouseButtonDown(sf::Mouse::Left)))
 		{
 			//double angle = atan2((GetCamera(app).GetCenter().y + app.GetInput().GetMouseY() - 256) - (GetCamera(app).getEntityPosition().y+8), (GetCamera(app).GetCenter().x + app.GetInput().GetMouseX() - 384) - (GetCamera(app).getEntityPosition().x+8)) * 180 / 3.1415;
@@ -43,6 +44,8 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 			if (angle < 90 || angle > 270)
 				deltaSpeedY *= -1;
+
+
 
 			
 			//Projectile *projectile = new Projectile(GetCamera(app).getEntityPosition().x.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
@@ -95,6 +98,8 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<sf:
 		down = Down;
 		left = Left;
 		up = Up;
+
+
 
 		if (isClientControlling)
 		{

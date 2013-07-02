@@ -43,7 +43,7 @@ public:
 #ifndef _SERVER
     virtual void Draw(App& app, TextureContainer &tc);
 #endif
-	virtual void CheckCollision(App& app, World* world);
+	virtual bool CheckCollision(App& app, World* world, float speedX, float speedY);
 	virtual void Collision(World* world);
 	virtual std::string getTextureName()=0;
 	virtual char getTextureId()=0;
