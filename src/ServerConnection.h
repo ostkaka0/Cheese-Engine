@@ -6,20 +6,22 @@
 #include <thread>
 #include <queue>
 #include "Client.h"
+#include "World.h"
 
 class ServerConnection : public sf::Thread
 {
 public:
-	sf::Mutex globalMutex;
-	ServerConnection(int port);
+	ServerConnection(int port, World* world);
 	~ServerConnection(void);
-	std::queue<std::pair<sf::Packet*, Client*>> packets;
 	void Broadcast(sf::Packet packet);
+	void KickClient(int ID, std::string reason);
+	virtual void Run();
+
+	sf::Mutex globalMutex;
+	std::queue<std::pair<sf::Packet*, Client*>> packets;
 	long int maxClients;
 	std::map<int, Client*> clients;
 private:
-	virtual void Run();
-	void KickClient(int ID, std::string reason);
 	void PingClients();
 	void Accept();
 	void Receive();
@@ -27,5 +29,6 @@ private:
 	sf::IPAddress localIP;
 	sf::IPAddress publicIP;
 	sf::Clock pingTimeout;
+	World* currentWorld;
 };
 
