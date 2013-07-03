@@ -70,7 +70,7 @@ void ServerConnection::Accept()
 				sf::Uint16 clientid = ClientID;
 				packet << clientid << i;
 				client->socket.Send(packet); 
-				
+
 				std::cout << client->IP << " connected on socket " << i << std::endl;
 				if(i >= maxClients-1)
 				{
@@ -135,14 +135,19 @@ void ServerConnection::KickClient(int ID, std::string reason)
 	if(client != clients.end())
 	{
 		const char *kickmsg = reason.c_str();
+		sf::IPAddress ip = client->second->IP;
 		sf::Packet send;
 		send << 2 << kickmsg;
 		client->second->socket.Send(send);
-		//Sleep(100);
 		client->second->socket.Close();
 		clients.erase(ID);
 		currentWorld->RemovePlayer(ID);
 		std::cout << "Kicked client " << ID << " - " << reason << std::endl;
+
+		send.Clear();
+		send << (sf::Uint16)PlayerJoinLeft << (sf::Uint16)1 << (sf::Uint16)ID;
+		Broadcast(send);
+		//std::cout << ip << " has left" << std::endl;
 	}
 }
 

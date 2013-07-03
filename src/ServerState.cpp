@@ -54,6 +54,7 @@ void ServerState::ProcessPackets(void)
 	{
 		auto data = packets.front();
 		sf::Packet* packet = data.first;
+		sf::Packet* originalPacket = new sf::Packet(*packet);
 		Client* client = data.second;
 		//Now process packets
 		sf::Uint16 packetType;
@@ -67,10 +68,6 @@ void ServerState::ProcessPackets(void)
 				float ping = client->pingClock.GetElapsedTime();
 				client->pingClock.Reset();
 				client->ping = ping;
-				if(ping > 5)
-				{
-					sC->KickClient(client->ID, "Too high ping");
-				}
 				//std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
 			break;
@@ -82,7 +79,6 @@ void ServerState::ProcessPackets(void)
 				sf::Uint16 type;
 				float xPos;
 				float yPos;
-				*packet >> type >> xPos >> yPos;
 
 				//std::cout << "Server got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << client->ID << std::endl;
 
@@ -90,8 +86,15 @@ void ServerState::ProcessPackets(void)
 				sf::Uint16 packetTypeTemp = PlayerJoinLeft;
 				sf::Uint16 clientidtemp = client->ID;
 
+				*packet >> type;
+
 				if(type == 0) //Player has joined
 				{
+					*packet >> xPos >> yPos;
+
+					//Add the player to the server world
+					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+
 					// Send the init message
 					send << (sf::Uint16) InitMessage;
 					for(std::pair<int, Client*> pair : sC->clients)
@@ -101,17 +104,19 @@ void ServerState::ProcessPackets(void)
 							send << (sf::Int16)pair.first << (sf::Int16)temp->getPosition().x << (sf::Int16)temp->getPosition().y << (sf::Int16)temp->getSize().x << (sf::Int16)temp->getSize().y;
 					}
 					client->socket.Send(send);
-					send.Clear();
 
-					//Add the player to the server world
-					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+					send.Clear();
+					send << packetType << type << xPos << yPos << clientidtemp;
+
 				}
-				else if(type == 1) //Player has left
+				/*else if(type == 1) //Player has left
 				{
 					currentWorld->RemovePlayer(client->ID);
-				}
+					send.Clear();
+					send << packetType << type << (sf::Uint16)client->ID;
+					std::cout << client->IP << " has left" << std::endl;
+				}*/
 
-				send << packetType << type << xPos << yPos << clientidtemp;
 				sC->Broadcast(send);
 				//std::cout << "Server sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientidtemp << std::endl;
 				break;
@@ -163,6 +168,7 @@ void ServerState::ProcessPackets(void)
 			break;
 		}
 		delete packet;
+		delete originalPacket;
 		packets.pop();
 	}
 }
