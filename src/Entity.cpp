@@ -36,7 +36,7 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 		double speed = sqrt(pow(speedX*app.GetFrameTime(),2)+pow(speedY*app.GetFrameTime(),2));
 
-		while(speedXModifier > 1 && speedYModifier > 1)
+		/*while(speedXModifier > 1 && speedYModifier > 1)
 		{
 			if (CheckCollision(app, world, (float)speedXNegativeFactor, (float)speedXNegativeFactor))
 				break;
@@ -66,13 +66,16 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 			y += speedYNegativeFactor;
 
 			speedYModifier -= 1;
-		}
+		}*/
 
-		if (!CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor))
+		//if (!CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor))
 		{
-			x += speedXModifier*speedXNegativeFactor;
-			y += speedYModifier*speedYNegativeFactor;
+			//x += speedXModifier*speedXNegativeFactor;
+			//y += speedYModifier*speedYNegativeFactor;
 		}
+		//else
+		{
+		CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor);
 
 		/*if (speedX != 0)
 			x += speedXModifier*speedXNegativeFactor;
@@ -81,11 +84,12 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 			y += speedYModifier*speedYNegativeFactor;*/
 
 
-		/*if (!CheckCollision(app, world, speedXModifier*(float)speedXNegativeFactor, 0) && CheckCollision(app, world, 0, speedXModifier*(float)speedXNegativeFactor))
-			x += speedXModifier*speedXNegativeFactor;
+			if (speedX != 0)
+				x += speedXModifier*speedXNegativeFactor;
 
-		if (!CheckCollision(app, world, 0, speedXModifier*(float)speedXNegativeFactor) && CheckCollision(app, world, speedXModifier*(float)speedXNegativeFactor, 0))
-			y += speedYModifier*speedYNegativeFactor;*/
+			if (speedY != 0)
+				y += speedYModifier*speedYNegativeFactor;
+		}
 
 		speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
 		speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
