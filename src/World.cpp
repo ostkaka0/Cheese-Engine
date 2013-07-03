@@ -169,20 +169,21 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			{
 				c = it.first.at(yy + it.second) = new Chunk();
 			}
-
-			Block* block = c->getBlock(layer, xxx, yyy);
-			if (block != nullptr)
+			else
 			{
-				if (block->getId() == id)
+				Block* block = c->getBlock(layer, xxx, yyy);
+				if (block != nullptr)
 				{
-					std::cout << "test";
-					return false;
+					if (block->getId() == id)
+					{
+						return false;
+					}
 				}
 			}
 
-			c->setBlock(layer, xxx, yyy, (id != 0 && *getBlockType(id) != nullptr) ? (*getBlockType(id))(metadata) : nullptr);
+			//c->setBlock(layer, xxx, yyy, (id != 0 && *getBlockType(id) != nullptr) ? (*getBlockType(id))(metadata) : nullptr);
 			//c->setBlock(layer, xxx, yyy,( *getBlockType(id) != nullptr ? (*getBlockType(id))(metadata) : nullptr));
-			//c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
+			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
 			return true;
 		}
