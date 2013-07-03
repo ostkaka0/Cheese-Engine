@@ -140,6 +140,27 @@ void ServerState::ProcessPackets(void)
 				}
 			}
 			break;
+		case BlockPlace:
+			{
+				sf::Int32 xPos;
+				sf::Int32 yPos;
+				sf::Uint16 layer;
+				sf::Uint16 id;
+				sf::Uint16 metadata;
+				*packet >> xPos >> yPos >> layer >> id >> metadata;
+				currentWorld->setBlockAndMetadata(xPos, yPos, layer, id, metadata);
+			}
+			break;
+		case BlockMetadataChange:
+			{
+				sf::Int32 xPos;
+				sf::Int32 yPos;
+				sf::Uint16 layer;
+				sf::Uint16 metadata;
+				*packet >> xPos >> yPos >> layer >> metadata;
+				currentWorld->setBlockMetadata(xPos, yPos, layer, metadata);
+			}
+			break;
 		}
 		delete packet;
 		packets.pop();

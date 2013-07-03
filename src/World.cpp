@@ -24,13 +24,13 @@ World::World()
 
 	/*for (int x = 0; x < 30; x++)
 	{ 
-		chunkMatrix.first.push_back(ChunkColumnType(std::deque<Chunk*>(),0));
-		for (int y = 0; y < 30; y++)
-		{
-			Chunk* chunk = new Chunk();
-			chunk->setBlock(2, 1, 1, new  BlockSolid(1));//(*getBlockType(1))(0));
-			chunkMatrix.first[x].first.push_back(chunk);
-		}
+	chunkMatrix.first.push_back(ChunkColumnType(std::deque<Chunk*>(),0));
+	for (int y = 0; y < 30; y++)
+	{
+	Chunk* chunk = new Chunk();
+	chunk->setBlock(2, 1, 1, new  BlockSolid(1));//(*getBlockType(1))(0));
+	chunkMatrix.first[x].first.push_back(chunk);
+	}
 	}*/
 
 	packetDataList = new std::queue<sf::Packet>();
@@ -149,13 +149,13 @@ void World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 	unsigned short xxx = x&0xF;//(x < 0)? (abs(x+1)&0xF)^0xF : x&0XF;
 	unsigned short yyy = y&0xF;//(y < 0)? y&0XF : y&0XF;
 
-	std::cout << xx <<"?\n";
+	//std::cout << xx <<"?\n";
 	//if (!isColumnInsideChunkMatrix(xx+chunkMatrix.second))
 	{
 		Expand(xx, 0, nullptr);
 	}
 	{
-		std::cout << "NU?\n";
+		//std::cout << "NU?\n";
 		long yy = floor(y * 0.0625);
 
 		//if (!isChunkInsideChunkColumn(yy + it.second,it.first))
@@ -166,7 +166,7 @@ void World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 		auto &it = chunkMatrix.first.at(xx + chunkMatrix.second);
 
 		{
-			std::cout << xx << " " << yy << " " << xx+chunkMatrix.second << " " << yy+it.second << " s " << chunkMatrix.first.size() << " " << it.first.size() <<" JAHA?\n";
+			//std::cout << xx << " " << yy << " " << xx+chunkMatrix.second << " " << yy+it.second << " s " << chunkMatrix.first.size() << " " << it.first.size() <<" JAHA?\n";
 			Chunk* c = it.first.at(yy + it.second);
 			if (c == nullptr)
 			{
@@ -218,16 +218,16 @@ Block* World::getBlock(long x, long y, long layer)
 
 void World::Expand(long x, long y, Chunk* chunk)
 {
-	std::cout << sizeof(int);
+	//std::cout << sizeof(int);
 	long xx = x + chunkMatrix.second;
 	if (xx < 0)
 	{
 		for (long i = xx; i < 0; i++)
 		{
-			std::cout << "XD\n";
+			//std::cout << "XD\n";
 			chunkMatrix.first.push_front(ChunkColumnType(std::deque<Chunk*>(),0));
 			chunkMatrix.second++;
-			std::cout << "XD XD XD\n";
+			//std::cout << "XD XD XD\n";
 		}
 		xx = x + chunkMatrix.second;
 	}
