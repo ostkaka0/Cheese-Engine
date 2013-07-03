@@ -123,8 +123,8 @@ void PlayState::ProcessPackets(void)
 					sf::Int16 sizeX;
 					sf::Int16 sizeY;
 
-					if(!(*packet >> ID  >> xPos >> yPos >> sizeX >> sizeY))
-						std::cout << "ERROR: Client could not extract data" << std::endl;
+					if(!(*packet >> ID  >> xPos >> yPos >> sizeX >> sizeY)) {}
+						//std::cout << "ERROR: Client could not extract data" << std::endl;
 					else
 					{
 						Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");

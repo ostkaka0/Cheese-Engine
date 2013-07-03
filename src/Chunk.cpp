@@ -116,6 +116,6 @@ void Chunk::setMetadata(unsigned char layer, unsigned short x, unsigned short y,
 	blockList[x][y][layer].second = metadata;
 }
 
-Block* Chunk::getBlock(unsigned char layer, unsigned short x, unsigned short y) { return blockList[x][y][layer].first; }
+Block* Chunk::getBlock(unsigned char layer, unsigned short x, unsigned short y) { return blockList[x][y][layer].first != nullptr ? blockList[x][y][layer].first : nullptr;}
 short Chunk::getMetadata(unsigned char layer, unsigned short x, unsigned short y) { return blockList[x][y][layer].second; }
 unsigned short Chunk::getBlockId(unsigned char layer, unsigned short x, unsigned short y) { return blockList[x][y][layer].first->getId(); }

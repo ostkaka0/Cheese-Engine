@@ -169,19 +169,20 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			{
 				c = it.first.at(yy + it.second) = new Chunk();
 			}
-			else
-			{
-				Block* block = c->getBlock(layer, x, y);
 
-				if (block != nullptr)
+			Block* block = c->getBlock(layer, xxx, yyy);
+			if (block != nullptr)
+			{
+				if (block->getId() == id)
 				{
-					/*if (block->getId() == id)
-					{
-						return false;
-					}*/
+					std::cout << "test";
+					return false;
 				}
 			}
-			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
+
+			c->setBlock(layer, xxx, yyy, (id != 0 && *getBlockType(id) != nullptr) ? (*getBlockType(id))(metadata) : nullptr);
+			//c->setBlock(layer, xxx, yyy,( *getBlockType(id) != nullptr ? (*getBlockType(id))(metadata) : nullptr));
+			//c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
 			return true;
 		}
@@ -289,7 +290,9 @@ void World::AddBlockType(unsigned short key, std::function<Block*(unsigned short
 std::function<Block*(unsigned short)>* World::getBlockType(unsigned short id)
 {
 	auto it = blockTypeMap.find(id);
-	return (it == blockTypeMap.end()) ? NULL : &it->second;
+	if(it != blockTypeMap.end())
+		return (&it->second);
+	return(nullptr);
 }
 
 std::map<unsigned short, std::function<Block*(unsigned short)>>& World::getBlockTypeMap()
