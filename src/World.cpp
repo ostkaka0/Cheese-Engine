@@ -115,34 +115,31 @@ void World::setBlock(long x, long y, long layer, unsigned short id)
 
 void World::setBlockAndMetadata(long x, long y, long layer,  unsigned short id, unsigned short metadata)
 {
-	sf::Packet packet;
-	packet << (sf::Int16)BlockPlace << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)id << (sf::Uint16)metadata;
+	if (setBlockAndMetadataClientOnly(x, y, layer, id, metadata))
+	{
+		sf::Packet packet;
+		packet << (sf::Int16)BlockPlace << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)id << (sf::Uint16)metadata;
 
-	packetDataList->push(packet);
-	setBlockAndMetadataClientOnly(x, y, layer, id, metadata);
+		packetDataList->push(packet);
+	}
+	else
+	{
+		setBlockMetadata(x, y, layer, metadata);
+	}
 }
 
 void World::setBlockMetadata(long x, long y, long layer, unsigned short metadata)
 {
-	long xx = (x * 0.0625) + chunkMatrix.second;
-	if (isColumnInsideChunkMatrix(xx))
+	if (setBlockMetadataClientOnly(x, y, layer, metadata))
 	{
-		auto &it = chunkMatrix.first.at(xx);
-		long yy = (y * 0.0625) + it.second;
-		if (isChunkInsideChunkColumn(yy,it.first))
-		{
-			Chunk *c = it.first.at(yy);
-			c->setMetadata(layer, x, y, metadata);
+		sf::Packet packet;
+		packet << (sf::Int16)BlockMetadataChange << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)metadata;
 
-			sf::Packet packet;
-			packet << (sf::Int16)BlockMetadataChange << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)metadata;
-
-			packetDataList->push(packet);
-		}
+		packetDataList->push(packet);
 	}
 }
 
-void World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata)
+bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata)
 {
 	long xx = floor(x * 0.0625);
 
@@ -172,13 +169,28 @@ void World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			{
 				c = it.first.at(yy + it.second) = new Chunk();
 			}
+			else
+			{
+				Block* block = c->getBlock(layer, x, y);
+
+				if (block != nullptr)
+				{
+					/*if (block->getId() == id)
+					{
+						return false;
+					}*/
+				}
+			}
 			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
+			return true;
 		}
 	}
+
+	return false;
 }
 
-void World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
+bool World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
 {
 	long xx = (x * 0.0625) + chunkMatrix.second;
 	if (isColumnInsideChunkMatrix(xx))
@@ -188,9 +200,18 @@ void World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned shor
 		if (isChunkInsideChunkColumn(yy,it.first))
 		{
 			Chunk *c = it.first.at(yy);
-			c->setMetadata(layer, x, y, metadata);
+
+			if (c != nullptr)
+			{
+				if (c->getMetadata(layer, x, y) != metadata)
+				{
+					c->setMetadata(layer, x, y, metadata);
+					return true;
+				}
+			}
 		}
 	}
+	return false;
 }
 
 Block* World::getBlock(long x, long y, long layer)

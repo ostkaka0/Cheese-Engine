@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 2013-07-03 15:21:33.
      1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -6,6 +7,12 @@
      1>ServerState.cpp(70): warning C4244: '=' : conversion from 'float' to 'sf::Uint16', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
+=======
+﻿Build started 2013-07-03 14:20:45.
+     1>Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
+>>>>>>> 7bdac49dfab9f54e198773b888b4c65e5902f3d2
          "Server Release\Block.obj"
          "Server Release\BlockBackground.obj"
          "Server Release\BlockGravity.obj"
@@ -31,9 +38,13 @@
          "Server Release\TextureContainer.obj"
          "Server Release\World.obj"
      1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
-         cheese edits.vcxproj -> C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe
-     1>Done Building Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
+         cheese edits.vcxproj -> C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server.exe
+     1>Done Building Project "C:\Users\gayboy\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" (Build target(s)).
 
 Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:01.77
+=======
+Time Elapsed 00:00:00.50
+>>>>>>> 7bdac49dfab9f54e198773b888b4c65e5902f3d2

@@ -75,13 +75,13 @@
     <IncludePath>C:\SFML-1.6\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\SFML-1.6\lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName) $(Configuration) s3fssss</TargetName>
+    <TargetName>$(ProjectName) $(Configuration) </TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\SFML-1.6\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\SFML-1.6\lib;$(LibraryPath)</LibraryPath>
-    <TargetName>$(ProjectName) Server d</TargetName>
+    <TargetName>$(ProjectName) Server</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
