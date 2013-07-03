@@ -191,11 +191,7 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 
 void Entity::Collision(World* world)
 {
-<<<<<<< HEAD
-	//std::cout << "collision!\n";
-=======
 
->>>>>>> 64abe32e85e7bf1913114fea6824766103de60bf
 }
 
 /*void Entity::FixateX()
