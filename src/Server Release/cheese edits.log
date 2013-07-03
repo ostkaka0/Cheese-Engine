@@ -1,31 +1,9 @@
-﻿Build started 2013-07-03 13:53:37.
+﻿Build started 2013-07-03 15:21:33.
      1>Project "C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\cheese edits.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
-         World.cpp
-     1>World.cpp(132): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(133): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(136): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(137): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(140): warning C4244: 'argument' : conversion from 'long' to 'unsigned short', possible loss of data
-     1>World.cpp(140): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(151): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(163): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(179): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(180): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(187): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(188): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(191): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(192): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(195): warning C4244: 'argument' : conversion from 'long' to 'unsigned short', possible loss of data
-     1>World.cpp(195): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(202): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(207): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(210): warning C4244: 'initializing' : conversion from 'double' to 'long', possible loss of data
-     1>World.cpp(212): warning C4018: '<' : signed/unsigned mismatch
-     1>World.cpp(216): warning C4244: 'argument' : conversion from 'long' to 'unsigned char', possible loss of data
-     1>World.cpp(238): warning C4018: '>=' : signed/unsigned mismatch
-     1>World.cpp(258): warning C4018: '>=' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _SERVER /D _CONSOLE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Server Release\\" /Fd"Server Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ServerState.cpp
+         ServerState.cpp
+     1>ServerState.cpp(70): warning C4244: '=' : conversion from 'float' to 'sf::Uint16', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.exe" /INCREMENTAL /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gustav\Documents\GitHub\Cheese_Multiplayer\src\Server Release\cheese edits Server d.lib" /MACHINE:X86 /SAFESEH "Server Release\App.obj"
          "Server Release\Block.obj"
@@ -58,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.40
+Time Elapsed 00:00:01.77

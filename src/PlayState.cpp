@@ -125,9 +125,11 @@ void PlayState::ProcessPackets(void)
 
 					if(!(*packet >> ID  >> xPos >> yPos >> sizeX >> sizeY))
 						std::cout << "ERROR: Client could not extract data" << std::endl;
-
-					Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
-					currentWorld->AddPlayer(ID, player);
+					else
+					{
+						Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
+						currentWorld->AddPlayer(ID, player);
+					}
 				}
 			}
 			break;
@@ -171,26 +173,29 @@ void PlayState::ProcessPackets(void)
 				float xPos;
 				float yPos;
 				sf::Uint16 clientID;
-				if(!(*packet >> type >> xPos >> yPos >> clientID))
-					std::cout << "ERROR: Client could not extract data" << std::endl;
-				std::cout << "Client got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientID << std::endl;
+				*packet >> type;
+
+				//std::cout << "Client got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientID << std::endl;
 				if(type == 0)
 				{
+					*packet >> xPos >> yPos >> clientID;
 					Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
-
-
 					std::cout << "Added player -> clientid received " << clientID << " this clientid " << connection->client->ID << std::endl;
+
 					if(clientID == connection->client->ID)
 					{
 						temp->isClientControlling = true;
 						std::cout << "Camera set" << std::endl;
 						camera->setCameraAt(*temp);
 					}
+
 					currentWorld->AddPlayer(clientID, temp);
 				}
 				else if(type == 1)
 				{
+					*packet >> clientID;
 					currentWorld->RemovePlayer(clientID);
+					std::cout << "Client " << clientID << " has left" << std::endl;
 				}
 				break;
 			}
