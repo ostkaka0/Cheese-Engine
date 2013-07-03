@@ -167,22 +167,24 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			Chunk* c = it.first.at(yy + it.second);
 			if (c == nullptr)
 			{
+				if (id == 0)
+					return false;
+
 				c = it.first.at(yy + it.second) = new Chunk();
 			}
 			else
 			{
 				Block* block = c->getBlock(layer, xxx, yyy);
-				if (block != nullptr)
+				printf(" %X %d %d\n", block, xxx, yyy);
+				/*if (block != nullptr)
 				{
 					if (block->getId() == id)
 					{
 						return false;
 					}
-				}
+				}*/
 			}
 
-			//c->setBlock(layer, xxx, yyy, (id != 0 && *getBlockType(id) != nullptr) ? (*getBlockType(id))(metadata) : nullptr);
-			//c->setBlock(layer, xxx, yyy,( *getBlockType(id) != nullptr ? (*getBlockType(id))(metadata) : nullptr));
 			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
 			return true;
@@ -291,9 +293,7 @@ void World::AddBlockType(unsigned short key, std::function<Block*(unsigned short
 std::function<Block*(unsigned short)>* World::getBlockType(unsigned short id)
 {
 	auto it = blockTypeMap.find(id);
-	if(it != blockTypeMap.end())
-		return (&it->second);
-	return(nullptr);
+	return (it == blockTypeMap.end())? nullptr:&it->second;
 }
 
 std::map<unsigned short, std::function<Block*(unsigned short)>>& World::getBlockTypeMap()
