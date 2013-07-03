@@ -49,7 +49,7 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 			
 			//Projectile *projectile = new Projectile(GetCamera(app).getEntityPosition().x.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-			Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 1024, 0.03125, "arrow.png", 0, false);
+			Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 2048, 0.03125, "arrow.png", 0, false);
 			world->AddEntity(projectile);//new Projectile(sf::Vector2f(GetCamera(app).getCreaturePosition().x+8.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arroaaawb.png")[0]));
 			cameraDelay = 0.03125F;
 			//GetCamera(app).setCameraAt(*projectile);

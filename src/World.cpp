@@ -207,7 +207,10 @@ Block* World::getBlock(long x, long y, long layer)
 
 		if (isChunkInsideChunkColumn(yy,it.first))
 		{
-			return it.first.at(yy)->getBlock(layer, xxx, yyy);
+			if (it.first.at(yy) != nullptr)
+			{
+				return it.first.at(yy)->getBlock(layer, xxx, yyy);
+			}
 		}
 	}
 	return nullptr;

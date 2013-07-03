@@ -27,8 +27,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
-		std::cout << "nice!\n";
-
 		double speedXModifier = abs(speedX * app.GetFrameTime());
 
 		double speedYModifier = abs(speedY * app.GetFrameTime());
@@ -40,8 +38,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 		while(speedXModifier > 1 && speedYModifier > 1)
 		{
-			std::cout << "alpha\n";
-
 			if (CheckCollision(app, world, (float)speedXNegativeFactor, (float)speedXNegativeFactor))
 				break;
 
@@ -54,8 +50,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 		while(speedXModifier > 1)
 		{
-			std::cout << "beta\n";
-
 			if (CheckCollision(app, world, (float)speedXNegativeFactor, 0))
 				break;
 
@@ -66,8 +60,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 		while(speedYModifier > 1)
 		{
-			std::cout << "gamma\n";
-
 			if (CheckCollision(app, world, 0, (float)speedXNegativeFactor))
 				break;
 
@@ -98,6 +90,7 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4))
 	{
 		this->speedX = 0;
+		speedX = 0;
 		Collision(world);
 	}
 
@@ -107,6 +100,7 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
 	{
 		this->speedY = 0;
+		speedY = 0;
 		Collision(world);
 	}
 
@@ -116,9 +110,15 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
 	{
 		if (abs(speedX) > abs(speedY))
+		{
 			this->speedX = 0;
+			speedX = 0;
+		}
 		else
+		{
 			this->speedY = 0;
+			speedY = 0;
+		}
 
 		CheckCollision(app, world, speedX, speedY);
 		Collision(world);
