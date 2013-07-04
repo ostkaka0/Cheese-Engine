@@ -176,13 +176,13 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			{
 				Block* block = c->getBlock(layer, xxx, yyy);
 				printf(" %X %d %d\n", block, xxx, yyy);
-				/*if (block != nullptr)
+				if (block != nullptr)
 				{
 					if (block->getId() == id)
 					{
 						return false;
 					}
-				}*/
+				}
 			}
 
 			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
@@ -196,20 +196,23 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 
 bool World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
 {
-	long xx = (x * 0.0625) + chunkMatrix.second;
+	unsigned short xxx = x&0xF;//(x < 0)? (abs(x+1)&0xF)^0xF : x&0XF;
+	unsigned short yyy = y&0xF;//(y < 0)? y&0XF : y&0XF;
+
+	long xx = floor(x * 0.0625);
 	if (isColumnInsideChunkMatrix(xx))
 	{
 		auto &it = chunkMatrix.first.at(xx);
-		long yy = (y * 0.0625) + it.second;
+		long yy = floor(y * 0.0625);
 		if (isChunkInsideChunkColumn(yy,it.first))
 		{
 			Chunk *c = it.first.at(yy);
 
 			if (c != nullptr)
 			{
-				if (c->getMetadata(layer, x, y) != metadata)
+				if (c->getMetadata(layer, xxx, yyy) != metadata)
 				{
-					c->setMetadata(layer, x, y, metadata);
+					c->setMetadata(layer, xxx, yyy, metadata);
 					return true;
 				}
 			}
