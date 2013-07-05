@@ -27,14 +27,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
-<<<<<<< HEAD
-
-		float speedXModifier = abs(speedX * app.getFrameTime());
-
-		float speedYModifier = abs(speedY * app.getFrameTime());
-
-=======
->>>>>>> 3e2d1d23fd7a70df773ec0d22345bb1ca4eedc82
 
 		//float speedModifier = speedX * app.GetFrameTime();
 
@@ -123,10 +115,10 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 		// } D: 
 
 		//> gammal fysikD:
-		CheckCollision(app, world, speedX * app.getFrameTime(), speedY * app.getFrameTime());
+		CheckCollision(app, world, speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
 
-		x += speedX * app.getFrameTime();
-		y += speedY * app.getFrameTime();
+		x += speedX * app.GetFrameTime();
+		y += speedY * app.GetFrameTime();
 		//< D:
 
 		speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
@@ -141,13 +133,6 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 	if (speedX == 0 && speedY == 0)
 		return false;
 
-<<<<<<< HEAD
-
-	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
-=======
 	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1)>>4) ||
 		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14)>>4) ||
@@ -169,16 +154,11 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		Collision(world);
 		r = true;
 	}
->>>>>>> 3e2d1d23fd7a70df773ec0d22345bb1ca4eedc82
 
 	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14+speedY)>>4))
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e2d1d23fd7a70df773ec0d22345bb1ca4eedc82
 	{
 		if (abs(this->speedX) > abs(this->speedY))
 		{
