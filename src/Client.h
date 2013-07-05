@@ -9,9 +9,10 @@ struct Client
 public:
 	//Client(void);
 	//~Client(void);
-	sf::TcpSocket socket;
+	sf::SocketTCP socket;
 	sf::Uint16 ID;
 	std::string name;
+	sf::IPAddress IP;
 	sf::Uint16 ping;
 	sf::Clock pingClock;
 };

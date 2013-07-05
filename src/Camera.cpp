@@ -1,5 +1,6 @@
 #ifndef _SERVER
 #include "camera.h"
+#include "Entity.h"
 
 Camera::Camera(double speed)
 {
@@ -17,11 +18,11 @@ void Camera::Update(App& app)
 {
 	if (currentEntity != nullptr)
 	{
-		float deltaX = currentEntity->getX()+8-getCenter().x;
-		float deltaY = currentEntity->getY()+8-getCenter().y;
-		float speedFactor = atan(app.getFrameTime()*speed)*2/3.14159265358979323846264338327950288419;
+		float deltaX = currentEntity->getX()+8-GetCenter().x;
+		float deltaY = currentEntity->getY()+8-GetCenter().y;
+		float speedFactor = atan(app.GetFrameTime()*speed)*2/3.14159265358979323846264338327950288419;
 
-		setCenter(getCenter().x + deltaX*speedFactor, getCenter().y + deltaY*speedFactor);
+		SetCenter(GetCenter().x + deltaX*speedFactor, GetCenter().y + deltaY*speedFactor);
 	}
 }
 
