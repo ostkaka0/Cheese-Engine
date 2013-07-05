@@ -5,6 +5,8 @@ Camera::Camera(double speed)
 {
 	this->speed = speed;
 	currentEntity = nullptr;
+
+	this->setSize(1152,720);// temporära magiska nummer
 }
 
 

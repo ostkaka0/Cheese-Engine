@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
 #ifndef _SERVER
 
-	App app(sf::VideoMode(768, 512));
+	App app(sf::VideoMode(1152,720));
 
 	GameState *gameState = new PlayState((const PlayState&)app);
 #else

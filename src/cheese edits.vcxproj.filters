@@ -216,7 +216,4 @@
       <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="PropertySheet1.props" />
-  </ItemGroup>
 </Project>

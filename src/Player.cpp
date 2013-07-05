@@ -25,10 +25,7 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 	{
 		sf::Event event;
 		app.pollEvent(event);
-		bool dDown = false;
-		bool sDown = false;
-		bool aDown = false;
-		bool wDown = false;
+		bool rDown, dDown, lDown, uDown;
 		switch(event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -36,16 +33,16 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 				switch(event.key.code)
 				{
 				case sf::Keyboard::D:
-					dDown = true;
+					rDown = true;
 					break;
 				case sf::Keyboard::S:
-					sDown = true;
+					dDown = true;
 					break;
 				case sf::Keyboard::A:
-					aDown = true;
+					lDown = true;
 					break;
 				case sf::Keyboard::W:
-					wDown = true;
+					uDown = true;
 					break;
 				}
 			}
@@ -55,16 +52,16 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 				switch(event.key.code)
 				{
 				case sf::Keyboard::D:
-					dDown = false;
+					rDown = false;
 					break;
 				case sf::Keyboard::S:
-					sDown = false;
+					dDown = false;
 					break;
 				case sf::Keyboard::A:
-					aDown = false;
+					lDown = false;
 					break;
 				case sf::Keyboard::W:
-					wDown = false;
+					uDown = false;
 					break;
 				}
 			}
@@ -115,11 +112,7 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 			}
 			break;
 		}
-		KeyUpdate(
-			dDown,
-			sDown,
-			aDown,
-			wDown, packetDataList);
+		KeyUpdate(rDown, dDown, lDown, uDown, packetDataList);
 
 
 		if (&GetCamera(app).getEntity() != this)
