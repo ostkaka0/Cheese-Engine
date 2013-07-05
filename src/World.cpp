@@ -115,7 +115,7 @@ void World::setBlock(long x, long y, long layer, unsigned short id)
 
 void World::setBlockAndMetadata(long x, long y, long layer,  unsigned short id, unsigned short metadata)
 {
-	if (setBlockAndMetadataClientOnly(x, y, layer, id, metadata))
+	/*if (setBlockAndMetadataClientOnly(x, y, layer, id, metadata))
 	{
 		sf::Packet packet;
 		packet << (sf::Int16)BlockPlace << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)id << (sf::Uint16)metadata;
@@ -125,6 +125,36 @@ void World::setBlockAndMetadata(long x, long y, long layer,  unsigned short id, 
 	else
 	{
 		setBlockMetadata(x, y, layer, metadata);
+	}*/
+
+	MessageType messageType = setBlockAndMetadataClientOnly(x, y, layer, id, metadata);
+
+	switch (messageType)
+	{
+	case NullMessage:
+		break;
+
+	case BlockPlace:
+		{
+			sf::Packet packet;
+			packet << (sf::Int16)BlockPlace << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)id << (sf::Uint16)metadata;
+			packetDataList->push(packet);
+		}
+		break;
+
+	case BlockMetadataChange:
+		{
+			sf::Packet packet;
+			packet << (sf::Int16)BlockMetadataChange << (sf::Int32)x << (sf::Int32)y << (sf::Uint16)layer << (sf::Uint16)metadata;
+			packetDataList->push(packet);
+		}
+		break;
+
+	default:
+		{
+			std::cout << "Unexpected Messagetype: " << messageType << "\n";
+		}
+		break;
 	}
 }
 
@@ -139,7 +169,7 @@ void World::setBlockMetadata(long x, long y, long layer, unsigned short metadata
 	}
 }
 
-bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata)
+MessageType World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata)
 {
 	long xx = floor(x * 0.0625);
 
@@ -168,7 +198,7 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			if (c == nullptr)
 			{
 				if (id == 0)
-					return false;
+					return NullMessage;
 
 				c = it.first.at(yy + it.second) = new Chunk();
 			}
@@ -178,25 +208,33 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 				//printf(" %X %d %d\n", block, xxx, yyy);
 				if (block != nullptr)
 				{
-					if (block->getId() == id && c->getMetadata(layer, xxx, yyy) == metadata)
+					if (block->getId() == id)
 					{
-						return false;
+						if (c->getMetadata(layer, xxx, yyy) != metadata)
+						{
+							c->setMetadata(layer, xxx, yyy, metadata);
+							return BlockMetadataChange;
+						}
+
+						return NullMessage;
 					}
 				}
-				else if(id == 0)
-					return false;
+				else if (id == 0)
+				{
+					return NullMessage;
+				}
 			}
 
-			c->setBlock(layer, xxx, yyy, getBlockType(id) == nullptr ? nullptr : (*getBlockType(id))(metadata));
+			c->setBlock(layer, xxx, yyy, getBlockType(id,metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
-			return true;
+			return BlockPlace;
 		}
 	}
 
-	return false;
+	return NullMessage;
 }
 
-bool World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
+MessageType World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata)
 {
 	unsigned short xxx = x&0xF;//(x < 0)? (abs(x+1)&0xF)^0xF : x&0XF;
 	unsigned short yyy = y&0xF;//(y < 0)? y&0XF : y&0XF;
@@ -215,12 +253,12 @@ bool World::setBlockMetadataClientOnly(long x, long y, long layer, unsigned shor
 				if (c->getMetadata(layer, xxx, yyy) != metadata)
 				{
 					c->setMetadata(layer, xxx, yyy, metadata);
-					return true;
+					return BlockMetadataChange;
 				}
 			}
 		}
 	}
-	return false;
+	return NullMessage;
 }
 
 Block* World::getBlock(long x, long y, long layer)
@@ -295,10 +333,10 @@ void World::AddBlockType(unsigned short key, std::function<Block*(unsigned short
 	blockTypeMap.emplace(key, value);
 }
 
-std::function<Block*(unsigned short)>* World::getBlockType(unsigned short id)
+Block* World::getBlockType(unsigned short id, unsigned short metadata)
 {
 	auto it = blockTypeMap.find(id);
-	return (it == blockTypeMap.end())? nullptr:&it->second;
+	return (it == blockTypeMap.end())? nullptr : it->second(metadata);
 }
 
 std::map<unsigned short, std::function<Block*(unsigned short)>>& World::getBlockTypeMap()

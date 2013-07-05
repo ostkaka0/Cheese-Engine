@@ -1,6 +1,9 @@
+#define stringify ( name ) # name
+
 enum MessageType
 {
-	InitMessage = 0,
+	NullMessage = 0,
+	InitMessage,
 	PingMessage,
 	KickMessage,
 	ClientID,
