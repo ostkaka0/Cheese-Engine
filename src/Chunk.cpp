@@ -68,15 +68,15 @@ Block* Chunk::getHighestBlock(unsigned char x, unsigned char y)
 }
 
 #ifndef _SERVER
-void Chunk::Draw(short xPos, short yPos, App& app, TextureContainer &tc)
+void Chunk::Draw(long xPos, long yPos, App& app, TextureContainer &tc)
 {
 	//backgroundSprite = &(tc.getTextures("Block0.png")[0]);
-	for(short x = 0; x < CHUNKWIDTH; x++)
+	for(long x = 0; x < CHUNKWIDTH; x++)
 	{
-		for(short y = 0; y < CHUNKHEIGHT; y++)
+		for(long y = 0; y < CHUNKHEIGHT; y++)
 		{
-			short xPosBlock = (16*xPos-16 + x)*16;
-			short yPosBlock = (16*yPos-16 + y)*16;
+			long xPosBlock = (16*xPos-16 + x)*16;
+			long yPosBlock = (16*yPos-16 + y)*16;
 			if(blockList[x][y][0].first == nullptr || isAnySeeThrough(blockList[x][y]))
 			{
 				//backgroundSprite->SetPosition((16*xPos-16 + x)*16, (16*yPos-16 + y)*16);
