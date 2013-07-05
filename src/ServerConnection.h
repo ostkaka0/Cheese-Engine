@@ -8,7 +8,7 @@
 #include "Client.h"
 #include "World.h"
 
-class ServerConnection : public sf::Thread
+class ServerConnection
 {
 public:
 	ServerConnection(int port, World* world);
@@ -25,10 +25,11 @@ private:
 	void PingClients();
 	void Accept();
 	void Receive();
-	sf::SocketTCP s;
-	sf::IPAddress localIP;
-	sf::IPAddress publicIP;
+	//sf::TcpSocket s;
+	sf::IpAddress localIP;
+	sf::IpAddress publicIP;
 	sf::Clock pingTimeout;
+	sf::TcpListener s;
 	World* currentWorld;
 };
 

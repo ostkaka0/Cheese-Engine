@@ -1,12 +1,12 @@
 #include "Connection.h"
 
-
-Connection::Connection(int port, sf::IPAddress IP)
+Connection::Connection(int port, sf::IpAddress IP)
 {
 	client = new Client();
+	//thread = new sf::Thread(&Connection::Run);
 	if(Connect(IP, port))
 	{
-		
+		//thread->launch();
 	}
 }
 
@@ -15,21 +15,21 @@ Connection::~Connection(void)
 {
 }
 
-void Connection::Run(void)
+void Connection::Run()
 {
 	while(true)
 	{
 		Receive();
 
-		Sleep(10);
+		sf::sleep(sf::milliseconds(10));
 	}
 }
 
-bool Connection::Connect(sf::IPAddress ip, int port)
+bool Connection::Connect(sf::IpAddress ip, int port)
 {
-	if(client->socket.Connect(port, ip, 5) == sf::Socket::Done)
+	if(client->socket.connect(ip, port, sf::Time(sf::seconds(5))) == sf::Socket::Done)
 	{
-		client->socket.SetBlocking(false);
+		client->socket.setBlocking(false);
 		std::cout << "Connected to " << ip << " : " << port << std::endl;
 		return(true);
 	}
@@ -42,15 +42,15 @@ bool Connection::Connect(sf::IPAddress ip, int port)
 
 void Connection::Receive()
 {
-	if(client->socket.IsValid())
+	if(&client->socket != nullptr)
 	{
 		sf::Packet *received = new sf::Packet();
-		sf::Socket::Status status = client->socket.Receive(*received);
+		sf::Socket::Status status = client->socket.receive(*received);
 		if (status == sf::Socket::Done)
 		{
-			globalMutex.Lock();
+			globalMutex.lock();
 			packets.push(received);
-			globalMutex.Unlock();
+			globalMutex.unlock();
 		}
 		else if(status == sf::Socket::Disconnected)
 		{

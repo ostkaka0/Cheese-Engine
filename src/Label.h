@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "MenuItem.h"
 #include "GameState.h"
+#include "App.h"
 
 class Label : public MenuItem
 {

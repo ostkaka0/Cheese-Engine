@@ -10,17 +10,18 @@
 
 #include "Client.h"
 
-class Connection : public sf::Thread
+class Connection
 {
 public:
-	Connection(int port, sf::IPAddress IP);
+	Connection(int port, sf::IpAddress IP);
 	~Connection(void);
 	std::queue<sf::Packet*> packets;
 	sf::Mutex globalMutex;
 	Client* client;
 private:
-	bool Connect(sf::IPAddress ip, int port);
-	virtual void Run();
+	//sf::Thread* thread;
+	bool Connect(sf::IpAddress ip, int port);
+	void Run();
 	void Receive();
 };
 

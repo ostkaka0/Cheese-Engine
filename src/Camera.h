@@ -2,6 +2,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "App.h"
+#include "Entity.h"
+#include "App.h"
 
 class Entity;
 
@@ -22,7 +24,7 @@ public:
 
 inline Camera& GetCamera(App& app)
 {
-	return (*const_cast<Camera*>(reinterpret_cast<const Camera*>(&app.GetView())));
+	return (*const_cast<Camera*>(reinterpret_cast<const Camera*>(&app.getView())));
 }
 #endif
 

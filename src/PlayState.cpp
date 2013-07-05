@@ -33,7 +33,7 @@ PlayState::PlayState(App& app)
 	}
 	std::cout << "Connectiong to " << str_ip << " ...\n";
 
-	sf::IPAddress ip(str_ip);//std::string ip;
+	sf::IpAddress ip(str_ip);//std::string ip;
 	int port;
 
 
@@ -42,10 +42,9 @@ PlayState::PlayState(App& app)
 	currentWorld = new World();
 	blockMenu = new InGameUI(tC, *currentWorld);
 	connection = new Connection(5001, ip);
-	connection->Launch();
 
-	app.SetView(*camera);
-	camera->SetHalfSize(sf::Vector2f(768/2, 512/2)); 
+	app.setView(*camera);
+	camera->setSize(sf::Vector2f(768, 512)); 
 
 	//Player* player = new Player(128, 128, 16, 16, true, "graywizard.png", 0, "Karl-Bertil");
 	//currentWorld->AddPlayer(2,player); //MÅSTE FIXAS!!!!!!!!!!!!!
@@ -77,7 +76,7 @@ GameState *PlayState::Update(App& app)
 	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC);
 	while (!packetDataList->empty())
 	{
-		connection->client->socket.Send(packetDataList->front());
+		connection->client->socket.send(packetDataList->front());
 		packetDataList->pop();
 	}
 	//delete packetDataList;
@@ -96,10 +95,10 @@ void PlayState::Draw(App& app)
 
 void PlayState::ProcessPackets(void)
 {
-	connection->globalMutex.Lock();
+	connection->globalMutex.lock();
 	std::queue<sf::Packet*> packets = connection->packets;
 	connection->packets = std::queue<sf::Packet*>();
-	connection->globalMutex.Unlock();
+	connection->globalMutex.unlock();
 
 	while(packets.size() > 0)
 	{
@@ -115,7 +114,7 @@ void PlayState::ProcessPackets(void)
 		{
 		case InitMessage:
 			{
-				while(!packet->EndOfPacket())
+				while(!packet->endOfPacket())
 				{
 					sf::Int16 ID;
 					float xPos;
@@ -147,7 +146,7 @@ void PlayState::ProcessPackets(void)
 				float xPos = 0;
 				float yPos = 0;
 				send << packetType << type << xPos << yPos;
-				connection->client->socket.Send(send);
+				connection->client->socket.send(send);
 				std::cout << "Client sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << connection->client->ID << std::endl;
 			}
 			break;
@@ -158,7 +157,7 @@ void PlayState::ProcessPackets(void)
 					sf::Packet packet;
 					sf::Uint16 type = 1;
 					packet << type;
-					connection->client->socket.Send(packet);
+					connection->client->socket.send(packet);
 
 				}
 			}

@@ -14,7 +14,7 @@ char** _argv;
 //using namespace sf;
 
 /*#ifdef _SERVER
-	#define _APP *reinterpret_cast<sf::RenderWindow*>(&app)//static_cast<sf::RenderWindow>(app)
+	#define _APP *reinterpret_cast<tgui::Window*>(&app)//static_cast<tgui::Window>(app)
 #else
 	#define _APP app
 #endif*/
@@ -25,10 +25,12 @@ int main(int argc, char** argv)
 	_argv = argv;
 
 #ifndef _SERVER
-    App app(sf::VideoMode(768, 512), "Cheese Multiplayer - Alpha");
-	GameState *gameState = new PlayState(app);
+
+    App app(sf::VideoMode(768, 512));
+	
+	GameState *gameState = new PlayState((const PlayState&)app);
 #else
-	App app;//App app();
+	App app(sf::VideoMode(768, 512));//App app();
 	GameState *gameState = new ServerState(app);
 #endif
 	
@@ -36,13 +38,13 @@ int main(int argc, char** argv)
 
 	//app.SetFramerateLimit(6);
 #ifndef _SERVER
-	while (app.IsOpened())
+	while (app.isOpen())
     {
        sf::Event event;
-       if (app.GetEvent(event))
+       if (app.pollEvent(event))
         {
-            if (event.Type == sf::Event::Closed)
-                app.Close();
+            if (event.type == sf::Event::Closed)
+                app.close();
 
             gameState->EventUpdate(event);
         }
@@ -58,11 +60,11 @@ int main(int argc, char** argv)
         }
 
 #ifndef _SERVER
-        app.Clear();
+        app.clear();
 
         gameState->Draw(app);
 
-        app.Display();
+        app.display();
 #else
 		app.Update();
 #endif

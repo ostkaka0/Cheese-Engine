@@ -27,14 +27,14 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
-		float speedXModifier = abs(speedX * app.GetFrameTime());
+		float speedXModifier = abs(speedX * app.getFrameTime());
 
-		float speedYModifier = abs(speedY * app.GetFrameTime());
+		float speedYModifier = abs(speedY * app.getFrameTime());
 		
 		char speedXNegativeFactor = (speedX > 0)? 1:-1;
 		char speedYNegativeFactor = (speedY > 0)? 1:-1;
 
-		double speed = sqrt(pow(speedX*app.GetFrameTime(),2)+pow(speedY*app.GetFrameTime(),2));
+		double speed = sqrt(pow(speedX*app.getFrameTime(),2)+pow(speedY*app.getFrameTime(),2));
 
 		/*while(speedXModifier > 1 && speedYModifier > 1)
 		{
@@ -91,8 +91,8 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 				y += speedYModifier*speedYNegativeFactor;
 		}
 
-		speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
-		speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
+		speedX *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
+		speedY *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
 	}
 }
 
@@ -103,10 +103,10 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 	if (speedX == 0 && speedY == 0)
 		return false;
 
-	if (world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14)>>4))
+	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14)>>4))
 	{
 		this->speedX = 0;
 		speedX = 0;
@@ -114,10 +114,10 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		r = true;
 	}
 
-	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
+	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
 	{
 		this->speedY = 0;
 		speedY = 0;
@@ -125,10 +125,10 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		r = true;
 	}
 
-	if (world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+1+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+1+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.GetFrameTime())>>4,(int)(y+14+speedY*app.GetFrameTime())>>4))
+	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
+		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
 	{
 		if (abs(this->speedX) > abs(this->speedY))
 		{
@@ -236,9 +236,9 @@ void Entity::Draw(App& app, TextureContainer &tc)
 	sf::Sprite *sprite = &(tc.getTextures(spriteName)[spriteIndex]);
 	if (sprite != nullptr)
 	{
-	    sprite->SetPosition(sf::Vector2f(x, y));
-	    sprite->SetRotation(angle);
-		app.Draw(*sprite);
+	    sprite->setPosition(sf::Vector2f(x, y));
+	    sprite->setRotation(angle);
+		app.draw(*sprite);
 	}
 	else
 	{
