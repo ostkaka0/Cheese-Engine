@@ -30,7 +30,7 @@ ServerState::~ServerState()
 
 GameState *ServerState::Update(App& app)
 {
-	//std::cout << "updates per second: " << 1/APP(app).GetFrameTime() << std::endl;
+	//std::cout << "updates per second: " << 1/APP(app).getFrameTime() << std::endl;
 	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC);
 	while (!packetDataList->empty())
 	{
@@ -45,10 +45,10 @@ GameState *ServerState::Update(App& app)
 
 void ServerState::ProcessPackets(void)
 {
-	sC->globalMutex.Lock();
+	//sC->globalMutex.lock();
 	auto packets = sC->packets;
 	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
-	sC->globalMutex.Unlock();
+	//sC->globalMutex.unlock();
 
 	while(packets.size() > 0)
 	{
@@ -65,8 +65,8 @@ void ServerState::ProcessPackets(void)
 		{
 		case PingMessage: //measure ping between sent 1 and received 1 (type)
 			{
-				float ping = client->pingClock.GetElapsedTime();
-				client->pingClock.Reset();
+				float ping = client->pingClock.getElapsedTime().asMilliseconds();
+				client->pingClock.restart();
 				client->ping = ping;
 				//std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
@@ -104,9 +104,9 @@ void ServerState::ProcessPackets(void)
 						if(temp != nullptr)
 							send << (sf::Int16)pair.first << (sf::Int16)temp->getPosition().x << (sf::Int16)temp->getPosition().y << (sf::Int16)temp->getSize().x << (sf::Int16)temp->getSize().y;
 					}
-					client->socket.Send(send);
+					client->socket.send(send);
 
-					send.Clear();
+					send.clear();
 					send << packetType << type << xPos << yPos << clientidtemp;
 
 				}

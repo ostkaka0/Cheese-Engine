@@ -3,6 +3,7 @@
 #include "TextureContainer.h"
 #include "ServerConnection.h"
 #include "Player.h"
+#include "App.h"
 
 class World;
 class InGameUI;
