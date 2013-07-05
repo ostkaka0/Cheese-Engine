@@ -22,16 +22,16 @@ TextureContainer::~TextureContainer(void)
 
 bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int spriteHeight)
 {
-	sf::Texture image;
-	bool success = image.loadFromFile(fileName);
+	sf::Image image;
+	bool success = image.LoadFromFile(fileName);
 
 	if (!success)
 	{
 		std::cout << "Failed to load " << fileName << '\n';
 	}
 
-	int width = image.getSize().x/spriteWidth;
-	int height = image.getSize().y/spriteHeight;
+	int width = image.GetWidth()/spriteWidth;
+	int height = image.GetHeight()/spriteHeight;
 
 	sf::Sprite *sprite = new sf::Sprite[width*height*height];
 	sf::Image *tempImage;
@@ -40,13 +40,11 @@ bool TextureContainer::AddSpriteSheet(std::string fileName, int spriteWidth, int
 	{
 		for (int x = 0; x < height; x++)
 		{
-			tempImage = new sf::Image();
+			tempImage = new sf::Image(spriteWidth, spriteHeight);
 			//tempImage->Copy(image, 0, 0, sf::IntRect(x*spriteWidth, y*spriteHeight, (x + 1)*spriteWidth, (y + 1)*spriteHeight), true);
-			tempImage->copy(image.copyToImage(), 0, 0, sf::IntRect(x * spriteWidth, y * spriteHeight, (x + 1) * spriteWidth, (y + 1) * spriteHeight), false);
-			//tempImage->setSmooth(false);
-			sf::Texture toSet = sf::Texture();
-			toSet.update(*tempImage);
-			sprite[x + (y*width)].setTexture(toSet);
+			tempImage->Copy(image, 0, 0, sf::IntRect(x * spriteWidth, y * spriteHeight, (x + 1) * spriteWidth, (y + 1) * spriteHeight), false);
+			tempImage->SetSmooth(false);
+			sprite[x + (y*width)].SetImage(*tempImage);
 			//std::cout << "added " << fileName << " at " << (x + (y*width)) << std::endl;
 		}
 	}

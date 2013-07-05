@@ -1,25 +1,23 @@
 #pragma once
 
-//#ifdef _SERVER
+#ifdef _SERVER
 #define APP(a) (*reinterpret_cast<App*>(&a))
 
 #include <SFML\System.hpp>
-#include <SFML/Graphics.hpp>
 
-class App : public sf::RenderWindow
+class App
 {
 	sf::Clock frameTimer;
 	float frameTime;
 	float sleptTime;
 public:
-	App(sf::VideoMode);
-	float getFrameTime();
+	float GetFrameTime();
 
 	void Update();
 	sf::Clock& getFrameTimer();
 };
-//#else
-//#include <SFML\Graphics.hpp>
-//typedef sf::RenderWindow App;
-//#define APP(a) a
-//#endif
+#else
+#include <SFML\Graphics.hpp>
+typedef sf::RenderWindow App;
+#define APP(a) a
+#endif

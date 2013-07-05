@@ -15,8 +15,6 @@ InGameUI::InGameUI(TextureContainer &tc, World &world)
 	tc.AddSpriteSheet("UIMainButtonBlocks.png", 64, 18);
 	selectedBlockSolid = 0;
 	selectedBackground = 0;
-
-	//chatBox = window.add<tgui::Button>();
 }
 
 
@@ -26,77 +24,70 @@ InGameUI::~InGameUI(void)
 
 void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = GetCamera(app).getCenter() - sf::Vector2f(GetCamera(app).getSize().x/2, GetCamera(app).getSize().y/2);
+	sf::Vector2f bla = GetCamera(app).GetCenter() - GetCamera(app).GetHalfSize();
 	sf::Vector2f mousePos = sf::Vector2f(
-		GetCamera(app).getCenter().x 
-		- (GetCamera(app).getSize().x/2)
-		+ sf::Mouse::getPosition().x
+		GetCamera(app).GetCenter().x 
+		- GetCamera(app).GetHalfSize().x
+		+ app.GetInput().GetMouseX()
 		- (8*16),
-		+ GetCamera(app).getCenter().y
-		- (GetCamera(app).getSize().y/2)
-		+ sf::Mouse::getPosition().y);
+		+ GetCamera(app).GetCenter().y
+		- GetCamera(app).GetHalfSize().y
+		+ app.GetInput().GetMouseY());
 
-	sf::Event event;
-	while(app.pollEvent(event))
+	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
 	{
-		if(event.type == sf::Event::MouseButtonPressed)
+		for(int i = 0; i < 16; i++)
 		{
-			if(event.key.code == sf::Mouse::Left)
+			if(mousePos.x > 96 + bla.x + 16 * i - 128 && mousePos.x < 96 + bla.x + 16 * i + 16 -128 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
 			{
-				for(int i = 0; i < 16; i++)
-				{
-					if(mousePos.x > 96 + bla.x + 16 * i - 128 && mousePos.x < 96 + bla.x + 16 * i + 16 -128 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
-					{
-						selectedBackground = -1;
-						selectedBlockSolid = i;
-						std::cout << "Clicked block solid " << i << std::endl;
-					}
-				}
-				for(int i = 0; i < 16; i++)
-				{
-					if(mousePos.x > 96 + bla.x + 16 * i + 144 && mousePos.x < 96 + bla.x + 16 * i + 16 + 128 + 16 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
-					{
-						selectedBlockSolid = -1;
-						selectedBackground = i;
-						std::cout << "Clicked block background " << i << std::endl;
-					}
-				}
-			}
-			if(event.key.code == sf::Mouse::Left)
-			{
-				if(sf::Mouse::getPosition().y < 512 - 24)
-				{
-					//ORKAif(selectedBlockSolid != -1)
-						//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
-					//ORKAelse if(selectedBackground != -1)
-						//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
-
-					//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
-				}
-			}
-			else if(event.key.code == sf::Mouse::Right)
-			{
-				int layer = 2;
-				//if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
-				//	layer = 0;
-				//ORKAworld.setBlock((short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 0);	
+				selectedBackground = -1;
+				selectedBlockSolid = i;
+				std::cout << "Clicked block solid " << i << std::endl;
 			}
 		}
+		for(int i = 0; i < 16; i++)
+		{
+			if(mousePos.x > 96 + bla.x + 16 * i + 144 && mousePos.x < 96 + bla.x + 16 * i + 16 + 128 + 16 && mousePos.y > bla.y + 492 && mousePos.y < bla.y + 492 + 16)
+			{
+				selectedBlockSolid = -1;
+				selectedBackground = i;
+				std::cout << "Clicked block background " << i << std::endl;
+			}
+		}
+	}
+	if(app.GetInput().IsMouseButtonDown(sf::Mouse::Left))
+	{
+		if(app.GetInput().GetMouseY() < 512 - 24)
+		{
+			if(selectedBlockSolid != -1)
+				world.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
+			else if(selectedBackground != -1)
+				world.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
+				
+				//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
+		}
+	}
+	else if(app.GetInput().IsMouseButtonDown(sf::Mouse::Right))
+	{
+		int layer = 2;
+		//if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
+		//	layer = 0;
+		world.setBlock((short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 0);	
 	}
 }
 
 void InGameUI::Draw(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = GetCamera(app).getCenter() - sf::Vector2f(GetCamera(app).getSize().x/2, GetCamera(app).getSize().y/2);
+	sf::Vector2f bla = GetCamera(app).GetCenter() - GetCamera(app).GetHalfSize();
 
 	sf::Sprite *mainStripSprite = &(tc.getTextures("UIMainStrip.png")[0]);
 	sf::Sprite *buttonBlocksSprite = &(tc.getTextures("UIMainButtonBlocks.png")[0]);
 
-	mainStripSprite->setPosition(bla.x + 0, bla.y + 512 - 24);
-	buttonBlocksSprite->setPosition(bla.x + 1, bla.y + 512 - 21);
+	mainStripSprite->SetPosition(bla.x + 0, bla.y + 512 - 24);
+	buttonBlocksSprite->SetPosition(bla.x + 1, bla.y + 512 - 21);
 
-	app.draw(*mainStripSprite);
-	app.draw(*buttonBlocksSprite);
+	app.Draw(*mainStripSprite);
+	app.Draw(*buttonBlocksSprite);
 
 	for (auto b : world.getBlockTypeMap())//for (std::map<unsigned short, std::function<Block*(unsigned short)>>::iterator b = world.getBlockTypeMap()->begin(); b != world.getBlockTypeMap()->end(); b++)
 	{

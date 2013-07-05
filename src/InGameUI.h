@@ -2,7 +2,6 @@
 class InGameUI;
 #pragma once
 #include <SFML\Graphics.hpp>
-//#include <TGUI\TGUI.hpp>
 #include "App.h"
 
 class TextureContainer;
@@ -20,7 +19,5 @@ public:
 	std::map<Block*, sf::Vector2f> InGameUIItemList;
 	short int selectedBlockSolid;
 	short int selectedBackground;
-
-	//tgui::ChatBox* chatBox;
 };
 #endif
