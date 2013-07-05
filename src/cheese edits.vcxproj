@@ -79,9 +79,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
+<<<<<<< HEAD
     <IncludePath>C:\SFML-2.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\SFML-2.0\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName) Servers</TargetName>
+=======
+    <IncludePath>C:\SFML-1.6\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SFML-1.6\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName) Servers SNORUNGE</TargetName>
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -27,28 +27,59 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
+<<<<<<< HEAD
 		float speedXModifier = abs(speedX * app.getFrameTime());
 
 		float speedYModifier = abs(speedY * app.getFrameTime());
+=======
+
+		//float speedModifier = speedX * app.GetFrameTime();
+
+		//float speedYModifier = abs(speedY * app.GetFrameTime());
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 		
-		char speedXNegativeFactor = (speedX > 0)? 1:-1;
-		char speedYNegativeFactor = (speedY > 0)? 1:-1;
+		//char speedXNegativeFactor = (speedX > 0)? 1:-1;
+		//char speedYNegativeFactor = (speedY > 0)? 1:-1;
 
+
+		//NEW FAILED PHYSICS D:  {
+		/*double speed = sqrt(pow(abs(speedX)*app.GetFrameTime(),2)+pow(abs(speedY)*app.GetFrameTime(),2));
+
+<<<<<<< HEAD
 		double speed = sqrt(pow(speedX*app.getFrameTime(),2)+pow(speedY*app.getFrameTime(),2));
+=======
+		double angle = atan(speedY/speedX);
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 
-		/*while(speedXModifier > 1 && speedYModifier > 1)
+		double deltaX = cos(angle);
+		double deltaY = sin(angle);
+
+		for (int i = 0; i < 2; i++)
 		{
-			if (CheckCollision(app, world, (float)speedXNegativeFactor, (float)speedXNegativeFactor))
-				break;
+			while(speed >= 1)
+			{
+				if (CheckCollision(app, world, deltaX, deltaY))
+					break;
 
-			x += speedXNegativeFactor;
-			y += speedYNegativeFactor;
+				x += deltaX;
+				y += deltaY;
 
-			speedXModifier -= 1;
-			speedYModifier -= 1;
+				speed -= 1;
+			}
+			if (speedX == 0)
+				deltaX = 0;
+
+			if (speedY == 0)
+				deltaY = 0;
 		}
 
-		while(speedXModifier > 1)
+		if (CheckCollision(app, world, deltaX*speed, deltaY*speed))
+		{
+				x += deltaX*speed;
+				y += deltaY*speed;
+		}
+
+		/*while(speedXModifier > 1)
 		{
 			if (CheckCollision(app, world, (float)speedXNegativeFactor, 0))
 				break;
@@ -69,13 +100,13 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 		}*/
 
 		//if (!CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor))
-		{
+		//{
 			//x += speedXModifier*speedXNegativeFactor;
 			//y += speedYModifier*speedYNegativeFactor;
-		}
+		//}
 		//else
-		{
-		CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor);
+		//{
+		//CheckCollision(app, world, speedXModifier*speedXNegativeFactor, speedYModifier*speedYNegativeFactor);
 
 		/*if (speedX != 0)
 			x += speedXModifier*speedXNegativeFactor;
@@ -84,12 +115,21 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 			y += speedYModifier*speedYNegativeFactor;*/
 
 
-			if (speedX != 0)
+			/*if (speedX != 0)
 				x += speedXModifier*speedXNegativeFactor;
 
 			if (speedY != 0)
-				y += speedYModifier*speedYNegativeFactor;
-		}
+				y += speedYModifier*speedYNegativeFactor;*/
+		//}
+
+		// } D: 
+
+		//> gammal fysikD:
+		CheckCollision(app, world, speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
+
+		x += speedX * app.GetFrameTime();
+		y += speedY * app.GetFrameTime();
+		//< D:
 
 		speedX *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
 		speedY *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
@@ -103,10 +143,17 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 	if (speedX == 0 && speedY == 0)
 		return false;
 
+<<<<<<< HEAD
 	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
 		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14)>>4))
+=======
+	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14)>>4))
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 	{
 		this->speedX = 0;
 		speedX = 0;
@@ -114,10 +161,17 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		r = true;
 	}
 
+<<<<<<< HEAD
 	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
+=======
+	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY)>>4))
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 	{
 		this->speedY = 0;
 		speedY = 0;
@@ -125,10 +179,17 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 		r = true;
 	}
 
+<<<<<<< HEAD
 	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
+=======
+	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14+speedY)>>4))
+>>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 	{
 		if (abs(this->speedX) > abs(this->speedY))
 		{

@@ -25,7 +25,7 @@ bool Block::isSimple()
 }
 
 #ifndef _SERVER
-void Block::Draw(int posX, int posY, App& app, TextureContainer &tc, unsigned short metadata)
+void Block::Draw(long posX, long posY, App& app, TextureContainer &tc, unsigned short metadata)
 {
 	sf::Sprite *&&tempSprite = &(tc.getTextures(getTextureName())[getTextureId(app, metadata)]);
 	tempSprite->setPosition(posX, posY);

@@ -24,6 +24,6 @@ public:
 	virtual bool isSimple();
 	//virtual char getSubTextureId() = 0;
 #ifndef _SERVER
-	void Draw(int posX, int posY, App& app, TextureContainer &tc, unsigned short metadata);
+	void Draw(long posX, long posY, App& app, TextureContainer &tc, unsigned short metadata);
 #endif
 };

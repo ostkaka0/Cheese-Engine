@@ -32,7 +32,7 @@ public:
 	void setMetadata(unsigned char layer, unsigned short x, unsigned short y, unsigned short metadata);
 	unsigned short getBlockId(unsigned char layer, unsigned short x, unsigned short y);
 #ifndef _SERVER
-	void Draw(short xPos, short yPos, App& app, TextureContainer &tc);
+	void Draw(long xPos, long yPos, App& app, TextureContainer &tc);
 #endif
 	bool isAnySolid(std::pair<Block*, unsigned short> blocks[6]);
 	bool isAnySeeThrough(std::pair<Block*, unsigned short> blocks[6]);

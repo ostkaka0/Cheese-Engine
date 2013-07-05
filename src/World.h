@@ -51,13 +51,13 @@ public:
 	void setBlock(long x, long y, long layer, unsigned short id);
 	void setBlockAndMetadata(long x, long y, long layer, unsigned short id, unsigned short metadata);
 	void setBlockMetadata(long x, long y, long layer, unsigned short metadata);
-	bool setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata);
-	bool setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata);
+	MessageType setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata);
+	MessageType setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata);
 	Block* getBlock(long x, long y, long layer);
 	void Expand(long x, long y, Chunk* chunk);
 	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
 	bool isBlockSolid(long x, long y);
-	std::function<Block*(unsigned short)>* getBlockType(unsigned short id);
+	Block* getBlockType(unsigned short id, unsigned short metadata);
 	std::map<unsigned short, std::function<Block*(unsigned short)>>& getBlockTypeMap();
 	int AddEntity(Entity*);
 	void RemoveEntity(int id);
