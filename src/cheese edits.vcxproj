@@ -72,8 +72,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\SFML-2.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SFML-2.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SFML-2.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SFML-2.0\lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\</IntDir>
     <TargetName>$(ProjectName) $(Configuration)</TargetName>
   </PropertyGroup>
