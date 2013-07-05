@@ -96,6 +96,7 @@ void ServerState::ProcessPackets(void)
 					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
 
 					// Send the init message
+					// Players
 					send << (sf::Uint16) InitMessage;
 					for(std::pair<int, Client*> pair : sC->clients)
 					{
@@ -142,6 +143,11 @@ void ServerState::ProcessPackets(void)
 
 					//Move player in server world
 					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
+
+					//Send world data in radius around player
+					/*int chunkX = xPos * 0.00390625;
+					int chunkY = yPos * 0.00390625;
+					currentWorld->get*/
 				}
 			}
 			break;

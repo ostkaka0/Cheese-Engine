@@ -175,17 +175,19 @@ bool World::setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned s
 			else
 			{
 				Block* block = c->getBlock(layer, xxx, yyy);
-				printf(" %X %d %d\n", block, xxx, yyy);
+				//printf(" %X %d %d\n", block, xxx, yyy);
 				if (block != nullptr)
 				{
-					if (block->getId() == id)
+					if (block->getId() == id && c->getMetadata(layer, xxx, yyy) == metadata)
 					{
 						return false;
 					}
 				}
+				else if(id == 0)
+					return false;
 			}
 
-			c->setBlock(layer, xxx, yyy, (*getBlockType(id))(metadata));
+			c->setBlock(layer, xxx, yyy, getBlockType(id) == nullptr ? nullptr : (*getBlockType(id))(metadata));
 			c->setMetadata(layer, xxx, yyy, metadata);
 			return true;
 		}
