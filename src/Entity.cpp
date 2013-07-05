@@ -28,11 +28,6 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
 
-		float speedXModifier = abs(speedX * app.getFrameTime());
-
-		float speedYModifier = abs(speedY * app.getFrameTime());
-
-
 		//float speedModifier = speedX * app.GetFrameTime();
 
 		//float speedYModifier = abs(speedY * app.GetFrameTime());
@@ -44,11 +39,7 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 		//NEW FAILED PHYSICS D:  {
 		/*double speed = sqrt(pow(abs(speedX)*app.GetFrameTime(),2)+pow(abs(speedY)*app.GetFrameTime(),2));
 
-<<<<<<< HEAD
-		double speed = sqrt(pow(speedX*app.getFrameTime(),2)+pow(speedY*app.getFrameTime(),2));
-=======
 		double angle = atan(speedY/speedX);
->>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 
 		double deltaX = cos(angle);
 		double deltaY = sin(angle);
@@ -124,14 +115,14 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 		// } D: 
 
 		//> gammal fysikD:
-		CheckCollision(app, world, speedX * app.getFrameTime(), speedY * app.getFrameTime());
+		CheckCollision(app, world, speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
 
-		x += speedX * app.getFrameTime();
-		y += speedY * app.getFrameTime();
+		x += speedX * app.GetFrameTime();
+		y += speedY * app.GetFrameTime();
 		//< D:
 
-		speedX *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
-		speedY *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
+		speedX *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
+		speedY *= 1 - tan(friction*M_PI/2) * app.GetFrameTime();
 	}
 }
 
@@ -142,17 +133,32 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 	if (speedX == 0 && speedY == 0)
 		return false;
 
+	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1)>>4) ||
+		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14)>>4) ||
+		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14)>>4))
+	{
+		this->speedX = 0;
+		speedX = 0;
+		Collision(world);
+		r = true;
+	}
 
-	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
+	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY)>>4) ||
+		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY)>>4) ||
+		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY)>>4))
+	{
+		this->speedY = 0;
+		speedY = 0;
+		Collision(world);
+		r = true;
+	}
 
 	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14+speedY)>>4))
-
 	{
 		if (abs(this->speedX) > abs(this->speedY))
 		{
@@ -260,9 +266,9 @@ void Entity::Draw(App& app, TextureContainer &tc)
 	sf::Sprite *sprite = &(tc.getTextures(spriteName)[spriteIndex]);
 	if (sprite != nullptr)
 	{
-	    sprite->setPosition(sf::Vector2f(x, y));
-	    sprite->setRotation(angle);
-		app.draw(*sprite);
+	    sprite->SetPosition(sf::Vector2f(x, y));
+	    sprite->SetRotation(angle);
+		app.Draw(*sprite);
 	}
 	else
 	{
