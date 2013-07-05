@@ -14,9 +14,9 @@ char** _argv;
 //using namespace sf;
 
 /*#ifdef _SERVER
-	#define _APP *reinterpret_cast<tgui::Window*>(&app)//static_cast<tgui::Window>(app)
+#define _APP *reinterpret_cast<tgui::Window*>(&app)//static_cast<tgui::Window>(app)
 #else
-	#define _APP app
+#define _APP app
 #endif*/
 
 int main(int argc, char** argv)
@@ -26,49 +26,49 @@ int main(int argc, char** argv)
 
 #ifndef _SERVER
 
-    App app(sf::VideoMode(768, 512));
-	
+	App app(sf::VideoMode(768, 512));
+
 	GameState *gameState = new PlayState((const PlayState&)app);
 #else
-	App app(sf::VideoMode(768, 512));//App app();
+	App app;
 	GameState *gameState = new ServerState(app);
 #endif
-	
+
 	GameState *oldState;
 
 	//app.SetFramerateLimit(6);
 #ifndef _SERVER
 	while (app.isOpen())
-    {
-       sf::Event event;
-       if (app.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                app.close();
+	{
+		sf::Event event;
+		if (app.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				app.close();
 
-            gameState->EventUpdate(event);
-        }
+			gameState->EventUpdate(event);
+		}
 #else
 	while (true)
 	{
 #endif
 
-        oldState = gameState;
+		oldState = gameState;
 		if((gameState=gameState->Update(app)) != oldState)
-        {
-            delete oldState;
-        }
+		{
+			delete oldState;
+		}
 
 #ifndef _SERVER
-        app.clear();
+		app.clear();
 
-        gameState->Draw(app);
+		gameState->Draw(app);
 
-        app.display();
+		app.display();
 #else
 		app.Update();
 #endif
-    }
+	}
 
-    return 0;
+	return 0;
 }

@@ -83,6 +83,7 @@ GameState *PlayState::Update(App& app)
 
 	camera->Update(app);
 	blockMenu->Update(app, tC, *currentWorld);
+	connection->Run();
 	ProcessPackets();
 	return this;
 }

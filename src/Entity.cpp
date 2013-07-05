@@ -27,16 +27,15 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
-<<<<<<< HEAD
+
 		float speedXModifier = abs(speedX * app.getFrameTime());
 
 		float speedYModifier = abs(speedY * app.getFrameTime());
-=======
+
 
 		//float speedModifier = speedX * app.GetFrameTime();
 
 		//float speedYModifier = abs(speedY * app.GetFrameTime());
->>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
 		
 		//char speedXNegativeFactor = (speedX > 0)? 1:-1;
 		//char speedYNegativeFactor = (speedY > 0)? 1:-1;
@@ -125,10 +124,10 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 		// } D: 
 
 		//> gammal fysikD:
-		CheckCollision(app, world, speedX * app.GetFrameTime(), speedY * app.GetFrameTime());
+		CheckCollision(app, world, speedX * app.getFrameTime(), speedY * app.getFrameTime());
 
-		x += speedX * app.GetFrameTime();
-		y += speedY * app.GetFrameTime();
+		x += speedX * app.getFrameTime();
+		y += speedY * app.getFrameTime();
 		//< D:
 
 		speedX *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
@@ -143,53 +142,17 @@ bool Entity::CheckCollision(App& app, World* world, float speedX, float speedY)
 	if (speedX == 0 && speedY == 0)
 		return false;
 
-<<<<<<< HEAD
-	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14)>>4))
-=======
-	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1)>>4) ||
-		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14)>>4) ||
-		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14)>>4))
->>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
-	{
-		this->speedX = 0;
-		speedX = 0;
-		Collision(world);
-		r = true;
-	}
 
-<<<<<<< HEAD
-	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
-=======
-	if (world->isBlockSolid((int)(x+1)>>4,(int)(y+1+speedY)>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+1+speedY)>>4) ||
-		world->isBlockSolid((int)(x+1)>>4,(int)(y+14+speedY)>>4) ||
-		world->isBlockSolid((int)(x+14)>>4,(int)(y+14+speedY)>>4))
->>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
-	{
-		this->speedY = 0;
-		speedY = 0;
-		Collision(world);
-		r = true;
-	}
-
-<<<<<<< HEAD
 	if (world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+1+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+1+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4) ||
 		world->isBlockSolid((int)(x+14+speedX*app.getFrameTime())>>4,(int)(y+14+speedY*app.getFrameTime())>>4))
-=======
+
 	if (world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+1+speedY)>>4) ||
 		world->isBlockSolid((int)(x+1+speedX)>>4,(int)(y+14+speedY)>>4) ||
 		world->isBlockSolid((int)(x+14+speedX)>>4,(int)(y+14+speedY)>>4))
->>>>>>> 2dbb0fccc9120629075f0f104405e4486369d95b
+
 	{
 		if (abs(this->speedX) > abs(this->speedY))
 		{

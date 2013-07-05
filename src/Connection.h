@@ -18,10 +18,10 @@ public:
 	std::queue<sf::Packet*> packets;
 	sf::Mutex globalMutex;
 	Client* client;
+	void Run();
 private:
 	//sf::Thread* thread;
 	bool Connect(sf::IpAddress ip, int port);
-	void Run();
 	void Receive();
 };
 

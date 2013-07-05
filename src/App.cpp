@@ -3,10 +3,12 @@
 
 #define MIN_FRAME_TIME 0.00390625F
 
+#ifndef _SERVER
 App::App(sf::VideoMode videoMode) : RenderWindow(videoMode, "Cheese Multiplayer - Alpha")
 {
 
 }
+#endif
 
 float App::getFrameTime()
 {

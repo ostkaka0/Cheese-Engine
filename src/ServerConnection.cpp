@@ -4,7 +4,7 @@ ServerConnection::ServerConnection(int port, World* world)
 {
 	currentWorld = world;
 	maxClients = 1024;
-	//s.setBlocking(false);
+	s.setBlocking(false);
 	pingTimeout.restart();
 	if(s.listen(port) != sf::Socket::Status::Done)
 	{
@@ -108,13 +108,14 @@ void ServerConnection::Receive()
 		if(clients.find(i) != clients.end())
 		{
 			Client* client = clients.find(i)->second;
-			if(!client->socket.NotReady)
-			{
+			//if(client->socket.)
+			//{
 				sf::Packet *received = new sf::Packet();
 				sf::Socket::Status status = client->socket.receive(*received);
 				if (status == sf::Socket::Done)
 				{
 					//globalMutex.Lock();
+					std::cout << "received message server";
 					packets.push(std::pair<sf::Packet*, Client*>(received, client));
 					//globalMutex.Unlock();
 					// Extract the message and display it
@@ -122,9 +123,9 @@ void ServerConnection::Receive()
 				}
 				else if(status == sf::Socket::Disconnected)
 					KickClient(i, "Disconnected");
-			}
-			else
-				KickClient(i, "Not valid socket");
+			//}
+			//else
+				//KickClient(i, "Not valid socket");
 		}
 	}
 }

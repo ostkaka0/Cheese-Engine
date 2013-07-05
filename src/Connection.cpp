@@ -17,11 +17,11 @@ Connection::~Connection(void)
 
 void Connection::Run()
 {
-	while(true)
+	//while(true)
 	{
 		Receive();
 
-		sf::sleep(sf::milliseconds(10));
+		//sf::sleep(sf::milliseconds(10));
 	}
 }
 
