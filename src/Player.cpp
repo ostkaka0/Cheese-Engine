@@ -23,6 +23,9 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 #ifndef _SERVER
 	if (isClientControlling)
 	{
+		x += app.getFrameTime();
+		std::cout << "wtf\n";
+
 		sf::Event event;
 		app.pollEvent(event);
 		bool rDown, dDown, lDown, uDown;

@@ -22,7 +22,7 @@ World::World()
 	RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i));i++;
 	RegisterBlock(i,(new BlockBackground(i))->RegisterBlock(i));i++;
 
-	/*for (int x = 0; x < 30; x++)
+	for (int x = 0; x < 30; x++)
 	{ 
 	chunkMatrix.first.push_back(ChunkColumnType(std::deque<Chunk*>(),0));
 	for (int y = 0; y < 30; y++)
@@ -31,7 +31,7 @@ World::World()
 	chunk->setBlock(2, 1, 1, new  BlockSolid(1));//(*getBlockType(1))(0));
 	chunkMatrix.first[x].first.push_back(chunk);
 	}
-	}*/
+	}
 
 	packetDataList = new std::queue<sf::Packet>();
 }
