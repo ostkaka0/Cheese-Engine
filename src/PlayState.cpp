@@ -40,7 +40,7 @@ PlayState::PlayState(App& app)
 
 	camera = new Camera(32);
 	currentWorld = new World();
-	blockMenu = new InGameUI(tC, *currentWorld);
+	blockMenu = new InGameUI(app, tC, *currentWorld);
 	connection = new Connection(5001, ip);
 
 	app.setView(*camera);

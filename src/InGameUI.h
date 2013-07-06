@@ -2,7 +2,7 @@
 class InGameUI;
 #pragma once
 #include <SFML\Graphics.hpp>
-//#include <TGUI\TGUI.hpp>
+#include <TGUI\TGUI.hpp>
 #include "App.h"
 
 class TextureContainer;
@@ -13,7 +13,7 @@ class Block;
 class InGameUI
 {
 public:
-	InGameUI(TextureContainer &tc, World &world);
+	InGameUI(App &app, TextureContainer &tc, World &world);
 	~InGameUI(void);
 	void Update(App& app, TextureContainer &tc, World &world);
 	void Draw(App& app, TextureContainer &tc, World &world);
@@ -21,6 +21,5 @@ public:
 	short int selectedBlockSolid;
 	short int selectedBackground;
 
-	//tgui::ChatBox* chatBox;
 };
 #endif

@@ -8,7 +8,7 @@
 #include "BlockBackground.h"
 #include <iostream>
 
-InGameUI::InGameUI(TextureContainer &tc, World &world)
+InGameUI::InGameUI(App &app, TextureContainer &tc, World &world)
 {
 	tc.AddSpriteSheet("UIMainStrip.png", 768, 24);
 	tc.AddSpriteSheet("UIBlockBackground.png", 768, 128);
@@ -16,7 +16,27 @@ InGameUI::InGameUI(TextureContainer &tc, World &world)
 	selectedBlockSolid = 0;
 	selectedBackground = 0;
 
-	//chatBox = window.add<tgui::Button>();
+	sf::Vector2i drawPos(1152-420, 720-170);
+	auto chatBox = app.add<tgui::TextBox>("chatBox");
+	auto editBox = app.add<tgui::EditBox>("chatBoxInput");
+
+	if(!chatBox->load(340, 172, 24, "TGUI/objects/Scrollbar/Black"))
+		std::cout << "error";
+	if(!editBox->load("TGUI/objects/EditBox/Black"))
+		std::cout << "error";
+
+	chatBox->setBorders(2, 2, 2, 2);
+	editBox->setBorders(2, 2, 2, 2);
+	
+	chatBox->selectionPointWidth = 2;
+	chatBox->selectionPointColor = sf::Color::Black;
+
+	editBox->setSize(340, 40);
+	editBox->setMaximumCharacters(100);
+	editBox->enable();
+
+	chatBox->setPosition(drawPos.x + 0, drawPos.y + 0 );
+	editBox->setPosition(drawPos.x + 0, drawPos.y + 170);
 }
 
 
@@ -67,9 +87,9 @@ void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 				if(sf::Mouse::getPosition().y < 512 - 24)
 				{
 					//ORKAif(selectedBlockSolid != -1)
-						//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
+					//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
 					//ORKAelse if(selectedBackground != -1)
-						//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
+					//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
 
 					//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
 				}
@@ -97,6 +117,8 @@ void InGameUI::Draw(App& app, TextureContainer &tc, World &world)
 
 	app.draw(*mainStripSprite);
 	app.draw(*buttonBlocksSprite);
+	//app.draw(*chatBox);
+	app.drawGUI();
 
 	for (auto b : world.getBlockTypeMap())//for (std::map<unsigned short, std::function<Block*(unsigned short)>>::iterator b = world.getBlockTypeMap()->begin(); b != world.getBlockTypeMap()->end(); b++)
 	{
