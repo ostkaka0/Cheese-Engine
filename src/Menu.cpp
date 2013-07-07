@@ -17,9 +17,9 @@ Menu::~Menu()//void Menu::Shutdown()
     delete menuState;
 }
 
-void Menu::EventUpdate(sf::Event& event)
+void Menu::EventUpdate(App& app, sf::Event& event)
 {
-    menuState->EventUpdate(event);
+    menuState->EventUpdate(app, event);
 }
 
 GameState *Menu::Update(App& app)

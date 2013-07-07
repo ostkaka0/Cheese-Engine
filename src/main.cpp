@@ -45,9 +45,7 @@ int main(int argc, char** argv)
 		{
 			if (event.type == sf::Event::Closed)
 				app.close();
-
-			gameState->EventUpdate(event);
-			
+			gameState->EventUpdate(app, event);
 			// Pass the event to all the objects (if there would be objects)
             app.handleEvent(event);
 		}
@@ -67,6 +65,7 @@ int main(int argc, char** argv)
 
 		gameState->Draw(app);
 
+		app.Update();
 		app.display();
 #else
 		app.Update();

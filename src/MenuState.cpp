@@ -19,7 +19,7 @@ MenuState::~MenuState()//void MenuState::Shutdown()
     }
 }
 
-void MenuState::EventUpdate(sf::Event& event)
+void MenuState::EventUpdate(App& app, sf::Event& event)
 {
 
 }

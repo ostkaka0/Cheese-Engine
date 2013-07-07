@@ -15,7 +15,7 @@ public:
     //virtual void Initialize()=0;
     virtual GameState *Update(App& app)=0;
 #ifndef _SERVER
-	virtual void EventUpdate(sf::Event& event)=0;
+	virtual void EventUpdate(App& app, sf::Event& event)=0;
     virtual void Draw(App& app)=0;
 #endif
     //virtual void Shutdown()=0;

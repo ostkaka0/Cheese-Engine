@@ -12,12 +12,13 @@ App::App(sf::VideoMode videoMode) : tgui::Window(videoMode, "Cheese Multiplayer 
 
 float App::getFrameTime()
 {
-	return frameTime+sleptTime;
+	//std::cout << frameTime << " " << sleptTime << std::endl;
+	return (frameTime+sleptTime)/1000000;
 }
 
 void App::Update()
 {
-	frameTime = frameTimer.getElapsedTime().asMilliseconds();
+	frameTime = frameTimer.getElapsedTime().asMicroseconds();
 
 	if (frameTime < MIN_FRAME_TIME)
 	{

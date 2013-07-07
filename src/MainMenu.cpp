@@ -23,9 +23,9 @@ MainMenu::~MainMenu()// : MenuState()//void MainMenu::Shutdown()
 	MenuState::~MenuState();
 }
 
-void MainMenu::EventUpdate(sf::Event& event)
+void MainMenu::EventUpdate(App& app, sf::Event& event)
 {
-    MenuState::EventUpdate(event);
+    MenuState::EventUpdate(app, event);
 }
 
 GameState *MainMenu::Update(App& app)

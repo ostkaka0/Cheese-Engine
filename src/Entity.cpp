@@ -128,6 +128,7 @@ void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 
 		x += speedX * app.getFrameTime();
 		y += speedY * app.getFrameTime();
+				//std::cout << x << " " << y << std::endl;
 		//< D:
 
 		speedX *= 1 - tan(friction*M_PI/2) * app.getFrameTime();
@@ -255,6 +256,12 @@ void Entity::FixateY()
 }*/
 
 #ifndef _SERVER
+
+void Entity::EventUpdate(App& app, sf::Event& event, World* world, std::queue<sf::Packet>* packetDataList)
+{
+
+}
+
 void Entity::Draw(App& app, TextureContainer &tc)
 {
 	sf::Sprite *sprite = &(tc.getTextures(spriteName)[spriteIndex]);

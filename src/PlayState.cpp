@@ -43,7 +43,7 @@ PlayState::PlayState(App& app)
 	blockMenu = new InGameUI(app, tC, *currentWorld);
 	connection = new Connection(5001, ip);
 
-	app.setView(*camera);
+	//app.setView(*camera);
 	camera->setSize(sf::Vector2f(768, 512)); 
 
 	//Player* player = new Player(128, 128, 16, 16, true, "graywizard.png", 0, "Karl-Bertil");
@@ -66,9 +66,9 @@ PlayState::~PlayState()
 	//delete blockMenu;
 }
 
-void PlayState::EventUpdate(sf::Event& event)
+void PlayState::EventUpdate(App& app, sf::Event& event)
 {
-
+	currentWorld->EventUpdate(app, event);
 }
 
 GameState *PlayState::Update(App& app)
@@ -82,6 +82,7 @@ GameState *PlayState::Update(App& app)
 	//delete packetDataList;
 
 	camera->Update(app);
+	
 	blockMenu->Update(app, tC, *currentWorld);
 	connection->Run();
 	ProcessPackets();

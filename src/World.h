@@ -44,6 +44,7 @@ private:
 public:
 	World();
 #ifndef _SERVER
+	void EventUpdate(App& app, sf::Event& event);
 	void Draw(App& app, TextureContainer& tC);
 #endif
 	std::queue<sf::Packet>* Update(App& app, TextureContainer& tC);

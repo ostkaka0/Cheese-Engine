@@ -20,7 +20,7 @@ class PlayState : public GameState
 public:
 	PlayState(App& app);
 	~PlayState();
-    virtual void EventUpdate(sf::Event& event);
+    virtual void EventUpdate(App& app, sf::Event& event);
     virtual GameState *Update(App& app);
     virtual void Draw(App& app);
 	World* currentWorld;

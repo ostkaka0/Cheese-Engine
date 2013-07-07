@@ -3,10 +3,10 @@
 
 Camera::Camera(double speed)
 {
-	this->speed = speed;
+	speed = speed;
 	currentEntity = nullptr;
 
-	this->setSize(1152,720);// temporära magiska nummer
+	setSize(1152,720);// temporära magiska nummer
 }
 
 
@@ -24,6 +24,8 @@ void Camera::Update(App& app)
 		float speedFactor = atan(app.getFrameTime()*speed)*2/3.14159265358979323846264338327950288419;
 
 		setCenter(getCenter().x + deltaX*speedFactor, getCenter().y + deltaY*speedFactor);
+
+		rotate(13);
 	}
 }
 

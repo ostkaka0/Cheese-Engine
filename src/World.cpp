@@ -37,6 +37,20 @@ World::World()
 }
 
 #ifndef _SERVER
+
+void World::EventUpdate(App& app, sf::Event& event)
+{
+	for (Entity* entity : entityList)
+	{
+		entity->EventUpdate(app, event, this, packetDataList);
+	}
+
+	for(std::pair<short, Player*> pair : playerList)
+	{
+		pair.second->EventUpdate(app, event, this, packetDataList);
+	}
+}
+
 void World::Draw(App& app, TextureContainer& tC)
 {
 	for (int x = 0; x < chunkMatrix.first.size(); x++)
