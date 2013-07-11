@@ -81,11 +81,28 @@ GameState *PlayState::Update(App& app)
 	}
 	//delete packetDataList;
 
+	tgui::Callback callback;
+	while (app.getCallback(callback))
+	{
+		if (callback.callbackID == 1)
+		{
+			if (callback.trigger == tgui::Callback::keyPress_Return)
+			{
+				sf::String chatToSend = app.get<tgui::EditBox>("chatBoxInput")->getText();
+				app.get<tgui::EditBox>("chatBoxInput")->setText("");
+				sf::Packet toSend;
+				toSend << (sf::Uint16)ChatMessage << chatToSend;
+				connection->client->socket.send(toSend);
+				std::cout << "client sent chat" << std::endl;
+			}
+		}
+	}
+
 	camera->Update(app);
-	
+
 	blockMenu->Update(app, tC, *currentWorld);
 	connection->Run();
-	ProcessPackets();
+	ProcessPackets(app);
 	return this;
 }
 
@@ -95,7 +112,7 @@ void PlayState::Draw(App& app)
 	blockMenu->Draw(app, tC, *currentWorld);
 }
 
-void PlayState::ProcessPackets(void)
+void PlayState::ProcessPackets(App& app)
 {
 	connection->globalMutex.lock();
 	std::queue<sf::Packet*> packets = connection->packets;
@@ -125,7 +142,7 @@ void PlayState::ProcessPackets(void)
 					sf::Int16 sizeY;
 
 					if(!(*packet >> ID  >> xPos >> yPos >> sizeX >> sizeY)) {}
-						//std::cout << "ERROR: Client could not extract data" << std::endl;
+					//std::cout << "ERROR: Client could not extract data" << std::endl;
 					else
 					{
 						Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
@@ -244,6 +261,15 @@ void PlayState::ProcessPackets(void)
 				sf::Uint16 metadata;
 				*packet >> xPos >> yPos >> layer >> metadata;
 				currentWorld->setBlockMetadataClientOnly(xPos, yPos, layer, metadata);
+			}
+			break;
+		case ChatMessage:
+			{
+				std::string said;
+				sf::Uint16 id;
+				*packet >> id >> said;
+				app.get<tgui::TextBox>("chatBox")->addText((int)id + " says: " + said);
+				std::cout << "client got chat" << std::endl;
 			}
 			break;
 			std::cout << packetType << std::endl;

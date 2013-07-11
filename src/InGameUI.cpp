@@ -16,7 +16,7 @@ InGameUI::InGameUI(App &app, TextureContainer &tc, World &world)
 	selectedBlockSolid = 0;
 	selectedBackground = 0;
 
-	sf::Vector2i drawPos(1152-420, 720-170);
+	sf::Vector2i drawPos(1152-420, 720-170-500);
 	auto chatBox = app.add<tgui::TextBox>("chatBox");
 	auto editBox = app.add<tgui::EditBox>("chatBoxInput");
 
@@ -32,9 +32,10 @@ InGameUI::InGameUI(App &app, TextureContainer &tc, World &world)
 	chatBox->selectionPointColor = sf::Color::Black;
 
 	editBox->setSize(340, 40);
-	editBox->setMaximumCharacters(100);
 	editBox->enable();
 
+	//chatBox->disable();
+	editBox->callbackID = 1;
 	chatBox->setPosition(drawPos.x + 0, drawPos.y + 0 );
 	editBox->setPosition(drawPos.x + 0, drawPos.y + 170);
 }
