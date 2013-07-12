@@ -75,11 +75,7 @@
     <IncludePath>D:\SFML-2.0\include;D:\TGUI-0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\TGUI-0.5\lib;D:\SFML-2.0\lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(Configuration)\</IntDir>
-<<<<<<< HEAD
-    <TargetName>$(ProjectName) $(Configuration) sssssssss</TargetName>
-=======
     <TargetName>$(ProjectName) $(Configuration)</TargetName>
->>>>>>> cdeb60989cd5f6b251633fc64d1e9e8d237414db
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -156,7 +152,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Cheese_Multiplayer\src\BlockRegister.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockBackground.cpp" />
@@ -185,7 +180,6 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Cheese_Multiplayer\src\BlockRegister.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockBackground.h" />
