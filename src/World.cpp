@@ -7,7 +7,9 @@
 #include "BlockBackground.h"
 #include "Player.h"
 #include "MessageType.h"
+#include "EventHandler.h"
 #include <deque>
+
 
 #define getChunkMatrixIndexX(x) (int)abs(x>>4 + chunkMatrix.second)
 #define getChunkColumnIndexY(y,x_it) (int)abs(y>>4 + x_it.second)

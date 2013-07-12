@@ -81,7 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>D:\SFML-2.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\SFML-2.0\lib;$(LibraryPath)</LibraryPath>
-    <TargetName>$(ProjectName) Server ss</TargetName>
+    <TargetName>$(ProjectName) $(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -163,6 +163,7 @@
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="InGameUI.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
@@ -193,9 +194,11 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityRegister.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InGameUI.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="Listener.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuItem.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="ServerState.h" />
+    <ClInclude Include="SoundContainer.h" />
     <ClInclude Include="TextureContainer.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
