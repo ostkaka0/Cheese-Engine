@@ -7,7 +7,7 @@
 class TextureContainer;
 class Entity;
 
-class BlockRegister
+class EntityRegister
 {
 	std::map<size_t, std::function<Entity*(/*EventCallback*/)>> blockTypeList;
 public:
