@@ -37,7 +37,7 @@ GameState *ServerState::Update(App& app)
 		sC->Broadcast(packetDataList->front());
 		packetDataList->pop();
 	}
-	//delete packetDataList;
+	delete packetDataList;
 	sC->Run();
 	ProcessPackets();
 	return this;
@@ -45,16 +45,12 @@ GameState *ServerState::Update(App& app)
 
 void ServerState::ProcessPackets(void)
 {
-	//sC->globalMutex.lock();
-	auto packets = sC->packets;
-	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
-	//sC->globalMutex.unlock();
-
-	while(packets.size() > 0)
+	if(sC->packets != nullptr)
+	while(sC->packets->size() > 0)
 	{
-		auto data = packets.front();
+		auto data = sC->packets->front();
 		sf::Packet* packet = data.first;
-		sf::Packet* originalPacket = new sf::Packet(*packet);
+		sf::Packet originalPacket = sf::Packet(*packet);
 		Client* client = data.second;
 		//Now process packets
 		sf::Uint16 packetType;
@@ -174,7 +170,6 @@ void ServerState::ProcessPackets(void)
 			break;
 		}
 		delete packet;
-		delete originalPacket;
-		packets.pop();
+		sC->packets->pop();
 	}
 }
