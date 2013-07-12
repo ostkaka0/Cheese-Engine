@@ -132,7 +132,11 @@
     <ClCompile Include="Connection.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="BlockRegister.cpp">
+=======
+    <ClCompile Include="..\..\..\Cheese_Multiplayer\src\BlockRegister.cpp">
+>>>>>>> cdeb60989cd5f6b251633fc64d1e9e8d237414db
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,10 +222,14 @@
     <ClInclude Include="MessageType.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="BlockRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityRegister.h">
+=======
+    <ClInclude Include="..\..\..\Cheese_Multiplayer\src\BlockRegister.h">
+>>>>>>> cdeb60989cd5f6b251633fc64d1e9e8d237414db
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
