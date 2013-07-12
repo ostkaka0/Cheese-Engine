@@ -6,8 +6,13 @@
 #include "MessageType.h"
 #include "App.h"
 
+#ifdef _SERVER
 Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
 	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
+#else
+Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name, EventHandler& eventHandler) 
+	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
+#endif
 {
 	name = Name;
 	cameraDelay = 0;
@@ -18,7 +23,11 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	lmb = false;
 }
 
+#ifdef _SERVER
 void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
+#else
+void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera, EventHandler& eventHandler)
+#endif
 {
 #ifndef _SERVER
 	if (isClientControlling)
@@ -38,7 +47,11 @@ void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataLi
 	}
 #endif
 
+#ifdef _SERVER
 	Creature::Update(app, world, packetDataList, camera);
+#else
+	Creature::Update(app, world, packetDataList, camera, eventHandler);
+#endif
 }
 
 #ifndef _SERVER

@@ -221,9 +221,6 @@
     <ClInclude Include="MessageType.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="BlockRegister.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EntityRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -234,6 +231,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockRegister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
