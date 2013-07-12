@@ -11,7 +11,7 @@ class EntityRegister
 {
 	std::map<size_t, std::function<Entity*(/*EventCallback*/)>> blockTypeList;
 public:
-	BlockRegister();
+	EntityRegister();
 	void RegisterEntity(TextureContainer tC, Entity* entity, size_t typeId);
 	Entity* getEntityType(unsigned short id, unsigned short metadata);
 	Entity* getEntityTypeByTypeId(size_t typeId, unsigned short metadata);
