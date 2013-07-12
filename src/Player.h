@@ -22,7 +22,7 @@ private:
     std::string name;
 public:
     Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name);
-	void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList);
+	void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera);
 #ifndef _SERVER
 	virtual void EventUpdate(App& app, sf::Event& event, World* world, std::queue<sf::Packet>* packetDataList);
     virtual void Draw(App& app, TextureContainer &tc);

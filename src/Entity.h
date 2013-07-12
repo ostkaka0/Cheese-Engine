@@ -39,7 +39,7 @@ protected:
 public:
     bool isClientControlling;
 	Entity(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
-	virtual void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList);
+	virtual void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera);
 #ifndef _SERVER
 	virtual void EventUpdate(App& app, sf::Event& event, World* world, std::queue<sf::Packet>* packetDataList);
     virtual void Draw(App& app, TextureContainer &tc);

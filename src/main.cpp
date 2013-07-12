@@ -27,7 +27,6 @@ int main(int argc, char** argv)
 #ifndef _SERVER
 
 	App app(sf::VideoMode(1152,720));
-	app.globalFont.loadFromFile("TGUI/Fonts/DejaVuSans.ttf");
 
 	GameState *gameState = new PlayState((const PlayState&)app);
 #else
@@ -42,15 +41,14 @@ int main(int argc, char** argv)
 	while (app.isOpen())
 	{
 		sf::Event event;
-		while (app.pollEvent(event))
+		if (app.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				app.close();
 			gameState->EventUpdate(app, event);
 			// Pass the event to all the objects (if there would be objects)
-			app.handleEvent(event);
+            app.handleEvent(event);
 		}
-
 #else
 	while (true)
 	{

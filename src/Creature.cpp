@@ -9,12 +9,12 @@ Creature::Creature(float x, float y, short sizeX, short sizeY, float speed, floa
     vertical = 0;
 }
 
-void Creature::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
+void Creature::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
 {
     speedX += horizontal * app.getFrameTime();
     speedY += vertical * app.getFrameTime();
 
-	Entity::Update(app, world, packetDataList);
+	Entity::Update(app, world, packetDataList, camera);
 }
 
 void Creature::CreatureMove(float x, float y, float speedX, float speedY, float angle, float horizontal, float vertical)

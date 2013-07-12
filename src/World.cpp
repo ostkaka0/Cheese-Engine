@@ -22,10 +22,10 @@ World::World()
 	RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i));i++;
 	RegisterBlock(i,(new BlockBackground(i))->RegisterBlock(i));i++;
 
-	for (int x = 0; x < 30; x++)
+	for (int x = 0; x < 3; x++)
 	{ 
 	chunkMatrix.first.push_back(ChunkColumnType(std::deque<Chunk*>(),0));
-	for (int y = 0; y < 30; y++)
+	for (int y = 0; y < 3; y++)
 	{
 	Chunk* chunk = new Chunk();
 	chunk->setBlock(2, 1, 1, new  BlockSolid(1));//(*getBlockType(1))(0));
@@ -76,16 +76,16 @@ void World::Draw(App& app, TextureContainer& tC)
 }
 #endif
 
-std::queue<sf::Packet>* World::Update(App& app, TextureContainer& tC)
+std::queue<sf::Packet>* World::Update(App& app, TextureContainer& tC, Camera* camera)
 {
 	for (Entity* entity : entityList)
 	{
-		entity->Update(app, this, packetDataList);
+		entity->Update(app, this, packetDataList, camera);
 	}
 
 	for(std::pair<short, Player*> pair : playerList)
 	{
-		pair.second->Update(app, this, packetDataList);
+		pair.second->Update(app, this, packetDataList, camera);
 	}	
 
 	return packetDataList;

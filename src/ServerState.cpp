@@ -31,16 +31,16 @@ ServerState::~ServerState()
 GameState *ServerState::Update(App& app)
 {
 	//std::cout << "updates per second: " << 1/APP(app).getFrameTime() << std::endl;
-	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC);
+	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC, nullptr);
 	while (!packetDataList->empty())
 	{
 		sC->Broadcast(packetDataList->front());
 		packetDataList->pop();
 	}
+	//delete packetDataList;
 	sC->Run();
 	ProcessPackets();
 	return this;
-
 }
 
 void ServerState::ProcessPackets(void)
@@ -49,9 +49,9 @@ void ServerState::ProcessPackets(void)
 	auto packets = sC->packets;
 	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
 	//sC->globalMutex.unlock();
+
 	while(packets.size() > 0)
 	{
-		//std::cout << "got pack";
 		auto data = packets.front();
 		sf::Packet* packet = data.first;
 		sf::Packet* originalPacket = new sf::Packet(*packet);
@@ -112,10 +112,10 @@ void ServerState::ProcessPackets(void)
 				}
 				/*else if(type == 1) //Player has left
 				{
-				currentWorld->RemovePlayer(client->ID);
-				send.Clear();
-				send << packetType << type << (sf::Uint16)client->ID;
-				std::cout << client->IP << " has left" << std::endl;
+					currentWorld->RemovePlayer(client->ID);
+					send.Clear();
+					send << packetType << type << (sf::Uint16)client->ID;
+					std::cout << client->IP << " has left" << std::endl;
 				}*/
 
 				sC->Broadcast(send);
@@ -170,17 +170,6 @@ void ServerState::ProcessPackets(void)
 				sf::Uint16 metadata;
 				*packet >> xPos >> yPos >> layer >> metadata;
 				currentWorld->setBlockMetadata(xPos, yPos, layer, metadata);
-			}
-			break;
-		case ChatMessage:
-			{
-				std::cout << "server got chat" << std::endl;
-				std::string said;
-				*packet >> said;
-				sf::Packet toSend;
-				toSend << (sf::Uint16)ChatMessage << (sf::Uint16)client->ID << said;
-				sC->Broadcast(toSend);
-				std::cout << "server sent chat" << std::endl;
 			}
 			break;
 		}

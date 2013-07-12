@@ -16,7 +16,7 @@ class PlayState : public GameState
 	Camera *camera;
 	InGameUI *blockMenu;
 	Connection *connection;
-	void ProcessPackets(App& app);
+	void ProcessPackets();
 public:
 	PlayState(App& app);
 	~PlayState();

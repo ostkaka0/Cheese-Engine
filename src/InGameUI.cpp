@@ -16,7 +16,7 @@ InGameUI::InGameUI(App &app, TextureContainer &tc, World &world)
 	selectedBlockSolid = 0;
 	selectedBackground = 0;
 
-	sf::Vector2i drawPos(1152-420, 720-170-500);
+	sf::Vector2i drawPos(1152-420, 720-170);
 	auto chatBox = app.add<tgui::TextBox>("chatBox");
 	auto editBox = app.add<tgui::EditBox>("chatBoxInput");
 
@@ -32,10 +32,9 @@ InGameUI::InGameUI(App &app, TextureContainer &tc, World &world)
 	chatBox->selectionPointColor = sf::Color::Black;
 
 	editBox->setSize(340, 40);
+	editBox->setMaximumCharacters(100);
 	editBox->enable();
 
-	//chatBox->disable();
-	editBox->callbackID = 1;
 	chatBox->setPosition(drawPos.x + 0, drawPos.y + 0 );
 	editBox->setPosition(drawPos.x + 0, drawPos.y + 170);
 }
@@ -47,18 +46,18 @@ InGameUI::~InGameUI(void)
 
 void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = GetCamera(app).getCenter() - sf::Vector2f(GetCamera(app).getSize().x/2, GetCamera(app).getSize().y/2);
+	sf::Vector2f bla = app.getView().getCenter() - sf::Vector2f(app.getView().getSize().x/2, app.getView().getSize().y/2);
 	sf::Vector2f mousePos = sf::Vector2f(
-		GetCamera(app).getCenter().x 
-		- (GetCamera(app).getSize().x/2)
+		app.getView().getCenter().x 
+		- (app.getView().getSize().x/2)
 		+ sf::Mouse::getPosition().x
 		- (8*16),
-		+ GetCamera(app).getCenter().y
-		- (GetCamera(app).getSize().y/2)
+		+ app.getView().getCenter().y
+		- (app.getView().getSize().y/2)
 		+ sf::Mouse::getPosition().y);
 
 	sf::Event event;
-	while(app.pollEvent(event))
+	while(false)//while(app.pollEvent(event)) <- läs sfml-tutorials... så kan man absolut inte göra >.< använd eventupdate!
 	{
 		if(event.type == sf::Event::MouseButtonPressed)
 		{
@@ -88,19 +87,19 @@ void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 				if(sf::Mouse::getPosition().y < 512 - 24)
 				{
 					//ORKAif(selectedBlockSolid != -1)
-					//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
+					//ORKAworld.setBlockAndMetadata((long)((app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(app.getView().GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 1, selectedBlockSolid);//world.setBlockAndMetadata(2,(short)( app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(app.getView().GetCenter().y + app.GetInput().GetMouseY()), 1, selectedBlockSolid);
 					//ORKAelse if(selectedBackground != -1)
-					//ORKAworld.setBlockAndMetadata((long)((GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
+					//ORKAworld.setBlockAndMetadata((long)((app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16))*0.0625), (long)(app.getView().GetCenter().y + app.GetInput().GetMouseY())>>4, 0, 2, selectedBackground);
 
-					//world.setBlockAndMetadata(0, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
+					//world.setBlockAndMetadata(0, (short)(app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16)), (short)(app.getView().GetCenter().y + app.GetInput().GetMouseY()), 2, selectedBackground);
 				}
 			}
 			else if(event.key.code == sf::Mouse::Right)
 			{
 				int layer = 2;
-				//if (world.getBlock(layer, (short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
+				//if (world.getBlock(layer, (short)(app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(app.getView().GetCenter().y + app.GetInput().GetMouseY())>>4) == 0)
 				//	layer = 0;
-				//ORKAworld.setBlock((short)(GetCamera(app).GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(GetCamera(app).GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 0);	
+				//ORKAworld.setBlock((short)(app.getView().GetCenter().x + app.GetInput().GetMouseX()-(8*16))>>4, (short)(app.getView().GetCenter().y + app.GetInput().GetMouseY())>>4, 2, 0);	
 			}
 		}
 	}
@@ -108,18 +107,21 @@ void InGameUI::Update(App& app, TextureContainer &tc, World &world)
 
 void InGameUI::Draw(App& app, TextureContainer &tc, World &world)
 {
-	sf::Vector2f bla = GetCamera(app).getCenter() - sf::Vector2f(GetCamera(app).getSize().x/2, GetCamera(app).getSize().y/2);
+	sf::Vector2f bla = app.getView().getCenter() - sf::Vector2f(app.getView().getSize().x/2, app.getView().getSize().y/2);
 
 	sf::Sprite *mainStripSprite = &(tc.getTextures("UIMainStrip.png")[0]);
 	sf::Sprite *buttonBlocksSprite = &(tc.getTextures("UIMainButtonBlocks.png")[0]);
 
-	mainStripSprite->setPosition(bla.x + 0, bla.y + 512 - 24);
-	buttonBlocksSprite->setPosition(bla.x + 1, bla.y + 512 - 21);
+	if (mainStripSprite != 0 && buttonBlocksSprite != 0)
+	{
+		mainStripSprite->setPosition(bla.x + 0, bla.y + 512 - 24);
+		buttonBlocksSprite->setPosition(bla.x + 1, bla.y + 512 - 21);
 
-	app.draw(*mainStripSprite);
-	app.draw(*buttonBlocksSprite);
-	//app.draw(*chatBox);
-	app.drawGUI();
+		app.draw(*mainStripSprite);
+		app.draw(*buttonBlocksSprite);
+		//app.draw(*chatBox);
+		app.drawGUI();
+	}
 
 	for (auto b : world.getBlockTypeMap())//for (std::map<unsigned short, std::function<Block*(unsigned short)>>::iterator b = world.getBlockTypeMap()->begin(); b != world.getBlockTypeMap()->end(); b++)
 	{

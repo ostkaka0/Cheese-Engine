@@ -12,7 +12,7 @@ Monster::~Monster(void)
 {
 }
 
-void Monster::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
+void Monster::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
 {
-	Creature::Update(app, world, packetDataList);
+	Creature::Update(app, world, packetDataList, camera);
 }

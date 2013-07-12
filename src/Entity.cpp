@@ -23,7 +23,7 @@ Entity::Entity(float x, float y, short sizeX, short sizeY, float angle, float sp
 	this->spriteIndex = spriteIndex;
 }
 
-void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList)
+void Entity::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
 {
 	if (speedX != 0.0F || speedY != 0.0F)
 	{
