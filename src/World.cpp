@@ -82,12 +82,20 @@ std::queue<sf::Packet>* World::Update(App& app, TextureContainer& tC, Camera* ca
 {
 	for (Entity* entity : entityList)
 	{
+#ifdef _SERVER
 		entity->Update(app, this, packetDataList, camera);
+#else
+		entity->Update(app, this, packetDataList, camera, eventHandler);
+#endif
 	}
 
 	for(std::pair<short, Player*> pair : playerList)
 	{
+#ifdef _SERVER
 		pair.second->Update(app, this, packetDataList, camera);
+#else
+		pair.second->Update(app, this, packetDataList, camera, eventHandler);
+#endif
 	}	
 
 	return packetDataList;
