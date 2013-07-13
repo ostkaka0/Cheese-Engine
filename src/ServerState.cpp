@@ -89,7 +89,11 @@ void ServerState::ProcessPackets(void)
 					*packet >> xPos >> yPos;
 
 					//Add the player to the server world
+#ifdef _SERVER
 					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+#else
+					//orkar inte fixaA>.<
+#endif
 
 					// Send the init message
 					// Players
