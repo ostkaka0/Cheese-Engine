@@ -37,7 +37,7 @@ GameState *ServerState::Update(App& app)
 		sC->Broadcast(packetDataList->front());
 		packetDataList->pop();
 	}
-	delete packetDataList;
+	//delete packetDataList;
 	sC->Run();
 	ProcessPackets();
 	return this;
@@ -45,12 +45,16 @@ GameState *ServerState::Update(App& app)
 
 void ServerState::ProcessPackets(void)
 {
-	if(sC->packets != nullptr)
-	while(sC->packets->size() > 0)
+	//sC->globalMutex.lock();
+	auto packets = sC->packets;
+	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
+	//sC->globalMutex.unlock();
+
+	while(packets.size() > 0)
 	{
-		auto data = sC->packets->front();
+		auto data = packets.front();
 		sf::Packet* packet = data.first;
-		sf::Packet originalPacket = sf::Packet(*packet);
+		sf::Packet* originalPacket = new sf::Packet(*packet);
 		Client* client = data.second;
 		//Now process packets
 		sf::Uint16 packetType;
@@ -89,7 +93,11 @@ void ServerState::ProcessPackets(void)
 					*packet >> xPos >> yPos;
 
 					//Add the player to the server world
+#ifdef _SERVER
 					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
+#else
+					//orkar inte fixaA>.<
+#endif
 
 					// Send the init message
 					// Players
@@ -170,6 +178,7 @@ void ServerState::ProcessPackets(void)
 			break;
 		}
 		delete packet;
-		sC->packets->pop();
+		delete originalPacket;
+		packets.pop();
 	}
 }

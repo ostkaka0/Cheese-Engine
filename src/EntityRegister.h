@@ -6,10 +6,11 @@
 
 class TextureContainer;
 class Entity;
+class EventHandler;
 
 class EntityRegister
 {
-	std::map<size_t, std::function<Entity*(/*EventCallback*/)>> blockTypeList;
+	std::map<size_t, std::function<Entity*(EventHandler*)>> blockTypeList;
 public:
 	EntityRegister();
 	void RegisterEntity(TextureContainer tC, Entity* entity, size_t typeId);

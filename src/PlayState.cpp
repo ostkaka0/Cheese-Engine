@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "BlockSolid.h"
 #include "BlockBackground.h"
+#include "EventHandler.h"
 
 namespace sf
 {
@@ -69,6 +70,7 @@ PlayState::~PlayState()
 void PlayState::EventUpdate(App& app, sf::Event& event)
 {
 	currentWorld->EventUpdate(app, event);
+	EventUpdate(app, event);
 }
 
 GameState *PlayState::Update(App& app)
@@ -131,7 +133,7 @@ void PlayState::ProcessPackets(void)
 						//std::cout << "ERROR: Client could not extract data" << std::endl;
 					else
 					{
-						Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
+						Player* player = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp", eventHandler);
 						currentWorld->AddPlayer(ID, player);
 					}
 				}
@@ -183,7 +185,7 @@ void PlayState::ProcessPackets(void)
 				if(type == 0)
 				{
 					*packet >> xPos >> yPos >> clientID;
-					Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp");
+					Player* temp = new Player(xPos, yPos, 16, 16, false, "graywizard.png", 0, "temp", eventHandler);
 					std::cout << "Added player -> clientid received " << clientID << " this clientid " << connection->client->ID << std::endl;
 
 					if(clientID == connection->client->ID)

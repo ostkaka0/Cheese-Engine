@@ -25,8 +25,6 @@ void Camera::Update(App& app)
 
 		std::cout << deltaX << " ;( ;( ;( :(\n" << deltaY << ":O\n";
 
-
-
 		//setCenter(getCenter().x + deltaX*speedFactor, getCenter().y + deltaY*speedFactor);
 		//move(deltaX*speedFactor,deltaY*speedFactor);
 		move(deltaX, deltaY);
