@@ -27,7 +27,7 @@ void ServerConnection::Run(void)
 	TryReceive();
 
 	float ElapsedTime = pingTimeout.getElapsedTime().asMilliseconds();
-	if(ElapsedTime > 1)
+	if(ElapsedTime > 1000)
 	{
 		pingTimeout.restart();
 		PingClients();
@@ -42,8 +42,7 @@ void ServerConnection::PingClients(void)
 		if(clients.find(i) != clients.end())
 		{
 			sf::Packet send;
-			sf::Uint16 ping = 1;
-			send << ping;
+			send << (sf::Uint16)PingMessage;
 			client->socket.send(send);
 			client->pingClock.restart();
 		}

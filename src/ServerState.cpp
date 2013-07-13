@@ -47,12 +47,12 @@ void ServerState::ProcessPackets(void)
 {
 	//sC->globalMutex.lock();
 	auto packets = sC->packets;
-	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
+	sC->packets = new std::queue<std::pair<sf::Packet*, Client*>>();
 	//sC->globalMutex.unlock();
 
-	while(packets.size() > 0)
+	while(packets->size() > 0)
 	{
-		auto data = packets.front();
+		auto data = packets->front();
 		sf::Packet* packet = data.first;
 		sf::Packet* originalPacket = new sf::Packet(*packet);
 		Client* client = data.second;
@@ -68,7 +68,7 @@ void ServerState::ProcessPackets(void)
 				float ping = client->pingClock.getElapsedTime().asMilliseconds();
 				client->pingClock.restart();
 				client->ping = ping;
-				//std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
+				std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
 			}
 			break;
 		case KickMessage: //server kicks client (type, string message)
@@ -179,6 +179,6 @@ void ServerState::ProcessPackets(void)
 		}
 		delete packet;
 		delete originalPacket;
-		packets.pop();
+		packets->pop();
 	}
 }
