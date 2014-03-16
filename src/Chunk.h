@@ -15,6 +15,7 @@ class Chunk;
 class TextureContainer;
 class Camera;
 class Block;
+class GameUtility;
 
 class Chunk
 {
@@ -25,14 +26,15 @@ private:
 public:
 	Chunk();
 	~Chunk(void);
-	Block* getHighestBlock(unsigned char x, unsigned char y);
-	Block* getBlock(unsigned char layer, unsigned short x, unsigned short y);
+	Block *getHighestBlock(unsigned char x, unsigned char y);
+	Block *getBlock(unsigned char layer, unsigned short x, unsigned short y);
 	short getMetadata(unsigned char layer, unsigned short x, unsigned short y);
+	std::pair<Block*, unsigned short> &getBlockAndMetadata(unsigned short x, unsigned short y, unsigned short layer);
 	void setBlock(unsigned char layer, unsigned short x, unsigned short y, Block*);
 	void setMetadata(unsigned char layer, unsigned short x, unsigned short y, unsigned short metadata);
-	unsigned short getBlockId(unsigned char layer, unsigned short x, unsigned short y);
-#ifndef _SERVER
-	void Draw(long xPos, long yPos, App& app, TextureContainer &tc);
+	unsigned short getBlockId(unsigned char layer, unsigned short x, unsigned short y, GameUtility* gameUtility);
+#ifdef CLIENT
+	void Draw(long xPos, long yPos, App &app, GameUtility *gameUtility);
 #endif
 	bool isAnySolid(std::pair<Block*, unsigned short> blocks[6]);
 	bool isAnySeeThrough(std::pair<Block*, unsigned short> blocks[6]);

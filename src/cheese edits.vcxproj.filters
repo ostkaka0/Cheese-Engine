@@ -16,14 +16,8 @@
     <Filter Include="Source Files\GameState">
       <UniqueIdentifier>{8d961622-9744-4b8d-88e2-2e15c5b8f18c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MenuItem">
-      <UniqueIdentifier>{d67e6eff-4c36-46d4-9172-79e4f64a853b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameState">
       <UniqueIdentifier>{8e08149d-26ad-409e-a997-116c3f9b76cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\MenuItem">
-      <UniqueIdentifier>{dd9bcfa3-0c6d-4383-acd0-d0b5b944d868}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Block">
       <UniqueIdentifier>{8beaf456-f2b3-4503-8e4b-9dd746bd2619}</UniqueIdentifier>
@@ -49,33 +43,93 @@
     <Filter Include="Header Files\Entity\Creature">
       <UniqueIdentifier>{cf4be33f-685d-48c9-b81c-875471f6a527}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Network">
+      <UniqueIdentifier>{aedd41a3-ab91-47c0-9c27-66f317cdddcc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Network">
       <UniqueIdentifier>{d719da3f-3b61-4d48-aeec-94434b40724b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Network">
-      <UniqueIdentifier>{aedd41a3-ab91-47c0-9c27-66f317cdddcc}</UniqueIdentifier>
+    <Filter Include="Header Files\Register">
+      <UniqueIdentifier>{a9cb2ce2-6124-457e-bd01-aad47ca508e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Block\Gravity">
+      <UniqueIdentifier>{0a9f72b0-7cfb-4e81-ae93-ecb12da603d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Block\Background">
+      <UniqueIdentifier>{a54eabb4-997d-40d1-9880-5a37e0b038b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Block\Solid">
+      <UniqueIdentifier>{aef19a81-455d-47cf-9dae-b449faadcd50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Register">
+      <UniqueIdentifier>{295ad046-8791-4ab4-9d02-ea25f8a62a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block\Gravity">
+      <UniqueIdentifier>{804f4ce9-eba0-407b-97b9-e7b9c36590e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block\Background">
+      <UniqueIdentifier>{f53dbf3a-0e65-4e5b-b39a-49740b0bde4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block\Solid">
+      <UniqueIdentifier>{447eb884-1ddc-4ff9-bb19-ff5db6e2f9cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Block\Unique">
+      <UniqueIdentifier>{52ee1865-e8e3-4a8d-977b-a5c5a009dd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block\Unique">
+      <UniqueIdentifier>{36d31630-fb15-44cc-bb79-ab8a5cf623a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{dd9bcfa3-0c6d-4383-acd0-d0b5b944d868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{d67e6eff-4c36-46d4-9172-79e4f64a853b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameState\Menu">
+      <UniqueIdentifier>{e66064ae-ccc0-4262-afcd-a8c7f1408926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameState\Menu">
+      <UniqueIdentifier>{9da7d566-afca-4899-bfa5-ac4ac39efc31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\World\Generator">
+      <UniqueIdentifier>{57400c47-2b53-4692-b55d-80a156ec6e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World\Generator">
+      <UniqueIdentifier>{a3a935c3-2fba-4d0f-badc-e78bcdc4733e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{e9f0fb75-00a3-419f-9307-c1c7cb696eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{a92dc19f-0797-42b9-9cb0-ac9ed684edc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Compressor">
+      <UniqueIdentifier>{46a82361-a033-48e6-9bb3-6592d1c28c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compressor">
+      <UniqueIdentifier>{9cb159eb-9e81-49fe-9b96-b577ea148915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CreatureController">
+      <UniqueIdentifier>{b3aa14d8-d8bf-4e1f-85e1-66d1226c21a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CreatureController">
+      <UniqueIdentifier>{908229ce-cc11-4e23-b92e-d76fbbd56275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{485c88cf-29d9-41a8-a6e5-9d39ed93df6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{d15b8328-bddb-4905-b893-fe3a41859c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Compressor\callbacks">
+      <UniqueIdentifier>{3d8fa046-aa01-4727-813a-0abf55ce5394}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuItem.cpp">
-      <Filter>Source Files\MenuItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Source Files\MenuItem</Filter>
-    </ClCompile>
     <ClCompile Include="PlayState.cpp">
-      <Filter>Source Files\GameState</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>Source Files\GameState</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files\GameState</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\GameState</Filter>
     </ClCompile>
     <ClCompile Include="Creature.cpp">
@@ -90,13 +144,7 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files\Block</Filter>
     </ClCompile>
-    <ClCompile Include="BlockSolid.cpp">
-      <Filter>Source Files\Block</Filter>
-    </ClCompile>
     <ClCompile Include="Chunk.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
     <ClCompile Include="TextureContainer.cpp">
@@ -104,15 +152,6 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockGravity.cpp">
-      <Filter>Source Files\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockBackground.cpp">
-      <Filter>Source Files\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="InGameUI.cpp">
-      <Filter>Source Files\MenuItem</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files\Entity</Filter>
@@ -132,33 +171,153 @@
     <ClCompile Include="Connection.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="BlockRegister.cpp">
+    <ClCompile Include="Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventHandler.cpp">
+    <ClCompile Include="NoobishBlockMenu.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockRegister.cpp">
+      <Filter>Source Files\Register</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityRegister.cpp">
+      <Filter>Source Files\Register</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockGravity.cpp">
+      <Filter>Source Files\Block\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockBackground.cpp">
+      <Filter>Source Files\Block\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockSolid.cpp">
+      <Filter>Source Files\Block\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockChest.cpp">
+      <Filter>Source Files\Block\Unique</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundBlock.cpp">
+      <Filter>Source Files\Block\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityBlock.cpp">
+      <Filter>Source Files\Block\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidBlock.cpp">
+      <Filter>Source Files\Block\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="UniqueBlock.cpp">
+      <Filter>Source Files\Block\Unique</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUtility.cpp">
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Selectable.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler_.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Eventhandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\GameState\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\GameState\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuItemContainer.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LargeTexturedBlock.cpp">
+      <Filter>Source Files\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Source Files\Block\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="Dirt.cpp">
+      <Filter>Source Files\Block\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadState.cpp">
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Minimap.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Generator - Kopia (2).cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="SeedGenerator.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardGenerator.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="WeirdGenerator.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="XGenerator.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="YGenerator.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="Flat.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>Source Files\World\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClient.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServer.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="Compressor.cpp">
+      <Filter>Source Files\Compressor</Filter>
+    </ClCompile>
+    <ClCompile Include="AMenuState.cpp">
+      <Filter>Source Files\GameState\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatureController.cpp">
+      <Filter>Source Files\CreatureController</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files\CreatureController</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundHandler.cpp">
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MenuItem.h">
-      <Filter>Header Files\MenuItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Label.h">
-      <Filter>Header Files\MenuItem</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Header Files\Entity\Creature</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files\GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Header Files\GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files\GameState</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuState.h">
       <Filter>Header Files\GameState</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.h">
@@ -173,29 +332,11 @@
     <ClInclude Include="Block.h">
       <Filter>Header Files\Block</Filter>
     </ClInclude>
-    <ClInclude Include="BlockSolid.h">
-      <Filter>Header Files\Block</Filter>
-    </ClInclude>
     <ClInclude Include="Chunk.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files\World</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockGravity.h">
-      <Filter>Header Files\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockBackground.h">
-      <Filter>Header Files\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="InGameUI.h">
-      <Filter>Header Files\MenuItem</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Entity</Filter>
@@ -221,20 +362,167 @@
     <ClInclude Include="MessageType.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="EntityRegister.h">
+    <ClInclude Include="Inventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventHandler.h">
+    <ClInclude Include="NoobishBlockMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundContainer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
     <ClInclude Include="BlockRegister.h">
+      <Filter>Header Files\Register</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityRegister.h">
+      <Filter>Header Files\Register</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGravity.h">
+      <Filter>Header Files\Block\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockBackground.h">
+      <Filter>Header Files\Block\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockSolid.h">
+      <Filter>Header Files\Block\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockChest.h">
+      <Filter>Header Files\Block\Unique</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityHealth.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundBlock.h">
+      <Filter>Header Files\Block\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityBlock.h">
+      <Filter>Header Files\Block\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidBlock.h">
+      <Filter>Header Files\Block\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="UniqueBlock.h">
+      <Filter>Header Files\Block\Unique</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtility.h">
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="HitProjectile.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="IMenuItem.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Selectable.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Eventhandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\GameState\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuItemContainer.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="LargeTextureBlock.h">
+      <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Header Files\Block\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="Dirt.h">
+      <Filter>Header Files\Block\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadState.h">
+      <Filter>Header Files\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimap.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="IGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="SeedGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="WeirdGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="XGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="YGenerator.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="Flat.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>Header Files\World\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCallbacks.h">
+      <Filter>Header Files\Compressor\callbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClient.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServer.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files\CreatureController</Filter>
+    </ClInclude>
+    <ClInclude Include="Compressor.h">
+      <Filter>Header Files\Compressor</Filter>
+    </ClInclude>
+    <ClInclude Include="AMenuState.h">
+      <Filter>Header Files\GameState\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\GameState\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatureController.h">
+      <Filter>Header Files\CreatureController</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandleable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundHandler.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SMusic.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SSound.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet1.props" />
   </ItemGroup>
 </Project>

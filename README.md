@@ -1,6 +1,3 @@
-Cheese_Multiplayer
-==================
-
-Softcoded 2d c++ game
-
-Hoho!
+Cheese_Multiplayer_Fix
+======================
+Hello! Adding more info later. 

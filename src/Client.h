@@ -4,15 +4,25 @@
 #include <SFML/System.hpp>
 #include "MessageType.h"
 
-struct Client
+class Client
 {
+private:
+#ifdef SERVER
+	//setd::vector<std::pair<long, long>> chunks;
+	long chunkX;
+	long chunkY;
+	bool *chunks;
+#endif
 public:
-	//Client(void);
-	//~Client(void);
-	sf::TcpSocket socket;
+	Client(void);
+	~Client(void);
+	//bool hasConnectedProperly;
+	sf::TcpSocket *socket;
 	sf::Uint16 ID;
 	std::string name;
-	sf::Uint16 ping;
+	float ping;
 	sf::Clock pingClock;
+	bool isMeasuringPing;
+	void Move(char x, char y);
 };
 

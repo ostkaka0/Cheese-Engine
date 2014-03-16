@@ -1,26 +1,22 @@
+#ifdef CLIENT
 #pragma once
 
-#ifndef MAINMENU_H_INCLUDED
-#define MAINMENU_H_INCLUDED
-
-#include <functional>
-#include <vector>
-#include "MenuState.h"
+#include "AMenuState.h"
 #include "GameState.h"
+#include "SoundHandler.h"
 
-class MainMenu : public MenuState
+class Game;
+
+class MainMenu : public AMenuState
 {
-private:
-    sf::Image Image;
-    sf::Sprite *sprite;
-	std::function<void()> lambda;
+	SoundHandler soundHandler;
 public:
-	MainMenu();
+	MainMenu(Game *game);
     ~MainMenu();
     //virtual void Initialize();
-    virtual void EventUpdate(App& app, sf::Event& event);
-    virtual GameState *Update(App& app);
-    virtual void Draw(App& app);
+    virtual void EventUpdate(App &app, Game &game, const sf::Event &event);
+    virtual GameState *Update(App &app, Game &game);
+    virtual void Draw(App &app);
     //virtual void Shutdown();
 };
 

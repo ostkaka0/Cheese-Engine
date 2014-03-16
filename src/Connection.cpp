@@ -1,12 +1,47 @@
 #include "Connection.h"
 
-Connection::Connection(int port, sf::IpAddress IP)
+Connection::Connection(int port, sf::IpAddress ip)
 {
 	client = new Client();
-	//thread = new sf::Thread(&Connection::Run);
-	if(Connect(IP, port))
+	receiveThread = new sf::Thread(&Connection::Receive, this);
+	if(client->socket->connect(ip, port, sf::Time(sf::seconds(5))) == sf::Socket::Done)
 	{
-		//thread->launch();
+		selector.add(*client->socket);
+		receiveThread->launch();
+
+		//vänta-saker börjar här
+		sf::Clock *c = new sf::Clock();
+		c->restart();
+		while(c->getElapsedTime() < sf::milliseconds(500)) {} //Måste vänta tills servern har lagt till klienten ordentligt
+		//vänta-saker slutar här
+
+		sf::Packet packet;
+		packet << (sf::Uint16)RequestChunks;
+		for(int x = -8; x < 8; x++)
+		{
+			for(int y = -8; y < 8; y++)
+			{
+				packet << (sf::Int32)x << (sf::Int32)y;
+			}
+		}
+		client->socket->send(packet);
+
+		//vänta-saker börjar här
+		c->restart();
+		while(c->getElapsedTime() < sf::milliseconds(500)) {} //Måste vänta tills servern har lagt till klienten ordentligt
+		delete c;
+		//vänta-saker slutar här
+
+		packet.clear();
+		packet << (sf::Uint16)RequestInit;
+		client->socket->send(packet);
+
+		std::cout << "Connected to " << ip << " : " << port << std::endl;
+	}
+	else
+	{
+		std::cout << "Error connecting to " << ip << " : " << port << std::endl;
+		//throw 0XFF00FF;//*_*/ >.< >_< dålig lösning
 	}
 }
 
@@ -17,44 +52,30 @@ Connection::~Connection(void)
 
 void Connection::Run()
 {
-	//while(true)
-	{
-		Receive();
 
-		//sf::sleep(sf::milliseconds(10));
-	}
-}
-
-bool Connection::Connect(sf::IpAddress ip, int port)
-{
-	if(client->socket.connect(ip, port, sf::Time(sf::seconds(5))) == sf::Socket::Done)
-	{
-		client->socket.setBlocking(false);
-		std::cout << "Connected to " << ip << " : " << port << std::endl;
-		return(true);
-	}
-	else
-	{
-		std::cout << "Error connecting to " << ip << " : " << port << std::endl;
-		return(false);
-	}
 }
 
 void Connection::Receive()
 {
-	if(&client->socket != nullptr)
+	while(true)
 	{
-		sf::Packet *received = new sf::Packet();
-		sf::Socket::Status status = client->socket.receive(*received);
-		if (status == sf::Socket::Done)
+		if(selector.wait())
 		{
-			globalMutex.lock();
-			packets.push(received);
-			globalMutex.unlock();
-		}
-		else if(status == sf::Socket::Disconnected)
-		{
-			//Socket is disconnected, cout will spam >.<
+			if(selector.isReady(*client->socket))
+			{
+				sf::Packet *received = new sf::Packet();
+				if (client->socket->receive(*received) == sf::Socket::Done)
+				{
+					globalMutex.lock();
+					packets.push(received);
+					globalMutex.unlock();
+				}
+				else
+				{
+					//std::cout << "Failed to receive data from sending server!" << std::endl;
+					delete received;
+				}
+			}
 		}
 	}
 }

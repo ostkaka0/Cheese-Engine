@@ -1,30 +1,38 @@
 #pragma once
 
-#ifdef _SERVER
+#ifdef SERVER
 #include <SFML\System.hpp>
 #else
 #include <SFML\Graphics.hpp>
-#include <TGUI/TGUI.hpp>
 #endif
 
-#define APP(a) (*reinterpret_cast<App*>(&a))
+//#define APP(a) (*reinterpret_cast<App*>(&a))
+
+#ifdef SERVER
+#define SERVER_(...) __VA_ARGS__
+#define CLIENT_(VOID)
+#else
+#define SERVER_(VOID)
+#define CLIENT_(...) __VA_ARGS__
+#endif
 
 class App
-#ifndef _SERVER
-	: public tgui::Window
-#endif
+CLIENT_(: public sf::RenderWindow)
 {
 	sf::Clock frameTimer;
 	float frameTime;
-	float sleptTime;
+SERVER_(
+	float sleptTime;)
+
 public:
-#ifndef _SERVER
-	App(sf::VideoMode);
-#endif
+CLIENT_(
+	App(sf::VideoMode);)
+
 	float getFrameTime();
+	float getDeltaTime();
 
 	void Update();
-	sf::Clock& getFrameTimer();
+	sf::Clock &getFrameTimer();
 };
 //#else
 //#include <SFML\Graphics.hpp>

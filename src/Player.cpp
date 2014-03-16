@@ -1,18 +1,16 @@
-#include "player.h"
-#include "World.h"
-#include "camera.h"
-#include "Projectile.h"
+#include "Player.h"
 #include <tuple>
+#include "World.h"
+#include "Camera.h"
+#include "Projectile.h"
 #include "MessageType.h"
 #include "App.h"
+#include "Block.h"
+#include "GameUtility.h"
+#include "Inventory.h"
 
-#ifdef _SERVER
-Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
-	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
-#else
-Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name, EventHandler& eventHandler) 
-	: Creature(X, Y, sizeX, sizeY, 4096, 0.875, spriteName, spriteIndex, IsClientControlling)
-#endif
+Player::Player(int id, float X, float Y, short sizeX, short sizeY, bool IsClientControlling, std::string spriteName, int spriteIndex, std::string Name) 
+	: Creature(id, X, Y, sizeX, sizeY, 1024, 8192, 0.9375, spriteName, spriteIndex, IsClientControlling)
 {
 	name = Name;
 	cameraDelay = 0;
@@ -21,42 +19,81 @@ Player::Player(float X, float Y, short sizeX, short sizeY, bool IsClientControll
 	left = false;
 	up = false;
 	lmb = false;
+	inventory = new Inventory(8, 4, 64);
+	currentChunkX = 0;
+	currentChunkY = 0;
+	currentChunkXOld = 0;
+	currentChunkYOld = 0;
+
+#ifdef CLIENT
+	//auto eventUpdate =  [this](App &app, sf::Event &event, World *world, std::queue<sf::Packet> *packetDataList) { EventUpdate(app, event, world, packetDataList); };
+	//eventHandler.AddEventCallback(this, eventUpdate);
+#endif
 }
 
-#ifdef _SERVER
-void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
+/*#ifdef SERVER
+void Player::Update(App &app, World *world, std::queue<sf::Packet> *packetDataList)
 #else
-void Player::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera, EventHandler& eventHandler)
-#endif
+void Player::Update(App &app, World *world, std::queue<sf::Packet> *packetDataList, Camera *camera, EventHandler &eventHandler)
+#endif*/
+void Player::Update(App &app, GameUtility *GameUtility)
 {
-#ifndef _SERVER
+	//std::cout << "xpos: " << x << " ypos:" << y << " xspeed:" << speedX << " yspeed:" << speedY << std::endl;
+#ifdef CLIENT
+	//if (y > 809200)
+	//	y = 0;
+
 	if (isClientControlling)
 	{
-		if (camera->getEntity() != this)
+		currentChunkXOld = currentChunkX;
+		currentChunkYOld = currentChunkY;
+		currentChunkX = floor(x/16.f+0.5)/16;
+		currentChunkY = floor(y/16.f+0.5)/16;
+		if(GameUtility->getCurrentWorld() != nullptr && currentChunkX != currentChunkXOld || currentChunkY != currentChunkYOld)
+		{
+			//Now request chunks from server! We have moved to a different chunk!
+			sf::Packet chunkPacket = sf::Packet();
+			chunkPacket << (sf::Uint16)RequestChunks;
+			for(long x = currentChunkX - 6; x < currentChunkX + 6; x++)
+			{
+				for(long y = currentChunkY - 6; y < currentChunkY + 6; y++)
+				{
+					if(GameUtility->getCurrentWorld()->getChunk(x, y) == nullptr)
+					{
+						//std::cout << "requesting chunk: x:" << x << " y:" << y << std::endl;
+						chunkPacket << (sf::Int32)x << (sf::Int32) y;
+					}
+				}
+			}
+			GameUtility->SendPacket(chunkPacket);
+		}
+
+		if (GameUtility->getCamera().getEntity() != this)
 		{
 			if (cameraDelay <= 0)
 			{
-				camera->setCameraAt(this);
+				GameUtility->getCamera().setCameraAt(this);
 				cameraDelay = 0.5;
 			}
 			else
 			{
-				cameraDelay -= app.getFrameTime();
+				cameraDelay -= app.getDeltaTime();
 			}
 		}
 	}
 #endif
 
-#ifdef _SERVER
-	Creature::Update(app, world, packetDataList, camera);
-#else
+	Creature::Update(app, GameUtility);
+	/*#ifdef SERVER
+	Creature::Update(app, world, packetDataList);
+	#else
 	Creature::Update(app, world, packetDataList, camera, eventHandler);
-#endif
+	#endif*/
 }
 
-#ifndef _SERVER
+#ifdef CLIENT
 
-void Player::EventUpdate(App& app, sf::Event& event, World* world, std::queue<sf::Packet>* packetDataList)
+void Player::EventUpdate(App &app, const sf::Event &event, GameUtility* gameUtility)
 {
 	if (isClientControlling)
 	{
@@ -86,6 +123,69 @@ Left:
 			case sf::Keyboard::W:
 Up:
 				uDown = true;
+				break;
+
+			case sf::Keyboard::Space:
+				if (true)//(speedX == 0 || speedY == 0)
+				{
+					float xSpeed2 = 0;
+					float ySpeed2 = 0;
+
+					if (currentBlock.first != nullptr)
+					{
+						currentBlock.first->CreatureJump(app, this, xSpeed2, ySpeed2, currentBlock.second);
+					}
+
+					if (xSpeed2 != 0 && speedX != 0)
+						break;
+					else if (ySpeed2 != 0 && speedY != 0)
+						break;
+
+					if (CheckCollision(app, gameUtility->getCurrentWorld(), gameUtility, (xSpeed2 > 0)? -1:1, (ySpeed2 > 0)? -1:1))
+					{
+						if (speedX == 0)
+							speedX = xSpeed2;
+
+						if (speedY == 0)
+							speedY = ySpeed2;
+					}
+
+					if (currentBlock.first != nullptr)
+						currentBlock.first->OnEntityHover(app, this, xSpeed2, ySpeed2, speedX, speedY, currentBlock.second);
+
+					if (isClientControlling)
+					{
+						sf::Packet packet;
+						packet << (sf::Uint16)MessageType::CreatureMove << x << y << speedX << speedY << angle << horizontal << vertical;
+						gameUtility->SendPacket(packet);
+
+						gameUtility->getSoundHandler().PlaySound(app, this, "jump.wav", 1.0, false, [this](){ return getPosition(); });
+					}
+				}
+				break;
+			case sf::Keyboard::Q:
+				{
+					float deltaX = sf::Mouse::getPosition().x - x + gameUtility->getCamera().getLeftX();//(sf::Mouse::getPosition().x - app.getPosition().x + app.getView().getCenter().x - app.getView().getSize().x/2) - x;
+					float deltaY = sf::Mouse::getPosition().y - y + gameUtility->getCamera().getTopY();//(sf::Mouse::getPosition().y - app.getPosition().y + app.getView().getCenter().y - app.getView().getSize().y/2) - y;
+
+					double angle = atan2(deltaY, deltaX) * 180 / 3.1415926536;
+
+					if (angle < 0)
+						angle = angle + 360;
+
+					double deltaSpeedX = cos(angle*3.1415926536)*speedX;
+					double deltaSpeedY = sin(angle*3.1415926536)*speedY;
+
+					if (angle > 180)
+						deltaSpeedX *= -1;
+
+					if (angle < 90 || angle > 270)
+						deltaSpeedY *= -1;
+
+
+					Projectile *projectile = new Projectile(0, x+(sizeX>>1), y+(sizeY>>1), 32, 32, angle, 1024, 0.03125F, "arrow.png", 0, false);
+					gameUtility->getCurrentWorld()->AddEntity(projectile);
+				}
 				break;
 
 			case sf::Keyboard::Right:
@@ -140,31 +240,15 @@ UpR:
 			switch(event.key.code)
 			{
 			case sf::Mouse::Left:
+				//inventory->AddItem(new NormalItem("Cow", "cowtexture"), 2);
+				//inventory->AddItem(new NormalItem("Goat", "cofsafwtexture"), 8);
+				//inventory->AddItem(new NormalItem("Chicken", "cowtexture"), 20);
+				//inventory->get(std::cout);
+
 				if(!lmb && (lmb=true))
-				{
-					//double angle = atan2((app.getView().GetCenter().y + app.GetInput().GetMouseY() - 256) - (app.getView().getEntityPosition().y+8), (app.getView().GetCenter().x + app.GetInput().GetMouseX() - 384) - (app.getView().getEntityPosition().x+8)) * 180 / 3.1415;
-					double angle = atan2((app.getView().getCenter().y + sf::Mouse::getPosition().y - 256) - (y+8), (app.getView().getCenter().x + sf::Mouse::getPosition().x - 384) - (x+8)) * 180 / 3.1415;
-					if (angle < 0)
-						angle = angle + 360;
-
-					double deltaSpeedX = cos(angle*3.1415926535)*speedX;
-					double deltaSpeedY = sin(angle*3.1415926535)*speedY;
-
-					if (angle > 180)
-						deltaSpeedX *= -1;
-
-					if (angle < 90 || angle > 270)
-						deltaSpeedY *= -1;
 
 
-					//Projectile *projectile = new Projectile(app.getView().getEntityPosition().x.getEntityPosition().y, 32, 32, -angle, 512, 0, "arrow.png", 0, false);
-					Projectile *projectile = new Projectile(x+8, y+8, 32, 32, -angle, 2048, 0.03125, "arrow.png", 0, false);
-					world->AddEntity(projectile);//new Projectile(sf::Vector2f(app.getView().getCreaturePosition().x+8.getCreaturePosition().y+8), (float)angle, 500, tc.getTextures("arroaaawb.png")[0]));
-					cameraDelay = 0.03125F;
-					//app.getView().setCameraAt(*projectile);
-				}
-
-				lmb = true;
+					lmb = true;
 				break;
 
 			case sf::Mouse::Right:
@@ -177,17 +261,19 @@ UpR:
 			}
 			break;
 		}
-		KeyUpdate(rDown, dDown, lDown, uDown, packetDataList);
+		KeyUpdate(rDown, dDown, lDown, uDown, gameUtility);
 	}
 }
 
-void Player::Draw(App& app, TextureContainer &tc)
+void Player::Draw(App &app, GameUtility *gameUtility)
 {
-	Creature::Draw(app, tc);
+
+	//inventory->Draw(16, 16, app, gameUtility->getTextureContainer()); 
+	Creature::Draw(app, gameUtility);
 }
 #endif
 
-void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<sf::Packet>* packetDataList)
+void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, GameUtility* gameUtility)
 {
 	if (Right != right || Down != down || Left != left || Up != up)
 	{
@@ -207,13 +293,11 @@ void Player::KeyUpdate(bool Right, bool Down, bool Left, bool Up, std::queue<sf:
 		left = Left;
 		up = Up;
 
-
-
 		if (isClientControlling)
 		{
 			sf::Packet packet;
-			packet << (sf::Uint16)PlayerMove << x << y << speedX << speedY << angle << horizontal << vertical;
-			packetDataList->push(packet);
+			packet << (sf::Uint16)MessageType::CreatureMove << x << y << speedX << speedY << angle << horizontal << vertical;
+			gameUtility->SendPacket(packet);
 		}
 	}
 }
@@ -223,12 +307,12 @@ void Player::setCameraDelay(float delay)
 	cameraDelay = delay;
 }
 
-std::string Player::getTextureName()
+const char *const Player::getTextureName()
 {
-	return "graywizard.png";
+	return "smileys.png";
 }
 
-char Player::getTextureId()
+short Player::getTextureId()
 {
 	return 0;
 }

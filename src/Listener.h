@@ -5,6 +5,6 @@ class Entity;
 
 class Listener
 {
-	Entity* currentEntity;
+	Entity *currentEntity;
 };
 #endif

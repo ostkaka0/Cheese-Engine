@@ -1,17 +1,20 @@
 #include "ServerConnection.h"
+#include "Player.h"
+#include "Client.h"
+#include "World.h"
 
-ServerConnection::ServerConnection(int port, World* world)
+ServerConnection::ServerConnection(int port, World *world)
 {
 	currentWorld = world;
-	maxClients = 1024;
-	s.setBlocking(false);
-	pingTimeout.restart();
+	acceptReceiveThread = new sf::Thread(&ServerConnection::AcceptReceive, this);
 	if(s.listen(port) != sf::Socket::Status::Done)
-	{
-		std::cout << "Failed to bind to port " << port << ", maybe you already have a server listening on this port?" << std::endl;
-	}
+		std::cout << "Failed to bind to port " << port << ", maybe already a server listening on this port?" << std::endl;
 	else
 		std::cout << "Server listening to port " << port << std::endl;
+	pingTimeout.restart();
+	s.setBlocking(true);
+	selector.add(s);
+	acceptReceiveThread->launch();
 }
 
 
@@ -19,151 +22,172 @@ ServerConnection::~ServerConnection(void)
 {
 }
 
-void ServerConnection::Run(void)
+void ServerConnection::Update(void)
 {
-<<<<<<< HEAD
-	TryAccept();
-	TryReceive();
-
 	float ElapsedTime = pingTimeout.getElapsedTime().asMilliseconds();
 	if(ElapsedTime > 1000)
-=======
-	//while(true)
->>>>>>> c52fd50e4c4b98a12a67856ed8a8692ddbdaaab1
 	{
-		Accept();
-		Receive();
-
-		float ElapsedTime = pingTimeout.getElapsedTime().asMilliseconds();
-		if(ElapsedTime > 1)
-		{
-			pingTimeout.restart();
-			PingClients();
-		}
-		//Sleep(10);
+		pingTimeout.restart();
+		PingClients();
 	}
 }
 
 void ServerConnection::PingClients(void)
 {
-	for(int i = 0; i < maxClients; i++) 
+	for (auto pair : clients)
 	{
-		Client* client = clients.find(i)->second;
-		if(clients.find(i) != clients.end())
+		Client *client = pair.second;
+		if(!client->isMeasuringPing)
 		{
+			std::cout << "Client " << client->ID << " has ping " << client->ping << std::endl;
 			sf::Packet send;
-			send << (sf::Uint16)PingMessage;
-			client->socket.send(send);
+			sf::Uint16 ping = Ping;
+			send << ping;
+			client->socket->send(send);
+			client->ping = 0;
 			client->pingClock.restart();
+			client->isMeasuringPing = true;
 		}
-	}
-}
-
-void ServerConnection::Accept()
-{
-	Client* client = new Client();
-	client->pingClock = sf::Clock();
-	sf::Socket::Status status = s.accept(client->socket);
-	if (status == sf::Socket::Done)
-	{
-		for(int i = 0; i < maxClients; i++) 
+		else
 		{
-			if(clients.find(i) == clients.end())
+			float currentPing = client->pingClock.getElapsedTime().asMilliseconds();
+			std::cout << "Client " << client->ID << " has ping " << currentPing << std::endl;
+			if(currentPing > 1000)
 			{
-				client->socket.setBlocking(false);
-				client->ID = i;
-				clients.insert(std::pair<int, Client*>(i, client));
-				sf::Packet packet;
-				sf::Uint16 clientid = ClientID;
-				packet << clientid << i;
-				client->socket.send(packet); 
-
-				std::cout << client->socket.getRemoteAddress() << " connected on socket " << i << std::endl;
-				if(i >= maxClients-1)
+				if(client->socket->getRemoteAddress() == sf::IpAddress::None)
 				{
-					KickClient(i, "Server full");
-					std::cout << "Server full! This is not good! " << clients.size() << " players connected. " << std::endl;
+					lockObject.lock();
+					toKick.emplace(std::pair<int, std::string>(client->ID, "Too high ping"));
+					lockObject.unlock();
 				}
-				break;
+				else
+				{
+					sf::Packet send;
+					sf::Uint16 ping = Ping;
+					send << ping;
+					client->socket->send(send);
+					client->ping = 0;
+					client->pingClock.restart();
+					client->isMeasuringPing = true;
+				}
 			}
-
 		}
-		//delete(client);
-	}
-	else
-	{
-		switch(status)
-		{
-		case sf::Socket::Status::Disconnected:
-			std::cout << "Error: Could not accept socket: Socket disconnected" << std::endl;
-			break;
-		case sf::Socket::Status::Error:
-			std::cout << "Error: Could not accept socket: Random error" << std::endl;
-			break;
-		case sf::Socket::Status::NotReady:
-			//std::cout << "NotReady" << std::endl;
-			break;
-		}
-		delete(client);
 	}
 }
 
-void ServerConnection::Receive()
+int ServerConnection::GetFreeClientId()
 {
-	for(int i = 0; i < maxClients; i++) 
+	for(int i = 0;; i++)
 	{
-		if(clients.find(i) != clients.end())
+		if(clients.find(i) == clients.end())
 		{
-			Client* client = clients.find(i)->second;
-			//if(client->socket.)
-			//{
-				sf::Packet *received = new sf::Packet();
-				sf::Socket::Status status = client->socket.receive(*received);
-				if (status == sf::Socket::Done)
+			std::cout << "Returned client id " << i << std::endl;
+			return i;
+		}
+	}
+}
+
+void ServerConnection::AcceptReceive()
+{
+	while(true)
+	{
+		if (selector.wait())
+		{
+			if(selector.isReady(s))
+			{
+				Client *client = new Client();
+				if (s.accept(*client->socket) == sf::Socket::Done)
 				{
-					//globalMutex.Lock();
-					std::cout << "received message server";
-					packets.push(std::pair<sf::Packet*, Client*>(received, client));
-					//globalMutex.Unlock();
-					// Extract the message and display it
-					//std::cout << "Client " << i << " says: " << *received << " with a size of " << received->GetDataSize() << std::endl;
+					int freeClientId = GetFreeClientId();
+					if(freeClientId != -1)
+					{
+						client->pingClock = sf::Clock();
+						client->socket->setBlocking(true);
+						client->ID = freeClientId;
+						lockObject.lock();
+						clients.insert(std::pair<int, Client*>(freeClientId, client));
+						lockObject.unlock();
+						selector.add(*client->socket);
+						std::cout << client->socket->getRemoteAddress() << " connected on socket " << freeClientId << std::endl;
+					}
 				}
-				else if(status == sf::Socket::Disconnected)
-					KickClient(i, "Disconnected");
-			//}
-			//else
-				//KickClient(i, "Not valid socket");
+				else
+				{
+					std::cout << "Failed to accept connecting socket!" << std::endl;
+					delete client;
+				}
+			}
+			else
+			{
+				lockObject.lock();
+				for(std::pair<int, Client*> pair : clients)
+				{
+					if (selector.isReady(*pair.second->socket))
+					{
+						Client *client = pair.second;
+						if(client->socket->getRemoteAddress() !=sf::IpAddress::None)
+						{
+							sf::Packet *received = new sf::Packet();
+							sf::Socket::Status status = client->socket->receive(*received);
+							if (status == sf::Socket::Done)
+							{
+								if(received != nullptr && client != nullptr && received->getDataSize() > 0)
+								{
+									lockObject.lock();
+									packets.push(std::pair<sf::Packet*, Client*>(received, client));
+									lockObject.unlock();
+								}
+							}
+							else if(status == sf::Socket::Disconnected)
+							{
+								lockObject.lock();
+								toKick.emplace(pair.first, "Socket disconnected");
+								lockObject.unlock();
+								delete received;
+							}
+						}
+						else
+							std::cout << "Failed to receive from sending socket!" << std::endl;
+					}
+				}
+				lockObject.unlock();
+			}
 		}
 	}
 }
 
 void ServerConnection::KickClient(int ID, std::string reason)
 {
+	lockObject.lock();
 	auto client = clients.find(ID);
 	if(client != clients.end())
 	{
+		//Send a kick message
 		const char *kickmsg = reason.c_str();
-		sf::IpAddress ip = client->second->socket.getRemoteAddress();
 		sf::Packet send;
-		send << 2 << kickmsg;
-		client->second->socket.send(send);
-		client->second->socket.disconnect();
-		clients.erase(ID);
-		currentWorld->RemovePlayer(ID);
-		std::cout << "Kicked client " << ID << " - " << reason << std::endl;
+		send << (sf::Uint16)Kicked << kickmsg;
+		client->second->socket->send(send);
 
+		//Kick the client
+		selector.remove(*client->second->socket);
+		delete clients.at(ID);
+		if(!clients.erase(ID))
+			std::cout << "Could not remove client! KickClient" << std::endl;
+		currentWorld->RemoveCreature(ID);
+		std::cout << "Kicked client: " << ID << " Reason: " << reason << std::endl;
+
+		//Tell other clients that the client has left
 		send.clear();
-		send << (sf::Uint16)PlayerJoinLeft << (sf::Uint16)1 << (sf::Uint16)ID;
+		send << (sf::Uint16) PlayerLeft << (sf::Uint16)ID;
 		Broadcast(send);
-		//std::cout << ip << " has left" << std::endl;
 	}
+	lockObject.unlock();
 }
 
 void ServerConnection::Broadcast(sf::Packet packet)
 {
-	//std::cout << packet << std::endl;
 	for(std::pair<int, Client*> pair : clients)
 	{
-		pair.second->socket.send(packet);
+		pair.second->socket->send(packet);
 	}
 }

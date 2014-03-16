@@ -1,15 +1,11 @@
 #pragma once
 #include "Block.h"
+#include "SolidBlock.h"
 
-class BlockSolid : public Block
+class BlockSolid : public virtual Block, public SolidBlock
 {
 public:
-	BlockSolid(unsigned short id);
-	virtual unsigned short getId();
-	virtual unsigned short getTextureId(App &app, unsigned short metadata);
-	virtual unsigned char getLayer();
-	virtual std::string getTextureName();
-	virtual bool isSeeThrough();
-	virtual bool isSolid();
+	virtual unsigned short getTextureId(App &app, unsigned short metadata) const;
+	virtual const char *const getTextureName() const;
 };
 

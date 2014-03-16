@@ -1,22 +1,35 @@
 #pragma once
 
-#include <functional>
-#include <vector>
-#include <map>
-#include <list>
 #include <deque>
+#include <functional>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <list>
+#include <tuple>
+#include <vector>
 #include <queue>
+
+
 #include "App.h"
 #include <SFML\Network.hpp>
 #include "EventHandler.h"
+#include "pyramid.h"
+#include "StandardGenerator.h"
 
 class Entity;
 class Player;
+class Creature;
 class Block;
 class Chunk;
 class TextureContainer;
 class Camera;
-class EventHandler;
+//template<class T> class EventHandler;
+class GameState;
+class GameUtility;
+class BlockRegister;
+class CreatureController;
+class User;
 
 enum MessageType;
 
@@ -37,99 +50,51 @@ private:
 	short int sizeX;
 	short int sizeY;
 	ChunkMatrixType chunkMatrix;
-	//long chunkMatrixCenterRow;
-	//std::pair<std::deque<std::pair<std::deque<Chunk*>,long>>,long> chunkMatrix;
-	std::map<unsigned short, std::function<Block*(unsigned short)>> blockTypeMap;
+	std::mutex chunkMatrixLock;
 	std::vector<Entity*> entityList;
-	std::map<short, Player*> playerList;
-	std::map<std::pair<short,short>,Block*> BlockMap;
-	std::queue<sf::Packet>* packetDataList;
-#ifndef _SERVER
-	EventHandler eventHandler;
+	std::mutex entityListLock;
+	std::map<short, CreatureController*> CreatureControllers;
+	//std::map<short, std::unique_ptr<std::weak_ptr<Creature>> creatureList // < senare! (med CreatureController)
+	std::map<short, std::unique_ptr<Creature>> creatureList;	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+	std::mutex creatureListLock;
+	//std::map<std::pair<short,short>,Block*> BlockMap;
+	std::pair<std::tuple<long, long, unsigned short>, std::pair<Block*, unsigned short>*> lastBlock;
+	std::pair<Block*, unsigned short> physicBlock;
+	generator::StandardGenerator generator;
+#ifdef CLIENT
+	EventHandler<GameUtility*> eventHandler;
+
+	User *me;
 #endif
 public:
-	World();
-#ifndef _SERVER
-	void EventUpdate(App& app, sf::Event& event);
-	void Draw(App& app, TextureContainer& tC);
+	World(GameUtility *gameUtility);
+#ifdef CLIENT
+	void EventUpdate(App &app, const sf::Event &event, GameUtility* gameUtility);
+	void Draw(App &app, GameUtility *gameUtility);
 #endif
-	std::queue<sf::Packet>* Update(App& app, TextureContainer& tC, Camera* camera);
-	void RegisterBlock(unsigned short key, std::function<Block*(unsigned short)> value);
-	void setBlock(long x, long y, long layer, unsigned short id);
-	void setBlockAndMetadata(long x, long y, long layer, unsigned short id, unsigned short metadata);
-	void setBlockMetadata(long x, long y, long layer, unsigned short metadata);
-	MessageType setBlockAndMetadataClientOnly(long x, long y, long layer, unsigned short id, unsigned short metadata);
-	MessageType setBlockMetadataClientOnly(long x, long y, long layer, unsigned short metadata);
-	Block* getBlock(long x, long y, long layer);
+
+	void Update(App &app, GameUtility *GameUtility);
+	void setBlock(long x, long y, long layer, unsigned short id, GameUtility *gameUtility);
+	void setBlockAndMetadata(long x, long y, long layer, unsigned short id, unsigned short metadata, GameUtility *gameUtility);
+	void setBlockMetadata(long x, long y, long layer, unsigned short metadata, GameUtility *gameUtility);
+	void SendSetBlockAndMetadata(long x, long y, long layer, unsigned short id, unsigned short metadata, GameUtility *gameUtility);
+	MessageType setBlockAndMetadataLocal(long x, long y, long layer, unsigned short id, unsigned short metadata, GameUtility *gameUtility);
+	MessageType setBlockMetadataLocal(long x, long y, long layer, unsigned short metadata, GameUtility *gameUtility);
+	MessageType getBlockPacket(long x, long y, long layer, unsigned short id, unsigned short metadata, GameUtility *gameUtility);
+	Block *getBlock(long x, long y, long layer);
+	std::pair<Block*, unsigned short> getBlockAndMetadata(long x, long y, long layer);
+	const std::pair<Block*, unsigned short> getPhysicBlock() const;
 	void Expand(long x, long y, Chunk* chunk);
-	void AddBlockType(unsigned short, std::function<Block*(unsigned short)>);
 	bool isBlockSolid(long x, long y);
-	Block* getBlockType(unsigned short id, unsigned short metadata);
-	std::map<unsigned short, std::function<Block*(unsigned short)>>& getBlockTypeMap();
 	int AddEntity(Entity*);
 	void RemoveEntity(int id);
-	int AddPlayer(int id, Player*);
-	void RemovePlayer(int id);
-	Player* GetPlayer(int id);
-	void SetPlayer(int id, Player* player);
+	int AddCreature(int id, Creature *creature);
+	void RemoveCreature(int id);
+	void SendCreatureToDeath(int id);
+	void RespawnCreature(int oldId, int newId);
+	Creature* getCreature(int id);
+	void SetCreature(int id, Creature *creature);
+	Chunk *getChunk(long x, long y);
+	Chunk *getGenerateChunk(long x, long y, GameUtility *gameUtility);
 };
-
-/*#include <functional>
-#include <vector>
-#include <map>
-#include <list>
-#include <deque>
-#include <SFML\System.hpp>
- 
-#ifndef _SERVER
-#include <SFML\Graphics.hpp>
-#include "App.h"
-#else
-class App;
-#endif
-
-class Chunk;
-class Block;
-class Entity;
-class Player;
-class TextureContainer;
-class Camera;
-
-#define SIZEXMAX 1024
-#define SIZEYMAX 1024
-
-#define SCREENSIZEX 800
-#define SCREENSIZEY 600
-
-class World
-{
-private:
-	short int sizeX;
-	short int sizeY;
-	Chunk *chunkList[256][256];
-	std::map<unsigned short, std::function<Block*(unsigned short)>> blockTypeMap;
-	std::vector<Entity*> entityList;
-	std::vector<Player*> playerList;
-
-public:
-	World(unsigned short, unsigned short);
-	~World(void);
-#ifndef _SERVER
-	void Draw(App& app, TextureContainer& tC);
-#endif
-	void Update(App& app);
-	void setBlock(unsigned char layer, short x, short y, unsigned short id);
-	void setBlockAndMetadata(unsigned char layer, short x, short y, unsigned short id, unsigned short metadata);
-	void setBlockMetadata(unsigned char layer, short x, short y, unsigned short metadata);
-	void RegisterBlock(unsigned short, std::function<Block*(unsigned short)>);
-	void DrawBorder(int blockId);
-	bool isVisible(App& app, Entity& entity, short position);
-	sf::Vector2i getSize();
-	Block* getBlock(unsigned char layer, short x, short y);
-	bool isBlockSolid(short x,short y);
-	Block* getBlockType(unsigned short id, unsigned short metadata);
-	std::map<unsigned short, std::function<Block*(unsigned short)>>* getBlockTypeMap();
-	void AddEntity(Entity*);
-	void AddPlayer(Player*, short Id);
-	void RemovePlayer(short Id);
-};*/

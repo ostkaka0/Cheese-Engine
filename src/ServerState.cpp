@@ -1,26 +1,28 @@
+#ifdef SERVER
+#define _USE_MATH_DEFINES
+#include "ServerState.h"
+
 #include <iostream>
 #include <string>
+#include <SFML\Graphics.hpp>
 #include <SFML\Network.hpp>
-#include "ServerState.h"
-#define _USE_MATH_DEFINES
 #include <math.h>
+
 #include "World.h"
+#include "Chunk.h"
 #include "BlockSolid.h"
 #include "BlockBackground.h"
 #include "App.h"
-#include <SFML\Graphics.hpp>
+#include "Packet.h"
+#include "BlockRegister.h"
+#include "Client.h"
+#include "World.h"
 
 
 
-ServerState::ServerState(App& app)
+ServerState::ServerState(App &app) : GameUtility(app)
 {
-	currentWorld = new World();
 	sC = new ServerConnection(5001, currentWorld);
-	//sC->Launch();
-	//unsigned short i = 1;
-
-	//currentWorld->RegisterBlock(i,(new BlockSolid(i))->RegisterBlock(i++));
-	//currentWorld->RegisterBlock(i,(new BlockBackground(i))->RegisterBlock(i++));
 }
 
 ServerState::~ServerState()
@@ -28,105 +30,145 @@ ServerState::~ServerState()
 	delete currentWorld;
 }
 
-GameState *ServerState::Update(App& app)
+GameState *ServerState::Update(App &app, Game &game)
 {
-	//std::cout << "updates per second: " << 1/APP(app).getFrameTime() << std::endl;
-	std::queue<sf::Packet>* packetDataList = currentWorld->Update(app, tC, nullptr);
+	//std::cout << "updates per second: " << 1/(app).getFrameTime() << std::endl;
 	while (!packetDataList->empty())
 	{
+		//std::cout << "packets " << packetDataList->size() << std::endl;
 		sC->Broadcast(packetDataList->front());
 		packetDataList->pop();
 	}
-	//delete packetDataList;
-	sC->Run();
-	ProcessPackets();
+	currentWorld->Update(app, this);
+	sC->Update();
+	ProcessPackets(this);
+	KickClients(this);
 	return this;
 }
 
-void ServerState::ProcessPackets(void)
+void ServerState::KickClients(GameUtility *gameUtility)
 {
-	//sC->globalMutex.lock();
-	auto packets = sC->packets;
-	sC->packets = new std::queue<std::pair<sf::Packet*, Client*>>();
-	//sC->globalMutex.unlock();
-
-	while(packets->size() > 0)
+	auto clients = sC->toKick;
+	sC->toKick = std::map<int, std::string>();
+	for(auto it = clients.begin(); it != clients.end(); it++)
 	{
-		auto data = packets->front();
+		sC->KickClient(it->first, it->second);
+	}
+}
+
+void ServerState::ProcessPackets(GameUtility *gameUtility)
+{
+	auto packets = sC->packets;
+	sC->packets = std::queue<std::pair<sf::Packet*, Client*>>();
+
+	while(packets.size() > 0)
+	{
+		auto data = packets.front();
 		sf::Packet* packet = data.first;
-		sf::Packet* originalPacket = new sf::Packet(*packet);
-		Client* client = data.second;
-		//Now process packets
+		Client *client = data.second;
+
 		sf::Uint16 packetType;
 		if(!(*packet >> packetType))
-			std::cout << "ERROR: Server could not extract data" << std::endl;
+			std::cout << "ERROR: Server could not extract packet type";
+		//throw("ERROR: Server could not extract data");
+		//std::cout << "packettype " << packetType << std::endl;
+
+		sf::Packet* const originalPacket = new sf::Packet(*packet);
 
 		switch(packetType)
 		{
-		case PingMessage: //measure ping between sent 1 and received 1 (type)
+		case RequestInit:
 			{
-				float ping = client->pingClock.getElapsedTime().asMilliseconds();
-				client->pingClock.restart();
-				client->ping = ping;
-				std::cout << "Client " << client->ID << " has ping " << ping << std::endl;
+				//std::cout << "Received RequestInit" << std::endl;
+				Player *joined = new Player(client->ID, 0, 0, 16, 16, false, "smileys.png", 0, "temp");
+				sf::Packet send;
+				send << (sf::Uint16) Init << (sf::Uint16)client->ID;
+				for(std::pair<int, Client*> pair : sC->clients)
+				{
+					Creature* temp = currentWorld->getCreature(pair.first);
+					if(temp != nullptr)
+						send << (sf::Int16)pair.first << (float)temp->getPosition().x << (float)temp->getPosition().y << (sf::Int16)temp->getSize().x << (sf::Int16)temp->getSize().y;
+				}
+				currentWorld->AddCreature(client->ID, joined);
+				client->socket->send(send);
+
+				send.clear();
+				send << (sf::Uint16)PlayerJoin << (sf::Uint16)client->ID << joined->getX() << joined->getY();
+				sC->Broadcast(send);
 			}
 			break;
-		case KickMessage: //server kicks client (type, string message)
-
-			break;
-		case PlayerJoinLeft:
+		case Ping: //Get client ping
 			{
-				sf::Uint16 type;
+				sf::Time ping = client->pingClock.getElapsedTime();
+				float totalPing = ping.asMilliseconds();
+				client->ping = totalPing;
+				client->isMeasuringPing = false;
+			}
+			break;
+		case Kicked: //Server has kicked client (Client receiver only)
+			{
+			}
+			break;
+		case Chat:
+			{
+				sf::Uint16 id;
+				char *message;
+				if(!(*packet >> id >> message))
+					std::cout << "ERROR: Server could not extract data: Chat" << std::endl;
+				//if(!message.contains(shit))
+				sf::Packet toSend;
+				toSend << id << message;
+				sC->Broadcast(toSend);
+			}
+			break;
+		case PlayerJoin: //A player has joined or left the server
+			{
+				sf::Uint16 clientId = client->ID;
+				std::cout << "client joined blabla " << clientId << std::endl;
 				float xPos;
 				float yPos;
-
-				//std::cout << "Server got PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << client->ID << std::endl;
-
 				sf::Packet send;
-				sf::Uint16 packetTypeTemp = PlayerJoinLeft;
-				sf::Uint16 clientidtemp = client->ID;
-
-				*packet >> type;
-
-				if(type == 0) //Player has joined
-				{
-					*packet >> xPos >> yPos;
-
-					//Add the player to the server world
-#ifdef _SERVER
-					currentWorld->AddPlayer(client->ID, new Player(xPos, yPos, 16, 16, true, "graywizard.png", 0, "temp"));
-#else
-					//orkar inte fixaA>.<
-#endif
-
-					// Send the init message
-					// Players
-					send << (sf::Uint16) InitMessage;
-					for(std::pair<int, Client*> pair : sC->clients)
-					{
-						Player* temp = currentWorld->GetPlayer(pair.first);
-						if(temp != nullptr)
-							send << (sf::Int16)pair.first << (sf::Int16)temp->getPosition().x << (sf::Int16)temp->getPosition().y << (sf::Int16)temp->getSize().x << (sf::Int16)temp->getSize().y;
-					}
-					client->socket.send(send);
-
-					send.clear();
-					send << packetType << type << xPos << yPos << clientidtemp;
-
-				}
-				/*else if(type == 1) //Player has left
-				{
-					currentWorld->RemovePlayer(client->ID);
-					send.Clear();
-					send << packetType << type << (sf::Uint16)client->ID;
-					std::cout << client->IP << " has left" << std::endl;
-				}*/
-
+				if(!(*packet >> xPos >> yPos))
+					std::cout << "ERROR: Server could not extract data: PlayerJoin" << std::endl;
+				currentWorld->AddCreature(client->ID, new Player(clientId, xPos, yPos, 16, 16, true, "smileys.png", 0, "temp"));
+				send << packetType << clientId << xPos << yPos;
 				sC->Broadcast(send);
-				//std::cout << "Server sent PlayerJoinLeft " << packetType << " " << type << " " << xPos << " " << yPos << " " << clientidtemp << std::endl;
 				break;
 			}
-		case PlayerMove:
+		case PlayerLeft:
+			{
+				sf::Packet send;
+				currentWorld->RemoveCreature(client->ID);
+				send.clear();
+				send << (sf::Uint16)PlayerLeft << (sf::Uint16)client->ID;
+				sC->Broadcast(send);
+			}
+			break;
+		case PlayerRespawn:
+			{
+				sf::Uint16 id;
+				sf::Int32 x;
+				sf::Int32 y;
+				if(!(*packet >> id >> x >> y))
+					std::cout << "ERROR: Client could not extract data: PlayerRespawn" << std::endl;
+				if(currentWorld->getCreature(id) == nullptr)
+				{
+					Player *player = new Player(id, x, y, 16, 16, false, "smileys.png", 0, "temp");
+					currentWorld->AddCreature(id, player);
+				}
+				else
+				{
+					Player *player = (Player*)currentWorld->getCreature(id);
+					// usch, såhär kan du inte göra!
+					//player->setPosition(x, y);
+					player->setHealth(100);
+				}
+				sf::Packet toSend;
+				toSend << (sf::Uint16)PlayerRespawn << id << x << y;
+				sC->Broadcast(toSend);
+			}
+			break;
+		case CreatureMove:
 			{
 				float xPos;
 				float yPos;
@@ -136,34 +178,35 @@ void ServerState::ProcessPackets(void)
 				float horizontal;
 				float vertical;
 				*packet >> xPos >> yPos >> speedX >> speedY >> angle >> horizontal >> vertical;
-				Player* p = currentWorld->GetPlayer(client->ID);
+				Creature* p = currentWorld->getCreature(client->ID);
 				if (p != nullptr)
 				{
-					//Broadcast playermove data
 					sf::Packet packet;
 					sf::Int16 clientid = client->ID;
-					packet << (sf::Uint16)PlayerMove << clientid << xPos << yPos << speedX << speedY << angle << horizontal << vertical;
+					if(!(packet << (sf::Uint16)CreatureMove << clientid << xPos << yPos << speedX << speedY << angle << horizontal << vertical))
+						std::cout << "ERROR: Server could not extract data: PlayerMove" << std::endl;
 					sC->Broadcast(packet);
-
-					//Move player in server world
 					p->CreatureMove(xPos, yPos, speedX, speedY, angle, horizontal, vertical);
-
-					//Send world data in radius around player
-					/*int chunkX = xPos * 0.00390625;
-					int chunkY = yPos * 0.00390625;
-					currentWorld->get*/
 				}
 			}
 			break;
 		case BlockPlace:
 			{
-				sf::Int32 xPos;
-				sf::Int32 yPos;
-				sf::Uint16 layer;
 				sf::Uint16 id;
-				sf::Uint16 metadata;
-				*packet >> xPos >> yPos >> layer >> id >> metadata;
-				currentWorld->setBlockAndMetadata(xPos, yPos, layer, id, metadata);
+				if(!(*packet >> id))
+					std::cout << "ERROR: Server could not extract data: BlockPlace: id" << std::endl;
+				if(id != 0)
+					blockRegister->getBlockType(id)->OnReceive(packet, id, gameUtility);
+				else
+				{
+					sf::Int32 xPos;
+					sf::Int32 yPos;
+					sf::Uint16 layer;
+					sf::Uint16 metadata;
+					if(!(*packet >> xPos >> yPos >> layer >> metadata))
+						std::cout << "ERROR: Server could not extract data: BlockPlace" << std::endl;
+					gameUtility->getCurrentWorld()->setBlockAndMetadata(xPos, yPos, layer, 0, metadata, gameUtility);
+				}
 			}
 			break;
 		case BlockMetadataChange:
@@ -172,13 +215,58 @@ void ServerState::ProcessPackets(void)
 				sf::Int32 yPos;
 				sf::Uint16 layer;
 				sf::Uint16 metadata;
-				*packet >> xPos >> yPos >> layer >> metadata;
-				currentWorld->setBlockMetadata(xPos, yPos, layer, metadata);
+				if(!(*packet >> xPos >> yPos >> layer >> metadata))
+					std::cout << "ERROR: Server could not extract data: BlockMetadataChange" << std::endl;
+				currentWorld->setBlockMetadata(xPos, yPos, layer, metadata, this);
+			}
+			break;
+		case RequestChunks:
+			{
+				sf::Packet sendChunksPacket = sf::Packet();
+				sendChunksPacket << (sf::Uint16) Chunks;
+				while(!packet->endOfPacket())
+				{
+					sf::Int32 currentChunkX;
+					sf::Int32 currentChunkY;
+					if(!(*packet >> currentChunkX >> currentChunkY))
+					{
+						std::cout << "ERROR: Server could not extract data: RequestChunks" << std::endl;
+						break;
+					}
+					Chunk *chunk = currentWorld->getGenerateChunk(currentChunkX, currentChunkY, gameUtility);
+					if(chunk != nullptr)
+					{
+						for(int x = 0; x < 16; x++)
+						{
+							for(int y = 0;  y < 16; y++)
+							{
+								for(int layer = 0; layer < 6; layer++)
+								{
+									std::pair<Block*, unsigned short> pair = chunk->getBlockAndMetadata(x, y, layer);
+									if(pair.first != nullptr)
+									{
+										long currentBlockX = currentChunkX * 16 + x - 16;
+										long currentBlockY = currentChunkY * 16 + y - 16;
+										sf::Uint16 blockId = blockRegister->getBlockIdByTypeId(typeid(*pair.first).hash_code());
+										if(blockId != 0)
+										{
+											sf::Uint16 blockMetadata = pair.second;
+											pair.first->OnSend(&sendChunksPacket, BlockPlace, currentBlockX, currentBlockY, layer, blockId, blockMetadata, gameUtility);
+											//sendChunksPacket << blockId << blockMetadata << (sf::Int32)currentBlockX << (sf::Int32)currentBlockY << (sf::Uint16)layer;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				client->socket->send(sendChunksPacket);
 			}
 			break;
 		}
 		delete packet;
 		delete originalPacket;
-		packets->pop();
+		packets.pop();
 	}
 }
+#endif

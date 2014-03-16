@@ -1,19 +1,27 @@
+#pragma once
+
 #define stringify ( name ) # name
 
 enum MessageType
 {
 	NullMessage = 0,
-	InitMessage,
-	PingMessage,
-	KickMessage,
-	ClientID,
+	Init,
+	RequestInit,
+	Ping,
+	Kicked,
 	WorldInit,
 	CreatureInit,
-	PlayerJoinLeft,
-	PlayerMove,
+	PlayerJoin,
+	PlayerLeft,
+	PlayerRespawn,
+	CreatureDamage,
+	CreatureMove,
 	ProjectileInit,
 	EntityMove,
 	EntityUpdate,
 	BlockPlace,
-	BlockMetadataChange
+	BlockMetadataChange,
+	RequestChunks,
+	Chunks,
+	Chat
 };

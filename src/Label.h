@@ -1,21 +1,30 @@
+#ifdef CLIENT
 #pragma once
-
-#ifndef Label_H_INCLUDED
-#define Label_H_INCLUDED
-
 #include <SFML/Graphics.hpp>
-#include "MenuItem.h"
-#include "GameState.h"
-#include "App.h"
+#include "Selectable.h"
+#include "Selectable.h"
 
-class Label : public MenuItem
+namespace gui
 {
-public:
-	Label(int x, int y, int width, int height, std::function<void()> &clickEvent);
-	~Label();
-	virtual void EventUpdate(sf::Event& event, App& app);
-    virtual GameState *Update(App& app);
-    virtual void Draw(App& app);
-};
+	class Label
+		: public Selectable
+	{
+	private:
+		int m_lineLength;
+		int m_maxLength;
+		sf::Text *m_text;
+	public:
+		Label(int x, int y, int width, int height, sf::String *text, sf::Font *font, int lineLength, int maxLength);
+		~Label();
+		virtual void Draw(App &app, float drawAreax, float drawAreay, int drawAreaWidth, int drawAreaHeight);
+		void Clear() { m_text->setString(sf::String()); };
+		sf::Text *getText() { return m_text; };
+		void setText(sf::Text *text) { m_text = text; };
+		void setLineLength(int lineLength) { m_lineLength = lineLength; };
+		int getLineLength() { return m_lineLength; };
+		void setMaxLength(int maxLength) { m_maxLength = maxLength; };
+		int getMaxLength() { return m_maxLength; };
+	};
+}
 
 #endif

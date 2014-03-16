@@ -1,39 +1,40 @@
 #ifndef _SERVER
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <vector>
 #include "MenuState.h"
-#include "MenuItem.h"                            
+//#include "MenuItem.h"                            
 #include "GameState.h"
+#include "IMenuItem.h"
+#include "Text.h"
+#include "MenuItemContainer.h"
 
-MenuState::MenuState()//void MenuState::Initialize()
+MenuState::MenuState()// : menuItemContainer(0, 0, 100, 100)//void MenuState::Initialize()
 {
-
+	menuItemContainer = new gui::MenuItemContainer(0, 0, 0, 0);
 }
 
 MenuState::~MenuState()//void MenuState::Shutdown()
 {
-    for (std::vector<double>::size_type i = 0; i < menuItems.size(); i++)
-    {
-        delete menuItems[i];
-    }
+	//for (std::vector<double>::size_type i = 0; i < menuItems.size(); i++)
+	{
+		//    delete menuItems[i];
+	}
 }
 
-void MenuState::EventUpdate(App& app, sf::Event& event)
+void MenuState::EventUpdate(App &app, const sf::Event &event)
 {
-
+	//menuItemContainer->EventUpdate(app, event, this, 0, 0);//eventHandler.EventUpdate(app, event, this);
 }
 
-GameState *MenuState::Update(App& app)
+GameState *MenuState::Update(App &app)
 {
-    return this;
+	return this;
 }
 
-void MenuState::Draw(App& app)
+void MenuState::Draw(App &app)
 {
-    for (unsigned int i = 0; i < menuItems.size(); i++)
-    {
-        menuItems[i]->Draw(app);
-    }
+	menuItemContainer->Draw(app, 0, 0, 0, 0);
 }
 #endif

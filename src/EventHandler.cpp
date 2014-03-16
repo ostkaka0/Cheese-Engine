@@ -1,20 +1,25 @@
-#ifndef _SERVER
+#ifdef f_SERVER
 #include "EventHandler.h"
 #include "App.h"
+#include "World.h"
 
-void EventHandler::EventUpdate(sf::Event event)
+template<class T>
+void EventHandler::EventUpdate(App &app, const sf::Event &event, GameUtility* gameUtility)
 {
 	for (auto it : callbackList)
 	{
-		it.second(event);
+		it.second(app, event, gameUtility);
 	}
 }
 
-void EventHandler::AddEventCallback(void* source, std::function<void(sf::Event)> callback)
+
+template<class T>
+void EventHandler::AddEventCallback(void* source, std::function<void(App&, const sf::Event&, GameUtility*)> callback)
 {
 	callbackList.emplace(source, callback);
 }
 
+template<class T>
 void EventHandler::RemoveEventCallback(void* source)
 {
 	auto it = callbackList.find(source);

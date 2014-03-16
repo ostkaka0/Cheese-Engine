@@ -1,10 +1,9 @@
-#ifndef _SERVER
+#ifdef CLIENT
 #pragma once
-#include <SFML\Graphics.hpp>
-#include "App.h"
-#include "Entity.h"
 #include "App.h"
 
+class App;
+class Game;
 class Entity;
 
 class Camera : private sf::View
@@ -13,16 +12,24 @@ private:
 	Entity *currentEntity;
 	double speed;
 public:
-	Camera(double speed);
+	//Camera();
+	Camera(const double speed);
+	Camera(const int speed);
 	~Camera(void);
-	void Update(App& app);
-	void setCameraAt(Entity* entity);
-	void setSpeed(double speed);
+	void Update(App &app, Game &game);
+	void setCameraAt(Entity *entity);
+	void setSpeed(const double speed);
+	void setSpeed(const int speed);
+	void setZoom(float zoom) { sf::View::zoom(zoom); };
 	sf::Vector2f getEntityPosition();
-	Entity* Camera::getEntity();
+	Entity *Camera::getEntity();
+	double getLeftX();
+	double getTopY();
+	double getRightX();
+	double getButtomY();
 };
 
-/*inline Camera& GetCamera(App& app)
+/*inline Camera& GetCamera(App &app)
 {
 	return (*const_cast<Camera*>(reinterpret_cast<const Camera*>(&app.getView())));
 }*/

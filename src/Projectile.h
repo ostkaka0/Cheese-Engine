@@ -1,6 +1,4 @@
-class Projectile;
 #pragma once
-
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include "Entity.h"
@@ -11,19 +9,20 @@ class World;
 class Projectile : public Entity
 {
 public:
-	Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
+	Projectile(int id, float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling);
 	~Projectile(void);
 
-#ifdef _SERVER
-	virtual void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera);
+	virtual void Update(App &app, GameUtility *GameUtility);
+/*#ifdef SERVER
+	virtual void Update(App &app, World *world, std::queue<sf::Packet> *packetDataList);
 #else
-	virtual void Update(App& app, World* world, std::queue<sf::Packet>* packetDataList,Camera* camera, EventHandler& EventHandler);
-#endif
+	virtual void Update(App &app, World *world, std::queue<sf::Packet> *packetDataList,Camera *camera, EventHandler &EventHandler);
+#endif*/
 
-	virtual void Collision(World* world);
-	std::string getTextureName();
-	char getTextureId();
-	/*virtual void Draw(App& app);
+	virtual void Collision(World *world);
+	const char *const getTextureName();
+	short getTextureId();
+	/*virtual void Draw(App &app);
 	void Rotate(float degrees);
 	void setAngle(float angle);
 	float getAngle();

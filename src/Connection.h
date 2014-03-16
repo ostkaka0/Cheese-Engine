@@ -10,6 +10,8 @@
 
 #include "Client.h"
 
+
+
 class Connection
 {
 public:
@@ -17,11 +19,11 @@ public:
 	~Connection(void);
 	std::queue<sf::Packet*> packets;
 	sf::Mutex globalMutex;
-	Client* client;
+	Client *client;
 	void Run();
 private:
-	//sf::Thread* thread;
+	sf::Thread *receiveThread;
+	sf::SocketSelector selector;
 	bool Connect(sf::IpAddress ip, int port);
 	void Receive();
 };
-

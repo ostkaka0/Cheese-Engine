@@ -4,7 +4,7 @@
 #define MENU_H_INCLUDED
 
 #include "GameState.h"
-#include "MenuState.h"
+class AMenuState;
 
 class Menu : public GameState
 {
@@ -14,9 +14,9 @@ public:
 	Menu();
 	~Menu();
     //virtual void Initialize();
-    virtual void EventUpdate(App& app, sf::Event& event);
-    virtual GameState *Update(App& app);
-    virtual void Draw(App& app);
+    virtual void EventUpdate(App &app, Game &game, const sf::Event &event);
+    virtual GameState *Update(App &app, Game &game);
+    virtual void Draw(App &app);
     //virtual void Shutdown();
 };
 

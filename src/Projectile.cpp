@@ -5,11 +5,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-Projectile::Projectile(float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) 
-	: Entity(x,y,sizeX,sizeY,angle,speed,friction,spriteName,spriteIndex,isClientControlling)
+Projectile::Projectile(int id, float x, float y, short sizeX, short sizeY, float angle, float speed, float friction, std::string spriteName, int spriteIndex, bool isClientControlling) 
+	: Entity(id, x,y,sizeX,sizeY,angle,speed, speed,friction,spriteName,spriteIndex,isClientControlling)
 {
-	speedX = (float)cos(angle * M_PI/180) * speed;
-	speedY = (float)sin(-angle * M_PI/180) * speed;
+	speedX = (float)cos(-angle * M_PI/180) * speed;
+	speedY = (float)sin(angle * M_PI/180) * speed;
 }
 
 
@@ -17,35 +17,45 @@ Projectile::~Projectile(void)
 {
 }
 
-#ifdef _SERVER
-void Projectile::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera)
+/*#ifdef SERVER
+void Projectile::Update(App &app, World *world, std::queue<sf::Packet> *packetDataList)
 #else
-void Projectile::Update(App& app, World* world, std::queue<sf::Packet>* packetDataList, Camera* camera, EventHandler& eventHandler)
-#endif
+void Projectile::Update(App &app, World *world, std::queue<sf::Packet> *packetDataList, Camera *camera, EventHandler &eventHandler)
+#endif*/
+void Projectile::Update(App &app, GameUtility *GameUtility)
 { 
-	speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
+	/*speed = sqrt(pow(abs(speedX),2)+pow(abs(speedY),2));
 	friction = 100/speed;
 	if (friction > 1)
-		friction = 1;
+		friction = 1;*/
 
-#ifdef _SERVER
-	Entity::Update(app, world, packetDataList, camera);
+	if (speedX != 0 || speedY != 0)
+	{
+		angle = atan2(speedY,speedX)*180/3.14159265;
+
+		//if (speedY < 0)
+		//	angle += 180;
+	}
+
+	Entity::Update(app, GameUtility);
+/*#ifdef SERVER
+	Entity::Update(app, world, packetDataList);
 #else
 	Entity::Update(app, world, packetDataList, camera, eventHandler);
-#endif
+#endif*/
 }
 
-void Projectile::Collision(World* world)
+void Projectile::Collision(World *world)
 {
 	//world.setBlock(2, (int)x<<4-16, (int)y<<4,1);
 	speedX = 0;
 	speedY = 0;
 }
 
-std::string Projectile::getTextureName() { return "arrow.png"; }
-char Projectile::getTextureId() { return 0; }
+const char *const Projectile::getTextureName() { return "arrow.png"; }
+short Projectile::getTextureId() { return 0; }
 
-/*void Projectile::Draw(App& app)
+/*void Projectile::Draw(App &app)
 {
 	app.Draw(*sprite);
 }
